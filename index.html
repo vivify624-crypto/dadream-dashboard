@@ -65,7 +65,7 @@ textarea.fi{resize:vertical}
 .cgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.08);border:0.5px solid rgba(0,0,0,.1);border-radius:12px;overflow:hidden}
 .cgh{padding:5px 2px;text-align:center;font-size:11px;font-weight:500;color:#888;background:#f5f5f3}
 .cgh.gs{color:#B85030}.cgh.ga{color:#185FA5}
-.cgc{min-height:52px;padding:2px;background:#fff;cursor:pointer}
+.cgc{min-height:78px;padding:2px;background:#fff;cursor:pointer}
 .cgc.om{background:#f5f5f3;cursor:default}
 .cgc.sl{background:#EEEDFE !important}
 .cgc.td .cgn{font-size:11px;font-weight:500;width:20px;height:20px;display:flex;align-items:center;justify-content:center;margin-bottom:1px}
@@ -235,9 +235,9 @@ textarea.fi{resize:vertical}
         </div>
       </div>
       <!-- 예배순서: 테이블 width:auto로 내용에 맞게 -->
-      <div class="card mb2">
+      <div class="card mb2" style="max-width:440px">
         <div class="ct-t"><span>✼ 예배순서</span><button class="btn sm" id="I_oedit">수정</button></div>
-        <div class="tw"><table style="width:auto;min-width:260px"><tbody id="I_otb"></tbody></table></div>
+        <div class="tw"><table style="width:100%"><tbody id="I_otb"></tbody></table></div>
       </div>
       <!-- 예배위원: 기존 full-width 유지 -->
       <div class="card">
@@ -698,9 +698,7 @@ function calKako(key){
   try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(function(){banner('복사됐어요! 📋');}).catch(function(){fb2(text);});}catch(ex){fb2(text);}
   function fb2(t){var ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;top:-9999px;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');banner('복사됐어요!');}catch(ex){}if(ta.parentNode)ta.parentNode.removeChild(ta);}
 }
-/* ============================================================
-   WEDDING — 날짜/시간 간격 압축: grid auto auto
-============================================================ */
+/* WEDDING */
 function rWed(){
   var items=ents(gWed).sort(function(a,b){return(a[1].date||'9').localeCompare(b[1].date||'9')});
   $('I_wsum').textContent='총 '+items.length+'건';
@@ -711,41 +709,35 @@ function rWed(){
     var diff=d?Math.ceil((d-TODAY)/864e5):null;
     var ddStr=diff===null?'':(diff<0?'완료':(diff===0?'D-day':'D-'+diff));
     var isPast=diff!==null&&diff<0;
-    h+='<div style="background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;padding:1rem;margin-bottom:.75rem;'+(isPast?'opacity:.5':'')+'">';
-    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;flex-wrap:wrap;gap:6px">';
-    h+='<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+    h+='<div style="background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;padding:.85rem 1rem;margin-bottom:.55rem;'+(isPast?'opacity:.45':'')+'">';
+    /* 헤더: 이름 + 수정 버튼 */
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">';
+    h+='<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">';
     if(ddStr&&!isPast)h+='<span class="badge">'+ddStr+'</span>';
-    h+='<span style="font-size:16px;font-weight:700">'+esc(w.groom||'')+' 💍 '+esc(w.bride||'')+'</span>';
+    h+='<span style="font-size:15px;font-weight:700">'+esc(w.groom||'')+' 💍 '+esc(w.bride||'')+'</span>';
     h+='</div><button class="btn xs" data-wed="'+id+'">수정</button></div>';
-    /* ─ 정보 그리드: auto auto (날짜·시간 딱 붙게) ─ */
-    h+='<div style="display:grid;grid-template-columns:auto auto;column-gap:1.5rem;row-gap:0;justify-content:start;font-size:13px">';
-    /* 날짜 */
-    h+='<div style="padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,.06)">'
-      +'<div style="color:#888;font-size:11px">날짜</div>'
-      +'<div style="font-weight:500;margin-top:2px">'+(w.date||'')+(dow2?' ('+dow2+')':'')+'</div></div>';
-    /* 시간 */
-    h+='<div style="padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,.06)">'
-      +'<div style="color:#888;font-size:11px">시간</div>'
-      +'<div style="font-weight:500;margin-top:2px">'+(w.time||'-')+'</div></div>';
-    /* 장소 (full span) */
-    h+='<div style="grid-column:1/-1;padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,.06)">'
-      +'<div style="color:#888;font-size:11px">장소</div>'
-      +'<div style="font-weight:500;margin-top:2px">'+esc(w.venue||'-')+'</div></div>';
-    /* 사회 */
-    h+='<div style="padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,.06)">'
-      +'<div style="color:#888;font-size:11px">사회</div>'
-      +'<div style="margin-top:2px">'+esc(w.mc||'-')+'</div></div>';
-    /* 기도 */
-    h+='<div style="padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,.06)">'
-      +'<div style="color:#888;font-size:11px">기도</div>'
-      +'<div style="margin-top:2px">'+esc(w.prayer||'-')+'</div></div>';
-    /* 주례 (full span) */
-    h+='<div style="grid-column:1/-1;padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,.06)">'
-      +'<div style="color:#888;font-size:11px">주례</div>'
-      +'<div style="margin-top:2px">'+esc(w.officiant||'-')+'</div></div>';
-    if(w.extra)h+='<div style="grid-column:1/-1;padding:5px 0;border-bottom:0.5px solid rgba(0,0,0,.06)"><div style="color:#888;font-size:11px">기타</div><div style="margin-top:2px">'+esc(w.extra)+'</div></div>';
-    if(w.note)h+='<div style="grid-column:1/-1;padding:5px 0"><div style="color:#888;font-size:11px">비고</div><div style="font-size:12px;color:#555;margin-top:2px">'+esc(w.note)+'</div></div>';
-    h+='</div></div>';
+    /* 날짜·시간·장소 한 줄 */
+    var dateStr=(w.date||'')+(dow2?' ('+dow2+')':'');
+    h+='<div style="font-size:13px;color:#333;margin-bottom:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 14px">';
+    if(dateStr)h+='<span><strong>'+esc(dateStr)+'</strong>'+(w.time?' &nbsp;'+esc(w.time):'')+'</span>';
+    if(w.venue&&w.venue!=='-')h+='<span style="color:#666">📍 '+esc(w.venue)+'</span>';
+    h+='</div>';
+    /* 사회·기도·주례 한 줄 */
+    var roles=[];
+    if(w.mc&&w.mc!=='-')roles.push('사회: '+w.mc);
+    if(w.prayer&&w.prayer!=='-')roles.push('기도: '+w.prayer);
+    if(w.officiant&&w.officiant!=='-')roles.push('주례: '+w.officiant);
+    if(roles.length){
+      h+='<div style="font-size:12px;color:#777;display:flex;flex-wrap:wrap;gap:2px 0">';
+      for(var ri=0;ri<roles.length;ri++){
+        if(ri>0)h+='<span style="color:#ddd;margin:0 7px">|</span>';
+        h+=esc(roles[ri]);
+      }
+      h+='</div>';
+    }
+    if(w.extra&&w.extra!=='-')h+='<div style="font-size:12px;color:#888;margin-top:4px">'+esc(w.extra)+'</div>';
+    if(w.note)h+='<div style="font-size:11px;color:#aaa;margin-top:5px;padding-top:5px;border-top:0.5px solid rgba(0,0,0,.06)">'+esc(w.note)+'</div>';
+    h+='</div>';
   }
   $('I_wtb').innerHTML=h||'<p class="hint">결혼 정보가 없어요</p>';
 }
