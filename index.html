@@ -2,22 +2,18 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <title>다드림 청년부</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100vh}
+body{font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;background:#f5f5f3;color:#1a1a1a}
 .sb{width:185px;background:#fff;border-right:0.5px solid rgba(0,0,0,.1);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:20}
 .sb-logo{padding:1rem;border-bottom:0.5px solid rgba(0,0,0,.06)}
 .sb-t{font-size:14px;font-weight:600;color:#3C3489}
 .sb-s{font-size:11px;color:#888;margin-top:2px}
 .snav{padding:.4rem;flex:1}
 .sni{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:#888;margin-bottom:2px}
-.sni:hover{background:#f5f5f3;color:#1a1a1a}
 .sni.on{background:#EEEDFE;color:#3C3489;font-weight:500}
-.sni-ic{font-size:15px;width:18px;text-align:center}
-.sb-ft{padding:.75rem 1rem;border-top:0.5px solid rgba(0,0,0,.06);font-size:11px;color:#888}
 .main{margin-left:185px;min-height:100vh}
 .topbar{background:#fff;border-bottom:0.5px solid rgba(0,0,0,.1);padding:.875rem 1.5rem;position:sticky;top:0;z-index:10}
 .tb-t{font-size:15px;font-weight:500}
@@ -29,7 +25,6 @@ body{font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;background:#f5f5
 .mni.on{color:#3C3489}
 .mni-ic{font-size:20px;line-height:1}
 .btn{padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;border:0.5px solid rgba(0,0,0,.15);background:#fff;color:#1a1a1a;font-family:inherit}
-.btn:active{opacity:.7}
 .btn.pr{background:#3C3489;color:#fff;border-color:#3C3489}
 .btn.sm{padding:5px 10px;font-size:12px}
 .btn.xs{padding:3px 8px;font-size:11px}
@@ -42,7 +37,7 @@ th{text-align:left;padding:7px 10px;background:#f5f5f3;color:#888;font-weight:50
 td{padding:8px 10px;border-top:0.5px solid rgba(0,0,0,.06);vertical-align:middle}
 .fr{margin-bottom:11px}
 .fl{font-size:12px;color:#888;margin-bottom:3px;display:block}
-input.fi,textarea.fi,select.fi{width:100%;padding:8px 10px;border:0.5px solid rgba(0,0,0,.15);border-radius:6px;font-size:13px;background:#fff;color:#1a1a1a;font-family:inherit;-webkit-appearance:none;appearance:none}
+input.fi,textarea.fi,select.fi{width:100%;padding:8px 10px;border:0.5px solid rgba(0,0,0,.15);border-radius:6px;font-size:13px;background:#fff;color:#1a1a1a;font-family:inherit;-webkit-appearance:none}
 input.fi:focus,textarea.fi:focus,select.fi:focus{outline:none;border-color:#3C3489}
 textarea.fi{resize:vertical}
 .frow{display:flex;gap:8px}
@@ -71,7 +66,6 @@ textarea.fi{resize:vertical}
 .cgh.gs{color:#B85030}.cgh.ga{color:#185FA5}
 .cgc{min-height:60px;padding:3px;background:#fff;cursor:pointer}
 .cgc.om{background:#f5f5f3;cursor:default}
-.cgc:not(.om):active{background:#f0f0ee}
 .cgc.sl{background:#EEEDFE !important}
 .cgc.td .cgn{background:#3C3489;color:#fff;border-radius:50%}
 .cgn{font-size:11px;font-weight:500;width:20px;height:20px;display:flex;align-items:center;justify-content:center;margin-bottom:2px}
@@ -105,7 +99,6 @@ textarea.fi{resize:vertical}
 .csw.sel{border-color:#222}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
 .cell-card{background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:10px;padding:.875rem;cursor:pointer}
-.cell-card:active{opacity:.8}
 .cell-nm{font-size:13px;font-weight:600;color:#3C3489;margin-bottom:3px}
 .cell-ld{font-size:11px;color:#888;margin-bottom:5px}
 .pills{display:flex;flex-wrap:wrap;gap:3px}
@@ -121,397 +114,335 @@ textarea.fi{resize:vertical}
 .chi-t{flex:1;font-size:13px}
 .scbox{background:#fff;border-radius:14px;padding:1.5rem;max-width:340px;width:100%;margin:0 auto}
 .scbtn{padding:10px 14px;border-radius:8px;font-size:13px;cursor:pointer;border:0.5px solid rgba(0,0,0,.12);background:#fff;text-align:left;font-family:inherit;width:100%;margin-bottom:6px;display:block}
-.scbtn:active{opacity:.7}
 .scbtn.r{border-color:#F09595;color:#A32D2D}
 .scbtn-sub{display:block;font-size:11px;color:#888;margin-top:2px}
 .cfmbox{background:#fff;border-radius:14px;padding:1.25rem;max-width:320px;width:100%;margin:0 auto}
 .cfm-msg{font-size:14px;margin-bottom:1rem;line-height:1.6}
 .cfm-f{display:flex;justify-content:flex-end;gap:8px}
 .hint{font-size:13px;color:#888;text-align:center;padding:2rem 0}
-.flex-row{display:flex;align-items:center}
-.flex-sb{justify-content:space-between}
-.gap1{gap:.5rem}.gap2{gap:1rem}
+.row{display:flex;align-items:center}
+.sb2{justify-content:space-between}
+.g1{gap:.5rem}.g2{gap:1rem}
 .mu{color:#888;font-size:12px}
 .mb2{margin-bottom:1rem}
 .badge{display:inline-block;font-size:10px;border-radius:4px;padding:2px 6px;font-weight:500;margin-right:4px;background:#FAEEDA;color:#854F0B}
 @media(max-width:700px){
-  .sb{display:none}
-  .main{margin-left:0}
-  .mob-nav{display:block}
-  .ct{padding:.75rem .875rem 80px}
-  .g3{grid-template-columns:1fr 1fr}
-  .topbar{padding:.75rem 1rem}
-  .mbox.wide{max-width:100%}
-  .cal-nav-right{width:100%}
-  .cal-nav-right input{flex:1}
-  .cgc{min-height:46px;padding:2px}
-  .ec{font-size:8px}
+  .sb{display:none}.main{margin-left:0}.mob-nav{display:block}
+  .ct{padding:.75rem .875rem 80px}.g3{grid-template-columns:1fr 1fr}
+  .topbar{padding:.75rem 1rem}.mbox.wide{max-width:100%}
+  .cal-nav-right{width:100%}.cgc{min-height:46px;padding:2px}.ec{font-size:8px}
 }
-@media(max-width:380px){
-  .g3{grid-template-columns:1fr}
-}
+@media(max-width:380px){.g3{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="sb">
   <div class="sb-logo"><div class="sb-t">⛪ 다드림 청년부</div><div class="sb-s">통합 관리 시스템</div></div>
   <nav class="snav">
-    <div class="sni on" data-s="cal"><span class="sni-ic">📅</span>일정 캘린더</div>
-    <div class="sni" data-s="wed"><span class="sni-ic">💍</span>결혼 현황</div>
-    <div class="sni" data-s="cells"><span class="sni-ic">👥</span>셀 명단</div>
-    <div class="sni" data-s="worship"><span class="sni-ic">🙏</span>이번 주 예배</div>
-    <div class="sni" data-s="chk"><span class="sni-ic">✅</span>체크리스트</div>
+    <div class="sni on" data-s="cal">📅 일정 캘린더</div>
+    <div class="sni" data-s="wed">💍 결혼 현황</div>
+    <div class="sni" data-s="cells">👥 셀 명단</div>
+    <div class="sni" data-s="worship">🙏 이번 주 예배</div>
+    <div class="sni" data-s="chk">✅ 체크리스트</div>
   </nav>
-  <div style="padding:.75rem 1rem;border-top:0.5px solid rgba(0,0,0,.06);font-size:11px;color:#888" id="sb-ft">● 로컬 모드</div>
+  <div style="padding:.75rem 1rem;border-top:0.5px solid rgba(0,0,0,.06);font-size:11px;color:#888">● 로컬 저장</div>
 </div>
-
 <div class="main">
-  <div class="topbar"><span class="tb-t" id="tbt">일정 캘린더</span></div>
+  <div class="topbar"><span class="tb-t" id="I_tbt">일정 캘린더</span></div>
   <div class="ct">
-    <div class="sec on" id="sec-cal">
-      <div class="cleg" id="cleg"></div>
+    <div class="sec on" id="I_s_cal">
+      <div class="cleg" id="I_leg"></div>
       <div class="cal-nav">
         <div class="cal-nav-left">
-          <button class="btn" id="btnPrev">◀</button>
-          <span class="cal-month" id="calml">로딩중...</span>
-          <button class="btn" id="btnNext">▶</button>
+          <button class="btn" id="I_prev">◀</button>
+          <span class="cal-month" id="I_ml"></span>
+          <button class="btn" id="I_next">▶</button>
         </div>
         <div class="cal-nav-right">
-          <input id="calSq" class="fi" style="width:150px;padding:7px 10px" type="text" placeholder="일정 검색...">
-          <button class="btn pr sm" id="btnCalAdd">+ 추가</button>
+          <input id="I_sq" class="fi" style="width:150px;padding:7px 10px" type="text" placeholder="일정 검색...">
+          <button class="btn pr sm" id="I_cadd">+ 추가</button>
         </div>
       </div>
-      <div id="calSr"></div>
-      <div class="cgrid" id="calgrid"></div>
-      <div id="caldet"><div class="cdet"><p class="hint">날짜를 탭하면 일정을 확인할 수 있어요</p></div></div>
+      <div id="I_sr"></div>
+      <div class="cgrid" id="I_grid"></div>
+      <div id="I_det"><div class="cdet"><p class="hint">날짜를 탭하면 일정을 확인할 수 있어요</p></div></div>
     </div>
-    <div class="sec" id="sec-wed">
-      <div class="flex-row flex-sb mb2">
-        <span class="mu" id="wedSum"></span>
-        <button class="btn pr sm" id="btnWedAdd">+ 결혼 추가</button>
-      </div>
-      <div class="card">
-        <div style="font-size:14px;font-weight:600;text-align:center;margin-bottom:1rem">26년 다드림 결혼식 현황</div>
-        <div class="tw"><table><thead><tr><th>#</th><th>날짜</th><th>신랑</th><th>신부</th><th>장소</th><th>시간</th><th>사회</th><th>기도</th><th>주례</th><th>비고</th><th></th></tr></thead><tbody id="wedTbody"></tbody></table></div>
-      </div>
+    <div class="sec" id="I_s_wed">
+      <div class="row sb2 mb2"><span class="mu" id="I_wsum"></span><button class="btn pr sm" id="I_wadd">+ 결혼 추가</button></div>
+      <div style="font-size:14px;font-weight:600;text-align:center;margin-bottom:1rem">26년 다드림 결혼식 현황</div>
+      <div id="I_wtb"></div>
     </div>
-    <div class="sec" id="sec-cells">
-      <div class="flex-row flex-sb mb2" style="flex-wrap:wrap;gap:8px">
-        <span class="mu" id="cellsSum"></span>
-        <div class="flex-row gap1">
-          <input id="cellsSq" class="fi" style="width:150px;padding:7px 10px" type="text" placeholder="이름 검색...">
-          <button class="btn pr sm" id="btnCellAdd">+ 셀 추가</button>
-        </div>
+    <div class="sec" id="I_s_cells">
+      <div class="row sb2 mb2" style="flex-wrap:wrap;gap:8px">
+        <span class="mu" id="I_csum"></span>
+        <div class="row g1"><input id="I_csq" class="fi" style="width:140px;padding:7px 10px" type="text" placeholder="이름 검색..."><button class="btn pr sm" id="I_cnadd">+ 셀 추가</button></div>
       </div>
-      <div class="g3" id="cellsGrid"></div>
+      <div class="g3" id="I_cgrid"></div>
     </div>
-    <div class="sec" id="sec-worship">
-      <div class="flex-row flex-sb mb2" style="flex-wrap:wrap;gap:8px">
-        <select id="worshipSel" class="fi" style="width:160px"></select>
-        <div class="flex-row gap1">
-          <button class="btn sm pr" id="btnOrderAdd">+ 예배순서</button>
-          <button class="btn sm pr" id="btnCommAdd">+ 예배위원</button>
-        </div>
+    <div class="sec" id="I_s_worship">
+      <div class="row sb2 mb2" style="flex-wrap:wrap;gap:8px">
+        <select id="I_wsel" class="fi" style="width:160px"></select>
+        <div class="row g1"><button class="btn sm pr" id="I_oadd">+ 예배순서</button><button class="btn sm pr" id="I_kadd">+ 예배위원</button></div>
       </div>
+      <div class="card mb2"><div class="ct-t"><span>✼ 예배순서</span><button class="btn sm" id="I_oedit">수정</button></div><div class="tw"><table><tbody id="I_otb"></tbody></table></div></div>
+      <div class="card"><div class="ct-t"><span>✼ 예배위원</span></div><div class="tw"><table><thead><tr><th>날짜</th><th>기도인도</th><th>대표기도</th><th>헌금위원</th><th>주차위원</th><th>청소담당</th><th>폰타나</th><th></th></tr></thead><tbody id="I_ktb"></tbody></table></div></div>
+    </div>
+    <div class="sec" id="I_s_chk">
       <div class="card mb2">
-        <div class="ct-t"><span style="font-size:14px">✼ 예배순서</span><button class="btn sm" id="btnOrderEdit">수정</button></div>
-        <div class="tw"><table><tbody id="orderTbody"></tbody></table></div>
-      </div>
-      <div class="card">
-        <div class="ct-t"><span style="font-size:14px">✼ 예배위원</span></div>
-        <div class="tw"><table><thead><tr><th>날짜</th><th>기도인도</th><th>대표기도</th><th>헌금위원</th><th>주차위원</th><th>청소담당</th><th>폰타나</th><th></th></tr></thead><tbody id="commTbody"></tbody></table></div>
-      </div>
-    </div>
-    <div class="sec" id="sec-chk">
-      <div class="card mb2">
-        <div class="flex-row gap1" style="flex-wrap:wrap">
-          <input class="fi" type="text" id="chkNew" placeholder="새 항목 입력..." style="flex:1;min-width:140px">
-          <input class="fi" type="text" id="chkWho" placeholder="담당자" style="width:80px">
-          <button class="btn pr" id="btnChkAdd">+ 추가</button>
+        <div class="row g1" style="flex-wrap:wrap">
+          <input class="fi" type="text" id="I_cnew" placeholder="새 항목 입력..." style="flex:1;min-width:140px">
+          <input class="fi" type="text" id="I_cwho" placeholder="담당자" style="width:80px">
+          <button class="btn pr" id="I_ckadd">+ 추가</button>
         </div>
       </div>
-      <div class="flex-row flex-sb mb2">
-        <span class="mu" id="chkSum"></span>
-        <button class="btn sm" id="btnChkClear">완료 지우기</button>
-      </div>
-      <div id="chkList"></div>
+      <div class="row sb2 mb2"><span class="mu" id="I_cksum"></span><button class="btn sm" id="I_ckclear">완료 지우기</button></div>
+      <div id="I_cklist"></div>
     </div>
   </div>
 </div>
-
-<div class="mob-nav">
-  <div class="mob-nav-inner">
-    <div class="mni on" data-s="cal"><div class="mni-ic">📅</div>일정</div>
-    <div class="mni" data-s="wed"><div class="mni-ic">💍</div>결혼</div>
-    <div class="mni" data-s="cells"><div class="mni-ic">👥</div>셀</div>
-    <div class="mni" data-s="worship"><div class="mni-ic">🙏</div>예배</div>
-    <div class="mni" data-s="chk"><div class="mni-ic">✅</div>체크</div>
-  </div>
-</div>
+<div class="mob-nav"><div class="mob-nav-inner">
+  <div class="mni on" data-s="cal"><div class="mni-ic">📅</div>일정</div>
+  <div class="mni" data-s="wed"><div class="mni-ic">💍</div>결혼</div>
+  <div class="mni" data-s="cells"><div class="mni-ic">👥</div>셀</div>
+  <div class="mni" data-s="worship"><div class="mni-ic">🙏</div>예배</div>
+  <div class="mni" data-s="chk"><div class="mni-ic">✅</div>체크</div>
+</div></div>
 
 <!-- MODALS -->
-<div class="ov" id="moCal"><div class="mbox">
-  <div class="mo-t" id="moCalTtl">일정 추가</div>
-  <div class="fr"><label class="fl">날짜</label><input class="fi" type="date" id="cFd"></div>
-  <div class="fr"><label class="fl">제목</label><input class="fi" type="text" id="cFt"></div>
-  <div class="fr"><label class="fl">색상</label><div class="copt" id="cCopt"></div></div>
-  <div class="fr"><label class="fl">장소</label><input class="fi" type="text" id="cFm"></div>
-  <div class="fr"><label class="fl">특이사항 (줄바꿈 구분)</label><textarea class="fi" id="cFn" rows="3"></textarea></div>
-  <div class="fr" id="cGrmRow" style="display:none"><label class="fl" style="color:#0F6E56;font-weight:500">공통 메모</label><textarea class="fi" id="cFgm" rows="2"></textarea></div>
-  <div class="fr"><label class="fl" id="cMl">메모</label><textarea class="fi" id="cFmo" rows="2"></textarea></div>
+<div class="ov" id="M_cal"><div class="mbox">
+  <div class="mo-t" id="M_calT">일정 추가</div>
+  <div class="fr"><label class="fl">날짜</label><input class="fi" type="date" id="M_cfd"></div>
+  <div class="fr"><label class="fl">제목</label><input class="fi" type="text" id="M_cft"></div>
+  <div class="fr"><label class="fl">색상</label><div class="copt" id="M_copt"></div></div>
+  <div class="fr"><label class="fl">장소</label><input class="fi" type="text" id="M_cfm"></div>
+  <div class="fr"><label class="fl">특이사항 (줄바꿈 구분)</label><textarea class="fi" id="M_cfn" rows="3"></textarea></div>
+  <div class="fr" id="M_grm" style="display:none"><label class="fl" style="color:#0F6E56;font-weight:500">공통 메모</label><textarea class="fi" id="M_cfg" rows="2"></textarea></div>
+  <div class="fr"><label class="fl" id="M_cml">메모</label><textarea class="fi" id="M_cfmo" rows="2"></textarea></div>
   <div class="divr"></div>
-  <div id="cRpEdit" style="display:none">
-    <div class="fr"><label class="fl">반복 정보</label><div class="rpinfo" id="cRpInfo"></div>
-    <div class="brkbox" style="margin-top:7px"><div class="ckr"><input type="checkbox" id="cBrk"><label for="cBrk" style="color:#A32D2D;font-weight:500">루틴 해제</label></div></div></div>
-  </div>
-  <div id="cRpNew" class="fr">
+  <div id="M_rpe" style="display:none"><div class="fr"><label class="fl">반복 정보</label><div class="rpinfo" id="M_rpi"></div><div class="brkbox" style="margin-top:7px"><div class="ckr"><input type="checkbox" id="M_brk"><label for="M_brk" style="color:#A32D2D;font-weight:500">루틴 해제</label></div></div></div></div>
+  <div id="M_rpn" class="fr">
     <label class="fl">반복 설정</label>
-    <select class="fi" id="cFrp" style="width:auto"><option value="none">반복 안 함</option><option value="weekly">매주</option><option value="biweekly">격주</option><option value="monthly">매달</option></select>
-    <div class="rpbox" id="cRpbox">
-      <div><label class="fl">반복 종료</label><select class="fi" id="cRet" style="width:auto"><option value="date">날짜 지정</option><option value="yearend">연말까지</option></select></div>
-      <div id="cRdw"><label class="fl">종료 날짜</label><input class="fi" type="date" id="cRed"></div>
-      <div class="ckr"><input type="checkbox" id="cRn"><label for="cRn">회차 번호 자동 추가</label></div>
-      <div class="rpprev" id="cRpv" style="display:none"></div>
+    <select class="fi" id="M_frp" style="width:auto"><option value="none">반복 안 함</option><option value="weekly">매주</option><option value="biweekly">격주</option><option value="monthly">매달</option></select>
+    <div class="rpbox" id="M_rpb">
+      <div><label class="fl">반복 종료</label><select class="fi" id="M_ret" style="width:auto"><option value="date">날짜 지정</option><option value="yearend">연말까지</option></select></div>
+      <div id="M_rdw"><label class="fl">종료 날짜</label><input class="fi" type="date" id="M_red"></div>
+      <div class="ckr"><input type="checkbox" id="M_rn"><label for="M_rn">회차 번호 자동 추가</label></div>
+      <div class="rpprev" id="M_rpv" style="display:none"></div>
     </div>
   </div>
-  <div class="mo-f"><button class="btn" id="btnCalCancel">취소</button><button class="btn pr" id="btnCalSave">저장</button></div>
+  <div class="mo-f"><button class="btn" id="M_calX">취소</button><button class="btn pr" id="M_calS">저장</button></div>
 </div></div>
 
-<div class="ov" id="moScope" style="padding-top:80px"><div class="scbox">
-  <div style="font-size:14px;font-weight:500;margin-bottom:4px" id="scTtl"></div>
-  <div style="font-size:12px;color:#888;margin-bottom:1rem;line-height:1.5" id="scSub"></div>
-  <div id="scBtns"></div>
-  <div style="margin-top:4px;font-size:13px;color:#888;text-align:center;cursor:pointer;padding:10px" id="btnScCancel">취소</div>
+<div class="ov" id="M_scope" style="padding-top:80px"><div class="scbox">
+  <div style="font-size:14px;font-weight:500;margin-bottom:4px" id="M_scT"></div>
+  <div style="font-size:12px;color:#888;margin-bottom:1rem;line-height:1.5" id="M_scS"></div>
+  <div id="M_scB"></div>
+  <div style="margin-top:4px;font-size:13px;color:#888;text-align:center;cursor:pointer;padding:10px" id="M_scX">취소</div>
 </div></div>
 
-<div class="ov" id="moLbl" style="padding-top:80px"><div class="mbox nar">
+<div class="ov" id="M_lbl" style="padding-top:80px"><div class="mbox nar">
   <div class="mo-t">색상 라벨 수정</div>
-  <div class="fr"><label class="fl">라벨 텍스트</label><input class="fi" type="text" id="lblInp"></div>
-  <div class="mo-f"><button class="btn" id="btnLblCancel">취소</button><button class="btn pr" id="btnLblSave">저장</button></div>
+  <div class="fr"><label class="fl">라벨 텍스트</label><input class="fi" type="text" id="M_li"></div>
+  <div class="mo-f"><button class="btn" id="M_lX">취소</button><button class="btn pr" id="M_lS">저장</button></div>
 </div></div>
 
-<div class="ov" id="moWed"><div class="mbox wide">
-  <div class="mo-t" id="moWedTtl">결혼 추가</div>
-  <div class="frow"><div class="fr"><label class="fl">신랑 *</label><input class="fi" type="text" id="wGroom" placeholder="이름(셀)"></div><div class="fr"><label class="fl">신부 *</label><input class="fi" type="text" id="wBride" placeholder="이름(셀)"></div></div>
-  <div class="frow"><div class="fr"><label class="fl">날짜</label><input class="fi" type="date" id="wDate"></div><div class="fr"><label class="fl">시간</label><input class="fi" type="text" id="wTime" placeholder="18:30"></div></div>
-  <div class="fr"><label class="fl">장소</label><input class="fi" type="text" id="wVenue"></div>
-  <div class="frow"><div class="fr"><label class="fl">사회</label><input class="fi" type="text" id="wMc"></div><div class="fr"><label class="fl">기도</label><input class="fi" type="text" id="wPrayer"></div></div>
-  <div class="fr"><label class="fl">주례</label><input class="fi" type="text" id="wOfficiant"></div>
-  <div class="fr"><label class="fl">비고</label><textarea class="fi" id="wNote" rows="2"></textarea></div>
-  <div class="mo-f"><button class="btn dl" id="btnWedDel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="btnWedCancel">취소</button><button class="btn pr" id="btnWedSave">저장</button></div>
+<div class="ov" id="M_wed"><div class="mbox wide">
+  <div class="mo-t" id="M_wedT">결혼 추가</div>
+  <div class="frow"><div class="fr"><label class="fl">신랑 *</label><input class="fi" type="text" id="M_wg"></div><div class="fr"><label class="fl">신부 *</label><input class="fi" type="text" id="M_wb"></div></div>
+  <div class="frow"><div class="fr"><label class="fl">날짜</label><input class="fi" type="date" id="M_wd"></div><div class="fr"><label class="fl">시간</label><input class="fi" type="text" id="M_wt" placeholder="18:30"></div></div>
+  <div class="fr"><label class="fl">장소</label><input class="fi" type="text" id="M_wv"></div>
+  <div class="frow"><div class="fr"><label class="fl">사회</label><input class="fi" type="text" id="M_wmc"></div><div class="fr"><label class="fl">기도</label><input class="fi" type="text" id="M_wpr"></div></div>
+  <div class="fr"><label class="fl">주례</label><input class="fi" type="text" id="M_wof"></div>
+  <div class="fr"><label class="fl">비고</label><textarea class="fi" id="M_wno" rows="2"></textarea></div>
+  <div class="mo-f"><button class="btn dl" id="M_wdel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="M_wX">취소</button><button class="btn pr" id="M_wS">저장</button></div>
 </div></div>
 
-<div class="ov" id="moCell"><div class="mbox wide">
-  <div class="flex-row flex-sb" style="margin-bottom:1rem">
-    <div class="mo-t" style="margin-bottom:0" id="moCellTtl">셀 상세</div>
-    <div class="flex-row gap1"><button class="btn sm pr" id="btnMemAdd">+ 멤버 추가</button><button class="btn sm dl" id="btnCellDel">셀 삭제</button></div>
+<div class="ov" id="M_cell"><div class="mbox wide">
+  <div class="row sb2" style="margin-bottom:1rem">
+    <div class="mo-t" style="margin-bottom:0" id="M_cellT">셀 상세</div>
+    <div class="row g1"><button class="btn sm pr" id="M_memadd">+ 멤버</button><button class="btn sm dl" id="M_celldel">셀 삭제</button></div>
   </div>
-  <div class="fr"><label class="fl">셀 이름</label><input class="fi" type="text" id="cellNameInp"></div>
+  <div class="fr"><label class="fl">셀 이름</label><input class="fi" type="text" id="M_cni"></div>
   <div style="margin-bottom:.5rem;font-size:12px;color:#888;font-weight:500">멤버 목록</div>
-  <div id="cellMemList" style="max-height:320px;overflow-y:auto"></div>
-  <div class="mo-f"><button class="btn" id="btnCellCancel">닫기</button><button class="btn pr" id="btnCellSave">셀 이름 저장</button></div>
+  <div id="M_mlist" style="max-height:320px;overflow-y:auto"></div>
+  <div class="mo-f"><button class="btn" id="M_cellX">닫기</button><button class="btn pr" id="M_cellS">이름 저장</button></div>
 </div></div>
 
-<div class="ov" id="moCellAdd" style="padding-top:80px"><div class="mbox nar">
+<div class="ov" id="M_nadd" style="padding-top:80px"><div class="mbox nar">
   <div class="mo-t">셀 추가</div>
-  <div class="fr"><label class="fl">셀 이름 *</label><input class="fi" type="text" id="newCellName" placeholder="예: 47셀"></div>
-  <div class="mo-f"><button class="btn" id="btnCellAddCancel">취소</button><button class="btn pr" id="btnCellAddSave">추가</button></div>
+  <div class="fr"><label class="fl">셀 이름 *</label><input class="fi" type="text" id="M_nnm" placeholder="예: 47셀"></div>
+  <div class="mo-f"><button class="btn" id="M_nX">취소</button><button class="btn pr" id="M_nS">추가</button></div>
 </div></div>
 
-<div class="ov" id="moMem" style="padding-top:40px"><div class="mbox">
-  <div class="mo-t" id="moMemTtl">멤버 추가</div>
-  <div class="fr"><label class="fl">이름 *</label><input class="fi" type="text" id="memName"></div>
+<div class="ov" id="M_mem" style="padding-top:40px"><div class="mbox">
+  <div class="mo-t" id="M_memT">멤버 추가</div>
+  <div class="fr"><label class="fl">이름 *</label><input class="fi" type="text" id="M_mn"></div>
   <div class="frow">
-    <div class="fr"><label class="fl">성별</label><select class="fi" id="memGender"><option value="M">남</option><option value="F">여</option></select></div>
-    <div class="fr"><label class="fl">출생연도</label><input class="fi" type="number" id="memBirth" placeholder="1994"></div>
+    <div class="fr"><label class="fl">성별</label><select class="fi" id="M_mg"><option value="M">남</option><option value="F">여</option></select></div>
+    <div class="fr"><label class="fl">출생연도</label><input class="fi" type="number" id="M_mb" placeholder="1994"></div>
   </div>
-  <div class="fr"><label class="fl">연락처</label><input class="fi" type="tel" id="memPhone" placeholder="010-0000-0000"></div>
-  <div class="fr"><label class="fl">역할</label><select class="fi" id="memRole"><option value="셀리더">셀리더</option><option value="부리더">부리더</option><option value="멤버" selected>멤버</option></select></div>
-  <div class="mo-f"><button class="btn dl" id="btnMemDel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="btnMemCancel">취소</button><button class="btn pr" id="btnMemSave">저장</button></div>
+  <div class="fr"><label class="fl">연락처</label><input class="fi" type="tel" id="M_mp" placeholder="010-0000-0000"></div>
+  <div class="fr"><label class="fl">역할</label><select class="fi" id="M_mr"><option value="셀리더">셀리더</option><option value="부리더">부리더</option><option value="멤버" selected>멤버</option></select></div>
+  <div class="mo-f"><button class="btn dl" id="M_mdel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="M_mX">취소</button><button class="btn pr" id="M_mS">저장</button></div>
 </div></div>
 
-<div class="ov" id="moOrder"><div class="mbox">
-  <div class="mo-t" id="moOrderTtl">예배순서 추가</div>
-  <div class="fr"><label class="fl">날짜 *</label><input class="fi" type="date" id="orDate"></div>
-  <div class="fr"><label class="fl">예배전기도</label><input class="fi" type="text" id="orPre"></div>
-  <div class="fr"><label class="fl">찬양</label><input class="fi" type="text" id="orPraise"></div>
-  <div class="fr"><label class="fl">대표기도</label><input class="fi" type="text" id="orRepray"></div>
-  <div class="fr"><label class="fl">말씀</label><textarea class="fi" id="orSermon" rows="2"></textarea></div>
-  <div class="fr"><label class="fl">결단</label><input class="fi" type="text" id="orDecision" placeholder="다 같이"></div>
-  <div class="fr"><label class="fl">헌금</label><input class="fi" type="text" id="orOffering"></div>
-  <div class="fr"><label class="fl">축도</label><input class="fi" type="text" id="orBene"></div>
-  <div class="mo-f"><button class="btn dl" id="btnOrderDel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="btnOrderCancel">취소</button><button class="btn pr" id="btnOrderSave">저장</button></div>
+<div class="ov" id="M_ord"><div class="mbox">
+  <div class="mo-t" id="M_ordT">예배순서 추가</div>
+  <div class="fr"><label class="fl">날짜 *</label><input class="fi" type="date" id="M_od"></div>
+  <div class="fr"><label class="fl">예배전기도</label><input class="fi" type="text" id="M_op"></div>
+  <div class="fr"><label class="fl">찬양</label><input class="fi" type="text" id="M_opr"></div>
+  <div class="fr"><label class="fl">대표기도</label><input class="fi" type="text" id="M_orp"></div>
+  <div class="fr"><label class="fl">말씀</label><textarea class="fi" id="M_os" rows="2"></textarea></div>
+  <div class="fr"><label class="fl">결단</label><input class="fi" type="text" id="M_ode" placeholder="다 같이"></div>
+  <div class="fr"><label class="fl">헌금</label><input class="fi" type="text" id="M_of"></div>
+  <div class="fr"><label class="fl">축도</label><input class="fi" type="text" id="M_ob"></div>
+  <div class="mo-f"><button class="btn dl" id="M_odel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="M_oX">취소</button><button class="btn pr" id="M_oS">저장</button></div>
 </div></div>
 
-<div class="ov" id="moComm" style="padding-top:60px"><div class="mbox">
-  <div class="mo-t" id="moCommTtl">예배위원 추가</div>
-  <div class="fr"><label class="fl">날짜 *</label><input class="fi" type="date" id="cmDate"></div>
-  <div class="frow"><div class="fr"><label class="fl">기도인도</label><input class="fi" type="text" id="cmPray"></div><div class="fr"><label class="fl">대표기도</label><input class="fi" type="text" id="cmRepray"></div></div>
-  <div class="frow"><div class="fr"><label class="fl">헌금위원</label><input class="fi" type="text" id="cmOffer"></div><div class="fr"><label class="fl">주차위원</label><input class="fi" type="text" id="cmPark"></div></div>
-  <div class="frow"><div class="fr"><label class="fl">청소담당</label><input class="fi" type="text" id="cmClean"></div><div class="fr"><label class="fl">폰타나</label><input class="fi" type="text" id="cmFont"></div></div>
-  <div class="mo-f"><button class="btn dl" id="btnCommDel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="btnCommCancel">취소</button><button class="btn pr" id="btnCommSave">저장</button></div>
+<div class="ov" id="M_kom" style="padding-top:60px"><div class="mbox">
+  <div class="mo-t" id="M_komT">예배위원 추가</div>
+  <div class="fr"><label class="fl">날짜 *</label><input class="fi" type="date" id="M_kd"></div>
+  <div class="frow"><div class="fr"><label class="fl">기도인도</label><input class="fi" type="text" id="M_kp"></div><div class="fr"><label class="fl">대표기도</label><input class="fi" type="text" id="M_kr"></div></div>
+  <div class="frow"><div class="fr"><label class="fl">헌금위원</label><input class="fi" type="text" id="M_kh"></div><div class="fr"><label class="fl">주차위원</label><input class="fi" type="text" id="M_kj"></div></div>
+  <div class="frow"><div class="fr"><label class="fl">청소담당</label><input class="fi" type="text" id="M_kc"></div><div class="fr"><label class="fl">폰타나</label><input class="fi" type="text" id="M_kf"></div></div>
+  <div class="mo-f"><button class="btn dl" id="M_kdel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="M_kX">취소</button><button class="btn pr" id="M_kS">저장</button></div>
 </div></div>
 
-<div class="ov" id="moCfm" style="padding-top:120px"><div class="cfmbox">
-  <div class="cfm-msg" id="cfmMsg"></div>
-  <div class="cfm-f"><button class="btn" id="btnCfmNo">취소</button><button class="btn dl" id="btnCfmYes">삭제</button></div>
+<div class="ov" id="M_cfm" style="padding-top:120px"><div class="cfmbox">
+  <div class="cfm-msg" id="M_cfmT"></div>
+  <div class="cfm-f"><button class="btn" id="M_cfmN">취소</button><button class="btn dl" id="M_cfmY">삭제</button></div>
 </div></div>
 
 <script>
-// ── FIREBASE (비동기 로드 — 앱은 즉시 실행) ──
-var DB = null;
-function initFirebase() {
-  try {
-    var s1 = document.createElement('script');
-    s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.0/firebase-app-compat.min.js';
-    s1.onload = function() {
-      var s2 = document.createElement('script');
-      s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.0/firebase-database-compat.min.js';
-      s2.onload = function() {
-        try {
-          firebase.initializeApp({apiKey:"AIzaSyCYzIoHqTze7xstmkDZvcG-skgDk1hi4pA",authDomain:"youth-calendar-12793.firebaseapp.com",databaseURL:"https://youth-calendar-12793-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"youth-calendar-12793",storageBucket:"youth-calendar-12793.firebasestorage.app",messagingSenderId:"286339113904",appId:"1:286339113904:web:b9f8876da982aa47faec75"});
-          DB = firebase.database();
-          setupFbListeners();
-          V('sb-ft').textContent = '● Firebase 연결됨';
-        } catch(ex) {}
-      };
-      document.head.appendChild(s2);
-    };
-    document.head.appendChild(s1);
-  } catch(ex) {}
-}
-function setupFbListeners() {
-  fbOn('ycal-evts', function(v){ gEvts={}; var e=objEntries(v); for(var i=0;i<e.length;i++) gEvts[e[i][0]]=toArr(e[i][1]); if(curSec==='cal'){rCal();if(gSel)rDet(gSel);} });
-  fbOn('ycal-chk', function(v){ gChk=v; if(gSel) rDet(gSel); });
-  fbOn('ycal-labels', function(v){ var ks=objKeys(v); for(var i=0;i<ks.length;i++) gLabels[ks[i]]=v[ks[i]]; rLeg(); });
-  fbOn('weddings', function(v){ gWed=v; if(curSec==='wed') rWed(); });
-  fbOn('cells', function(v){ gCells=v; if(curSec==='cells') rCells(); });
-  fbOn('members', function(v){ gMems=v; if(curSec==='cells') rCells(); });
-  fbOn('worship_orders', function(v){ gOrd=v; if(curSec==='worship') rWorship(); });
-  fbOn('worship_committee', function(v){ gCom=v; if(curSec==='worship') rWorship(); });
-  fbOn('checks', function(v){ gChecks=v; if(curSec==='chk') rChk(); });
-}
-setTimeout(initFirebase, 500);
+(function() {
 
-// ── CONSTANTS ──
+var $ = function(id) { return document.getElementById(id); };
+var _n = 0;
+function uid() { _n++; return 'x' + Date.now().toString(36) + _n; }
+function pad(n) { return n < 10 ? '0' + n : '' + n; }
+function dkey(y,m,d) { return y+'-'+pad(m+1)+'-'+pad(d); }
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+var TODAY = new Date();
+var DOW = ['일','월','화','수','목','금','토'];
 var CK = ['p','t','c','a','b','k','g'];
 var CBG = {p:'#EEEDFE',t:'#E1F5EE',c:'#FAECE7',a:'#FAEEDA',b:'#E6F1FB',k:'#FBEAF0',g:'#F1EFE8'};
 var DLBL = {p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'};
 var IVLBL = {weekly:'매주',biweekly:'격주',monthly:'매달'};
-var DOW = ['일','월','화','수','목','금','토'];
-
-// ── INIT DATA ──
-var IEVTS = {"2026-03-22":[{t:"제자훈련",c:"p",m:"",n:[],memo:"",grpMemo:""}],"2026-03-27":[{t:"차량 조사 (4/1 관련)",c:"a",m:"3월 마지막 주",n:["4/1 교회해산법 행사 차량 조사 진행"],memo:"",grpMemo:""}],"2026-03-28":[{t:"거방",c:"t",m:"",n:[],memo:"",grpMemo:""}],"2026-04-01":[{t:"교회해산법 국회 계단",c:"c",m:"",n:["다음 주일 예배 후 광고 진행","차량 관련 확인 필요"],memo:"",grpMemo:""}],"2026-04-05":[{t:"칸타타",c:"p",m:"",n:["셀 모임 진행 여부 추후 논의"],memo:"",grpMemo:""},{t:"부활절 전도 대축제",c:"c",m:"",n:["1,2청 연합 카톡방 46개 셀 구역 확인","예배 봉사자 고려 구역 배치","[준비물] 포대자루,비닐장갑,집게","[준비물] 청년부 전도지"],memo:"",grpMemo:""}],"2026-04-06":[{t:"부장님 셀 시작",c:"t",m:"4월 첫째 주",n:[],memo:"",grpMemo:""}],"2026-04-11":[{t:"새가족 환영회",c:"k",m:"",n:[],memo:"",grpMemo:""}],"2026-04-12":[{t:"다드림 예배-태국 선교 보고 및 간증",c:"p",m:"",n:[],memo:"",grpMemo:""}],"2026-04-18":[{t:"석인후 리더 결혼",c:"k",m:"",n:[],memo:"",grpMemo:""}],"2026-04-25":[{t:"월례회",c:"a",m:"장소: 지연 세미나실",n:["팀장 수요 오프라인 필참 여부 → 현재처럼 유지"],memo:"",grpMemo:""}],"2026-05-09":[{t:"이은빈 리더 결혼",c:"k",m:"",n:[],memo:"",grpMemo:""}],"2026-05-16":[{t:"이정욱 결혼",c:"k",m:"",n:[],memo:"",grpMemo:""}],"2026-05-25":[{t:"셀리더 체육대회",c:"t",m:"백학 초등학교",n:["셀리더 필참","식비 100만원 지원 확인"],memo:"",grpMemo:""}],"2026-06-20":[{t:"이세원 결혼",c:"k",m:"",n:[],memo:"",grpMemo:""}],"2026-06-27":[{t:"효도 잔치",c:"c",m:"",n:["2청 메인 진행","구체적 준비 방식 결정 필요"],memo:"",grpMemo:""}],"2026-07-09":[{t:"여름 수련회 1일차",c:"b",m:"7/9~7/11",n:[],memo:"",grpMemo:""}],"2026-07-10":[{t:"여름 수련회 2일차",c:"b",m:"",n:[],memo:"",grpMemo:""}],"2026-07-11":[{t:"여름 수련회 마지막날",c:"b",m:"",n:[],memo:"",grpMemo:""}]};
-var IWED = {w1:{groom:"석인후(25셀)",bride:"윤혜진(3청)",date:"2026-04-18",venue:"발산 더 베뉴지",time:"18:30",mc:"이창헌 목사님",prayer:"이진섭 목사님",officiant:"박한수 목사님",note:""},w2:{groom:"이은빈(21셀)",bride:"염정원(27셀)",date:"2026-05-09",venue:"백석 천년웨딩홀 미엘홀",time:"17:30",mc:"여호수아 전도사님",prayer:"은빈형제 아버님",officiant:"박한수 목사님",note:""},w3:{groom:"이정욱(35셀)",bride:"김원지(41셀)",date:"2026-05-16",venue:"삼성 더 베일리 하우스(2층)",time:"14:00",mc:"-",prayer:"이창헌 목사님",officiant:"박한수 목사님",note:""},w4:{groom:"이세원(26셀)",bride:"이아영(36셀)",date:"2026-06-20",venue:"마포 월드컵컨벤션",time:"18:20",mc:"-",prayer:"이창헌 목사님",officiant:"박한수 목사님",note:""},w5:{groom:"고기헌(16셀)",bride:"외부인원",date:"2026-08-22",venue:"발산 더베뉴지 서울아트홀",time:"17:20",mc:"-",prayer:"-",officiant:"신부 측 목사님",note:""},w6:{groom:"서정암(35셀)",bride:"김민정(38셀)",date:"2026-09-19",venue:"상암 DMC웨딩타워 펠리체홀",time:"15:00",mc:"-",prayer:"이창헌 목사님",officiant:"박한수 목사님",note:"이창헌 목사님께 기도 부탁 드릴 예정"},w7:{groom:"김준원(19셀)",bride:"김원비(29셀)",date:"2026-10-09",venue:"마곡나루 보타닉파크",time:"17:50",mc:"-",prayer:"미정",officiant:"미정",note:""}};
-var IORD = {o1:{date:"2026-04-05",pre:"김민지 회계",praise:"다드림찬양팀 [찬양인도:박근희청년]",repray:"이루미 리더",sermon:"이창헌 목사 (Begin Again - 요한복음 10장 14-15절)",decision:"다 같이",offering:"최예지 청년",bene:"이창헌 목사"},o2:{date:"2026-04-12",pre:"",praise:"",repray:"",sermon:"",decision:"다 같이",offering:"",bene:"이창헌 목사"}};
-var ICOM = {c1:{date:"2026-04-05","기도인도":"염정원 서기","대표기도":"조충성 리더","헌금위원":"유은옥 청년","주차위원":"27,28셀","청소담당":"29,30셀","폰타나":"1,2셀"},c2:{date:"2026-04-12","기도인도":"김지연 회장","대표기도":"조유림 리더","헌금위원":"이동범 청년","주차위원":"29,30셀","청소담당":"31,32셀","폰타나":"3,4셀"}};
-
-// ── CELL DATA (compact) ──
-var CD=[[1,'이우석','M',1994,'010-9975-7992',['남아름송이F1990','이유진F1991','김하빈F1995','서하린F1996','이승현M1997','하태현M1992']],[2,'김민지B','F',1995,'010-7125-2820',['이인서M1994','박용운M1994','양영선F1997','조찬경F1998','김채연F1998','황태원M1999','박상온F1995']],[3,'구교선','F',1997,'010-8013-7258',['한용준M1995','김예은CF1997','임우진F1997','박주원F1997','임경민M1999','한창우M1997']],[4,'박연희','F',1988,'010-4880-7163',['박해진F1988','박승세M1992','박선아AF1992','허순선F1993','조소연F1995','김학산M1989']],[5,'백수영','F',1988,'010-4908-4631',['최현M1988','윤선희F1988','이진영AF1989','김혜연F1990','유시온F1991','이진호AM1991']],[6,'김용권','M',1989,'010-2737-8180',['엄은영F1989','김은별F1990','박근희F1993','양진석M1989','김광택M1991','박예은F1989']],[7,'이소희','F',1989,'010-2429-8027',['함은성M1988','김은지AF1988','박상현M1989','박해민F1990','김지선F1990','이민경F1992','박찬영M1990']],[8,'김보라','F',1990,'010-2234-2731',['이인애F1988','최유라F1991','김슬기F1991','구도준M1992','이연영F1994','신유진F1996']],[9,'이요한','M',1991,'010-6325-8170',['이승진F1989','고민지F1989','김시몬M1990','이윤지F1990','이은송F1990','박동근M1994','허진F1996']],[10,'이루미','F',1991,'010-8229-5123',['최예지F1988','송주용M1989','박은총F1992','서민정F1992','신소현F1993','진혜연F1994','이성현BM1990']],[11,'조충성','M',1991,'010-5580-8733',['정은아F1989','유은옥F1990','강규건M1990','이우림M1990','이정민F1991','신동우BM1997','이은정F0']],[12,'박소정','F',1991,'010-3093-1983',['김유진F1989','이은지F1991','박준영M1997','한영민M1993','김정현DM1997','김예원F1995']],[13,'조유림','F',1991,'010-4475-7985',['이동범M1988','윤준학M1991','정지혜F1991','박동현M1992','이민우M1992','장지희F1993']],[14,'박영인','F',1992,'010-3027-3139',['주보영F1989','박지선F1991','김주아F1992','최낙중M1994','조민석M1996','여다솔M1997','최지필M0']],[15,'이은림','F',1992,'010-7287-8402',['김준호DF1991','임준영M1991','박혜주F1992','최혜인F1992','박이슬F1994','최솜이F1995']],[16,'정혜경','F',1993,'010-7223-3742',['고기헌M1993','김규리F1993','조세희F1993','홍수민F1996','김혜수BF1996','천기범M1998','김혜현F1993']],[17,'민효근','M',1993,'010-7323-7557',['서지애F1988','이다운F1992','정천도M1992','권주람M1998','서혜빈F1999','박은진BF1991']],[18,'김진형','M',1993,'010-5060-2569',['김수빈F1993','김보미F1993','김소리F1994','김태현M1994','이여진F0','김민정BF1993']],[19,'김도윤','M',1993,'010-4124-2367',['김은혜F1993','김윤주F1994','차이레M1996','정세영M1996','윤민기M1998','김채울F1999','김준원M1998']],[20,'박기쁨','F',1993,'010-5119-4919',['이태근M1990','김동현BF1993','조하경F1995','차건호M1998','차은혜F1999','김인혜F1995']],[21,'이은빈','M',1994,'010-3466-3492',['이아라F1991','김보람F1992','이가연F1993','정신현F1994','김태욱M1996','이주훈M1999','정요셉M1995']],[22,'정영재','M',1994,'010-7531-0397',['서홍주F1991','임용식M1992','이익재M1994','고예닮F1995','김인경F1996','도우미F1993']],[23,'김준호A','M',1994,'010-7740-0583',['정하나F1993','이승재M1994','강수민F1996','박서우F1999','이정현GM1995','이진영M1996']],[24,'홍유라','F',1994,'010-4393-8050',['김우재M1992','유태균M1994','전은혜F1995','강현이F1996','정태균M1997','박소영F1998']],[25,'임병민','M',1994,'010-6372-8983',['임영아F1988','석인후M1995','황성원M1996','정의진F1996','박성민M1996','방민우M1997','박채환F1999']],[26,'권혜빈','F',1994,'010-3008-5186',['이세원M1994','곽인수M1994','김승식M1995','이에녹M1996','이화정F1996','장세연F1999','최란F1998']],[27,'김동준','M',1995,'010-2010-2820',['최광수M1991','한은성M1992','염정원F1994','정선영F1997','박민지F1998','박지은F1999']],[28,'고예찬','F',1995,'010-9779-0099',['김혜진F1994','김영규M1994','이광연M1994','박예담F1996','권홍빈F1996','정영철M1996']],[29,'박현우','M',1995,'010-4132-4919',['김태호M1992','김원비F1994','김가은F1994','김보한M1995','고영광M1996','윤한울F1999']],[30,'최하은','F',1995,'010-3600-4759',['이라빈F1993','김예솔F1994','변하은F1995','이정현FM1996','박시온M1999','이용민M1997']],[31,'임효주','F',1995,'010-2013-7882',['이주성M1994','최일M1997','원도현F1998','조민호M1998','최예은F1998','장윤지F1997']],[32,'김찬양','M',1995,'010-7441-5519',['김솔지F1989','김영빈M1993','최승도M1994','고석주M1997','김연지F1998','김서현BF1999','장태영M1997']],[33,'서보경','M',1996,'010-9492-1977',['김형호M1991','박동민M1994','조해영F1994','김경화F1996','정예원F1997','김진용M1996']],[34,'손혜원','F',1996,'010-6224-3803',['서아연F1995','이정하F1995','성유진F1996','김신혜F1996','김지은F1998','고연진F1999']],[35,'서정암','M',1996,'010-9903-5785',['배성연M1991','김신실F1993','박창준M1996','이정욱M1996','임지형M1996','이채영F1996']],[36,'전찬민','M',1996,'010-8477-9890',['장유경F1991','윤은별F1997','손주찬M1998','이아영F1998','김예호M1998','한미경F1999']],[37,'김하영','F',1997,'010-8636-6983',['김태환M1996','권정환M1996','손성종M1998','김지원F1998','최민희F1999','송다솔F1999','이예주F1999']],[38,'김민정C','F',1997,'010-2948-6689',['김경모M1996','안희진F1997','김정현AM1998','이소현F1998','임소정F1998','하지현F1999']],[39,'조은수','M',1997,'010-4714-5355',['김정찬M1996','신동우M1997','한다솜F1998','한수빈F2001','조수훈M1999','우수민F1999']],[40,'이주원B','F',1997,'010-7547-0435',['유충석M1995','권진아F1997','송승원M1998','오예림F1998','권세빈F1999','안지휘F1999','민혜윤F1998']],[41,'김원지','F',1997,'010-9018-5114',['배민지F1991','고수정F1996','고예찬M1996','송민기M1997','최희지F1998','남채원F1999','전세희F1999']],[42,'김성훈','M',1997,'010-2552-6374',['조평래M1995','김지혁M1997','윤다혜F1997','하진호M1998','손현아F1998','신유연F1998']],[43,'최윤정','F',1997,'010-8332-3674',['남채린F1998','유시훈M1998','장보배F1998','최지송F1998','조성헌M1999','조예은F1996']],[44,'김민지D','F',1997,'010-9926-7936',['최진솔F1997','선하정F1998','조예닮F1998','최진우M1998','박찬현F1998','원샛별F1999']],[45,'왕예정','M',1997,'010-2736-7705',['김하은F1998','박은진F1998','장하은F1998','박진M1999','김학준M1999','이수용M1999']],[46,'강승희','F',1998,'010-3231-8557',['기은정F1996','김동현CM1997','박주손M1998','황수진F1998','한아름F1998','박주연F1999','이예진F1999']]];
-var CCOL = ['p','t','b','c','k','a','g','p','t','b'];
-
-function parseMem(s) {
-  // e.g. "남아름송이F1990" → {name, gender, by}
-  var m = s.match(/^(.*?)([MF])(\d+)$/);
-  if (!m) return {name:s, gender:'M', by:0};
-  return {name:m[1], gender:m[2], by:parseInt(m[3],10)||0};
-}
-function buildCells() {
-  var nc = {}, nm = {};
-  for (var i = 0; i < CD.length; i++) {
-    var row = CD[i];
-    var num = row[0], lName = row[1], lGender = row[2], lBy = row[3], lPhone = row[4], mArr = row[5];
-    var cid = 'c' + (num < 10 ? '0' + num : '' + num);
-    var lid = 'm' + cid + '_0';
-    nm[lid] = {name:lName, gender:lGender, birthYear:lBy, phone:lPhone, cellId:cid, role:'셀리더', status:'active'};
-    for (var j = 0; j < mArr.length; j++) {
-      var pm = parseMem(mArr[j]);
-      nm['m' + cid + '_' + (j+1)] = {name:pm.name, gender:pm.gender, birthYear:pm.by||null, phone:'', cellId:cid, role:'멤버', status:'active'};
-    }
-    nc[cid] = {name:num + '셀', number:num, leaderId:lid, color:CCOL[(num-1) % CCOL.length]};
-  }
-  return {nc:nc, nm:nm};
-}
 
 // ── STATE ──
-var built = buildCells();
-var gEvts = JSON.parse(JSON.stringify(IEVTS));
-var gWed = JSON.parse(JSON.stringify(IWED));
-var gOrd = JSON.parse(JSON.stringify(IORD));
-var gCom = JSON.parse(JSON.stringify(ICOM));
-var gCells = built.nc;
-var gMems = built.nm;
-var gChk = {}, gLabels = {p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'}, gChecks = {};
-var gToday = new Date();
-var gY = 2026, gM = (gToday.getFullYear() === 2026) ? gToday.getMonth() : 2;
-var gSel = null, gFC = null, gMoSt = null, gPend = null, gLmoKey = null;
-var eWed = null, eOrd = null, eCom = null, eCellId = null, eMemId = null;
-var curSec = 'cal', _uid = 0;
+var gY = 2026, gM = (TODAY.getFullYear()===2026 ? TODAY.getMonth() : 2);
+var gSel = null, gFC = null, gPend = null, gMoSt = null, gLmoKey = null;
+var eWed = null, eOrd = null, eKom = null, eCid = null, eMid = null;
+var curSec = 'cal';
 
-// ── HELPERS ──
-function V(id) { return document.getElementById(id); }
-function uid() { _uid++; return Date.now().toString(36) + '_' + _uid; }
-function pad2(n) { return n < 10 ? '0' + n : '' + n; }
-function dkey(y, m, d) { return y + '-' + pad2(m+1) + '-' + pad2(d); }
-function toArr(v) {
-  if (!v) return [];
-  if (v instanceof Array) return v;
-  var ks = Object.keys(v).sort(function(a,b){return +a-+b});
-  var r = [];
-  for (var i = 0; i < ks.length; i++) r.push(v[ks[i]]);
-  return r;
-}
-function objKeys(o) { return o ? Object.keys(o) : []; }
-function objVals(o) {
-  if (!o) return [];
-  var ks = Object.keys(o), r = [];
-  for (var i = 0; i < ks.length; i++) r.push(o[ks[i]]);
-  return r;
-}
-function objEntries(o) {
-  if (!o) return [];
-  var ks = Object.keys(o), r = [];
-  for (var i = 0; i < ks.length; i++) r.push([ks[i], o[ks[i]]]);
-  return r;
-}
+// init data
+var gEvts = {"2026-03-22":[{t:"제자훈련",c:"p",m:"",n:[],memo:""}],"2026-03-27":[{t:"차량 조사 (4/1 관련)",c:"a",m:"3월 마지막 주",n:["4/1 교회해산법 행사 차량 조사 진행"],memo:""}],"2026-03-28":[{t:"거방",c:"t",m:"",n:[],memo:""}],"2026-04-01":[{t:"교회해산법 국회 계단",c:"c",m:"",n:["다음 주일 예배 후 광고 진행","차량 관련 확인 필요"],memo:""}],"2026-04-05":[{t:"칸타타",c:"p",m:"",n:["셀 모임 진행 여부 추후 논의"],memo:""},{t:"부활절 전도 대축제",c:"c",m:"",n:["1,2청 연합 카톡방 46개 셀 구역 확인","예배 봉사자 고려 구역 배치","[준비물] 포대자루,비닐장갑,집게","청년부 전도지"],memo:""}],"2026-04-06":[{t:"부장님 셀 시작",c:"t",m:"4월 첫째 주",n:[],memo:""}],"2026-04-11":[{t:"새가족 환영회",c:"k",m:"",n:[],memo:""}],"2026-04-12":[{t:"다드림 예배-태국 선교 보고",c:"p",m:"",n:[],memo:""}],"2026-04-18":[{t:"석인후 리더 결혼",c:"k",m:"",n:[],memo:""}],"2026-04-25":[{t:"월례회",c:"a",m:"장소: 지연 세미나실",n:["팀장 수요 오프라인 필참 여부 → 현재처럼 유지"],memo:""}],"2026-05-09":[{t:"이은빈 리더 결혼",c:"k",m:"",n:[],memo:""}],"2026-05-16":[{t:"이정욱 결혼",c:"k",m:"",n:[],memo:""}],"2026-05-25":[{t:"셀리더 체육대회",c:"t",m:"백학 초등학교",n:["셀리더 필참","식비 100만원 지원 확인"],memo:""}],"2026-06-20":[{t:"이세원 결혼",c:"k",m:"",n:[],memo:""}],"2026-06-27":[{t:"효도 잔치",c:"c",m:"",n:["2청 메인 진행"],memo:""}],"2026-07-09":[{t:"여름 수련회 1일차",c:"b",m:"7/9~7/11",n:[],memo:""}],"2026-07-10":[{t:"여름 수련회 2일차",c:"b",m:"",n:[],memo:""}],"2026-07-11":[{t:"여름 수련회 마지막날",c:"b",m:"",n:[],memo:""}]};
+var gWed = {w1:{groom:"석인후(25셀)",bride:"윤혜진(3청)",date:"2026-04-18",venue:"발산 더 베뉴지",time:"18:30",mc:"이창헌 목사님",prayer:"이진섭 목사님",officiant:"박한수 목사님",note:""},w2:{groom:"이은빈(21셀)",bride:"염정원(27셀)",date:"2026-05-09",venue:"백석 천년웨딩홀 미엘홀",time:"17:30",mc:"여호수아 전도사님",prayer:"은빈형제 아버님",officiant:"박한수 목사님",note:""},w3:{groom:"이정욱(35셀)",bride:"김원지(41셀)",date:"2026-05-16",venue:"삼성 더 베일리 하우스",time:"14:00",mc:"-",prayer:"이창헌 목사님",officiant:"박한수 목사님",note:""},w4:{groom:"이세원(26셀)",bride:"이아영(36셀)",date:"2026-06-20",venue:"마포 월드컵컨벤션",time:"18:20",mc:"-",prayer:"이창헌 목사님",officiant:"박한수 목사님",note:""},w5:{groom:"고기헌(16셀)",bride:"외부인원",date:"2026-08-22",venue:"발산 더베뉴지 서울아트홀",time:"17:20",mc:"-",prayer:"-",officiant:"신부 측 목사님",note:""},w6:{groom:"서정암(35셀)",bride:"김민정(38셀)",date:"2026-09-19",venue:"상암 DMC웨딩타워",time:"15:00",mc:"-",prayer:"이창헌 목사님",officiant:"박한수 목사님",note:""},w7:{groom:"김준원(19셀)",bride:"김원비(29셀)",date:"2026-10-09",venue:"마곡나루 보타닉파크",time:"17:50",mc:"-",prayer:"미정",officiant:"미정",note:""}};
+var gOrd = {o1:{date:"2026-04-05",pre:"김민지 회계",praise:"다드림찬양팀 [찬양인도:박근희청년]",repray:"이루미 리더",sermon:"이창헌 목사 (Begin Again - 요한복음 10:14-15)",decision:"다 같이",offering:"최예지 청년",bene:"이창헌 목사"},o2:{date:"2026-04-12",pre:"",praise:"",repray:"",sermon:"",decision:"다 같이",offering:"",bene:"이창헌 목사"}};
+var gKom = {c1:{date:"2026-04-05","기도인도":"염정원 서기","대표기도":"조충성 리더","헌금위원":"유은옥 청년","주차위원":"27,28셀","청소담당":"29,30셀","폰타나":"1,2셀"},c2:{date:"2026-04-12","기도인도":"김지연 회장","대표기도":"조유림 리더","헌금위원":"이동범 청년","주차위원":"29,30셀","청소담당":"31,32셀","폰타나":"3,4셀"}};
+var gChk = {};
+var gLabels = {p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'};
+var gChecks = {};
+
+// cells — built inline to avoid large function
+var gCells = {}, gMems = {};
+(function() {
+  var CD = [
+    [1,'이우석','M',1994,'010-9975-7992',[['남아름송이','F',1990],['이유진','F',1991],['김하빈','F',1995],['서하린','F',1996],['이승현','M',1997],['하태현','M',1992]]],
+    [2,'김민지B','F',1995,'010-7125-2820',[['이인서','M',1994],['박용운','M',1994],['양영선','F',1997],['조찬경','F',1998],['김채연','F',1998],['황태원','M',1999],['박상온','F',1995]]],
+    [3,'구교선','F',1997,'010-8013-7258',[['한용준','M',1995],['김예은C','F',1997],['임우진','F',1997],['박주원','F',1997],['임경민','M',1999],['한창우','M',1997]]],
+    [4,'박연희','F',1988,'010-4880-7163',[['박해진','F',1988],['박승세','M',1992],['박선아A','F',1992],['허순선','F',1993],['조소연','F',1995],['김학산','M',1989]]],
+    [5,'백수영','F',1988,'010-4908-4631',[['최현','M',1988],['윤선희','F',1988],['이진영A','F',1989],['김혜연','F',1990],['유시온','F',1991],['이진호A','M',1991]]],
+    [6,'김용권','M',1989,'010-2737-8180',[['엄은영','F',1989],['김은별','F',1990],['박근희','F',1993],['양진석','M',1989],['김광택','M',1991],['박예은','F',1989]]],
+    [7,'이소희','F',1989,'010-2429-8027',[['함은성','M',1988],['김은지A','F',1988],['박상현','M',1989],['박해민','F',1990],['김지선','F',1990],['이민경','F',1992],['박찬영','M',1990]]],
+    [8,'김보라','F',1990,'010-2234-2731',[['이인애','F',1988],['최유라','F',1991],['김슬기','F',1991],['구도준','M',1992],['이연영','F',1994],['신유진','F',1996]]],
+    [9,'이요한','M',1991,'010-6325-8170',[['이승진','F',1989],['고민지','F',1989],['김시몬','M',1990],['이윤지','F',1990],['이은송','F',1990],['박동근','M',1994],['허진','F',1996]]],
+    [10,'이루미','F',1991,'010-8229-5123',[['최예지','F',1988],['송주용','M',1989],['박은총','F',1992],['서민정','F',1992],['신소현','F',1993],['진혜연','F',1994],['이성현B','M',1990]]],
+    [11,'조충성','M',1991,'010-5580-8733',[['정은아','F',1989],['유은옥','F',1990],['강규건','M',1990],['이우림','M',1990],['이정민','F',1991],['신동우B','M',1997],['이은정','F',0]]],
+    [12,'박소정','F',1991,'010-3093-1983',[['김유진','F',1989],['이은지','F',1991],['박준영','M',1997],['한영민','M',1993],['김정현D','M',1997],['김예원','F',1995]]],
+    [13,'조유림','F',1991,'010-4475-7985',[['이동범','M',1988],['윤준학','M',1991],['정지혜','F',1991],['박동현','M',1992],['이민우','M',1992],['장지희','F',1993]]],
+    [14,'박영인','F',1992,'010-3027-3139',[['주보영','F',1989],['박지선','F',1991],['김주아','F',1992],['최낙중','M',1994],['조민석','M',1996],['여다솔','M',1997]]],
+    [15,'이은림','F',1992,'010-7287-8402',[['김준호D','M',1991],['임준영','M',1991],['박혜주','F',1992],['최혜인','F',1992],['박이슬','F',1994],['최솜이','F',1995]]],
+    [16,'정혜경','F',1993,'010-7223-3742',[['고기헌','M',1993],['김규리','F',1993],['조세희','F',1993],['홍수민','F',1996],['김혜수B','F',1996],['천기범','M',1998],['김혜현','F',1993]]],
+    [17,'민효근','M',1993,'010-7323-7557',[['서지애','F',1988],['이다운','F',1992],['정천도','M',1992],['권주람','M',1998],['서혜빈','F',1999],['박은진B','F',1991]]],
+    [18,'김진형','M',1993,'010-5060-2569',[['김수빈','F',1993],['김보미','F',1993],['김소리','F',1994],['김태현','M',1994],['이여진','F',0],['김민정B','F',1993]]],
+    [19,'김도윤','M',1993,'010-4124-2367',[['김은혜','F',1993],['김윤주','F',1994],['차이레','M',1996],['정세영','M',1996],['윤민기','M',1998],['김채울','F',1999],['김준원','M',1998]]],
+    [20,'박기쁨','F',1993,'010-5119-4919',[['이태근','M',1990],['김동현B','F',1993],['조하경','F',1995],['차건호','M',1998],['차은혜','F',1999],['김인혜','F',1995]]],
+    [21,'이은빈','M',1994,'010-3466-3492',[['이아라','F',1991],['김보람','F',1992],['이가연','F',1993],['정신현','F',1994],['김태욱','M',1996],['이주훈','M',1999],['정요셉','M',1995]]],
+    [22,'정영재','M',1994,'010-7531-0397',[['서홍주','F',1991],['임용식','M',1992],['이익재','M',1994],['고예닮','F',1995],['김인경','F',1996],['도우미','F',1993]]],
+    [23,'김준호A','M',1994,'010-7740-0583',[['정하나','F',1993],['이승재','M',1994],['강수민','F',1996],['박서우','F',1999],['이정현G','M',1995],['이진영','M',1996]]],
+    [24,'홍유라','F',1994,'010-4393-8050',[['김우재','M',1992],['유태균','M',1994],['전은혜','F',1995],['강현이','F',1996],['정태균','M',1997],['박소영','F',1998]]],
+    [25,'임병민','M',1994,'010-6372-8983',[['임영아','F',1988],['석인후','M',1995],['황성원','M',1996],['정의진','F',1996],['박성민','M',1996],['방민우','M',1997],['박채환','F',1999]]],
+    [26,'권혜빈','F',1994,'010-3008-5186',[['이세원','M',1994],['곽인수','M',1994],['김승식','M',1995],['이에녹','M',1996],['이화정','F',1996],['장세연','F',1999],['최란','F',1998]]],
+    [27,'김동준','M',1995,'010-2010-2820',[['최광수','M',1991],['한은성','M',1992],['염정원','F',1994],['정선영','F',1997],['박민지','F',1998],['박지은','F',1999]]],
+    [28,'고예찬','F',1995,'010-9779-0099',[['김혜진','F',1994],['김영규','M',1994],['이광연','M',1994],['박예담','F',1996],['권홍빈','F',1996],['정영철','M',1996]]],
+    [29,'박현우','M',1995,'010-4132-4919',[['김태호','M',1992],['김원비','F',1994],['김가은','F',1994],['김보한','M',1995],['고영광','M',1996],['윤한울','F',1999]]],
+    [30,'최하은','F',1995,'010-3600-4759',[['이라빈','F',1993],['김예솔','F',1994],['변하은','F',1995],['이정현F','M',1996],['박시온','M',1999],['이용민','M',1997]]],
+    [31,'임효주','F',1995,'010-2013-7882',[['이주성','M',1994],['최일','M',1997],['원도현','F',1998],['조민호','M',1998],['최예은','F',1998],['장윤지','F',1997]]],
+    [32,'김찬양','M',1995,'010-7441-5519',[['김솔지','F',1989],['김영빈','M',1993],['최승도','M',1994],['고석주','M',1997],['김연지','F',1998],['김서현B','F',1999],['장태영','M',1997]]],
+    [33,'서보경','M',1996,'010-9492-1977',[['김형호','M',1991],['박동민','M',1994],['조해영','F',1994],['김경화','F',1996],['정예원','F',1997],['김진용','M',1996]]],
+    [34,'손혜원','F',1996,'010-6224-3803',[['서아연','F',1995],['이정하','F',1995],['성유진','F',1996],['김신혜','F',1996],['김지은','F',1998],['고연진','F',1999]]],
+    [35,'서정암','M',1996,'010-9903-5785',[['배성연','M',1991],['김신실','F',1993],['박창준','M',1996],['이정욱','M',1996],['임지형','M',1996],['이채영','F',1996]]],
+    [36,'전찬민','M',1996,'010-8477-9890',[['장유경','F',1991],['윤은별','F',1997],['손주찬','M',1998],['이아영','F',1998],['김예호','M',1998],['한미경','F',1999]]],
+    [37,'김하영','F',1997,'010-8636-6983',[['김태환','M',1996],['권정환','M',1996],['손성종','M',1998],['김지원','F',1998],['최민희','F',1999],['송다솔','F',1999],['이예주','F',1999]]],
+    [38,'김민정C','F',1997,'010-2948-6689',[['김경모','M',1996],['안희진','F',1997],['김정현A','M',1998],['이소현','F',1998],['임소정','F',1998],['하지현','F',1999]]],
+    [39,'조은수','M',1997,'010-4714-5355',[['김정찬','M',1996],['신동우','M',1997],['한다솜','F',1998],['한수빈','F',2001],['조수훈','M',1999],['우수민','F',1999]]],
+    [40,'이주원B','F',1997,'010-7547-0435',[['유충석','M',1995],['권진아','F',1997],['송승원','M',1998],['오예림','F',1998],['권세빈','F',1999],['안지휘','F',1999],['민혜윤','F',1998]]],
+    [41,'김원지','F',1997,'010-9018-5114',[['배민지','F',1991],['고수정','F',1996],['고예찬','M',1996],['송민기','M',1997],['최희지','F',1998],['남채원','F',1999],['전세희','F',1999]]],
+    [42,'김성훈','M',1997,'010-2552-6374',[['조평래','M',1995],['김지혁','M',1997],['윤다혜','F',1997],['하진호','M',1998],['손현아','F',1998],['신유연','F',1998]]],
+    [43,'최윤정','F',1997,'010-8332-3674',[['남채린','F',1998],['유시훈','M',1998],['장보배','F',1998],['최지송','F',1998],['조성헌','M',1999],['조예은','F',1996]]],
+    [44,'김민지D','F',1997,'010-9926-7936',[['최진솔','F',1997],['선하정','F',1998],['조예닮','F',1998],['최진우','M',1998],['박찬현','F',1998],['원샛별','F',1999]]],
+    [45,'왕예정','M',1997,'010-2736-7705',[['김하은','F',1998],['박은진','F',1998],['장하은','F',1998],['박진','M',1999],['김학준','M',1999],['이수용','M',1999]]],
+    [46,'강승희','F',1998,'010-3231-8557',[['기은정','F',1996],['김동현C','M',1997],['박주손','M',1998],['황수진','F',1998],['한아름','F',1998],['박주연','F',1999],['이예진','F',1999]]]
+  ];
+  var CC = ['p','t','b','c','k','a','g','p','t','b'];
+  var i, j, row, num, cid, lid, mems, m;
+  for (i = 0; i < CD.length; i++) {
+    row = CD[i];
+    num = row[0]; cid = 'c' + (num < 10 ? '0' + num : '' + num); lid = 'm' + cid + '_0';
+    mems = row[5];
+    gMems[lid] = {name:row[1], gender:row[2], birthYear:row[3]||null, phone:row[4], cellId:cid, role:'셀리더'};
+    for (j = 0; j < mems.length; j++) {
+      m = mems[j];
+      gMems['m'+cid+'_'+(j+1)] = {name:m[0], gender:m[1], birthYear:m[2]||null, phone:'', cellId:cid, role:'멤버'};
+    }
+    gCells[cid] = {name:num+'셀', number:num, leaderId:lid, color:CC[(num-1)%CC.length]};
+  }
+})();
+
+// ── UTILS ──
 function fmtD(ds) {
   if (!ds) return '';
-  var d = new Date(ds + 'T00:00:00');
-  return (d.getMonth()+1) + '/' + d.getDate() + '(' + DOW[d.getDay()] + ')';
+  var d = new Date(ds+'T00:00:00');
+  return (d.getMonth()+1)+'/'+d.getDate()+'('+DOW[d.getDay()]+')';
 }
+function keys(o) { return o ? Object.keys(o) : []; }
+function vals(o) { var r=[],ks=keys(o); for(var i=0;i<ks.length;i++) r.push(o[ks[i]]); return r; }
+function ents(o) { var r=[],ks=keys(o); for(var i=0;i<ks.length;i++) r.push([ks[i],o[ks[i]]]); return r; }
+function sortByDate(arr) { return arr.sort(function(a,b){return (a[1].date||'').localeCompare(b[1].date||'')}); }
+
 function banner(msg, err) {
   var b = document.createElement('div');
-  b.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:'+(err?'#FCEBEB':'#E1F5EE')+';color:'+(err?'#A32D2D':'#0F6E56')+';padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;border:0.5px solid '+(err?'#F09595':'#5DCAA5')+';white-space:nowrap;max-width:90vw;text-align:center;pointer-events:none';
-  b.textContent = msg;
-  document.body.appendChild(b);
-  setTimeout(function(){ if(b.parentNode) b.parentNode.removeChild(b); }, 2800);
+  b.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:'+(err?'#FCEBEB':'#E1F5EE')+';color:'+(err?'#A32D2D':'#0F6E56')+';padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;border:0.5px solid '+(err?'#F09595':'#5DCAA5')+';pointer-events:none;white-space:nowrap';
+  b.textContent = msg; document.body.appendChild(b);
+  setTimeout(function() { if(b.parentNode) b.parentNode.removeChild(b); }, 2800);
 }
-function showMo(id) { var el = V(id); if(el){el.classList.add('show'); el.scrollTop=0;} }
-function hideMo(id) { var el = V(id); if(el) el.classList.remove('show'); }
+function showM(id) { var e=$(id); if(e){e.classList.add('show');e.scrollTop=0;} }
+function hideM(id) { var e=$(id); if(e) e.classList.remove('show'); }
 var cfmCb = null;
-function cfm(msg, cb) { V('cfmMsg').textContent = msg; cfmCb = cb; showMo('moCfm'); }
-V('btnCfmYes').onclick = function(){ hideMo('moCfm'); if(cfmCb) cfmCb(); };
-V('btnCfmNo').onclick = function(){ hideMo('moCfm'); cfmCb = null; };
-
-// ── FIREBASE ──
-function fbSet(path, data) { if (!DB) return; try { DB.ref(path).set(data); } catch(e){} }
-function fbDel(path) { if (!DB) return; try { DB.ref(path).remove(); } catch(e){} }
-function fbOn(path, cb) {
-  if (!DB) return;
-  try { DB.ref(path).on('value', function(snap){ var v=snap.val(); if(v) cb(v); }, function(){}); } catch(e){}
-}
-
-function saveEvts() { fbSet('ycal-evts', gEvts); rCal(); if(gSel) rDet(gSel); }
+function cfm(msg, cb) { $('M_cfmT').textContent=msg; cfmCb=cb; showM('M_cfm'); }
+$('M_cfmY').onclick = function() { hideM('M_cfm'); if(cfmCb) cfmCb(); };
+$('M_cfmN').onclick = function() { hideM('M_cfm'); cfmCb=null; };
 
 // ── NAVIGATION ──
 var STITLE = {cal:'일정 캘린더',wed:'결혼 현황',cells:'셀 명단',worship:'이번 주 예배 담당자',chk:'이번주 체크리스트'};
 function navTo(id) {
-  var ns = document.querySelectorAll('.sni,.mni');
-  for (var i = 0; i < ns.length; i++) ns[i].classList.toggle('on', ns[i].getAttribute('data-s') === id);
+  var ns = document.querySelectorAll('.sni,.mni'), i;
+  for (i=0; i<ns.length; i++) ns[i].classList.toggle('on', ns[i].getAttribute('data-s')===id);
   var ss = document.querySelectorAll('.sec');
-  for (var i = 0; i < ss.length; i++) ss[i].classList.remove('on');
-  var sec = V('sec-' + id); if(sec) sec.classList.add('on');
-  var tbt = V('tbt'); if(tbt) tbt.textContent = STITLE[id] || '';
+  for (i=0; i<ss.length; i++) ss[i].classList.remove('on');
+  $('I_s_'+id).classList.add('on');
+  $('I_tbt').textContent = STITLE[id]||'';
   curSec = id;
   if(id==='cal') rCal();
   if(id==='wed') rWed();
@@ -519,434 +450,378 @@ function navTo(id) {
   if(id==='worship') rWorship();
   if(id==='chk') rChk();
 }
-(function(){
+(function() {
   var ns = document.querySelectorAll('.sni,.mni');
-  for (var i = 0; i < ns.length; i++) {
-    (function(el){ el.onclick = function(){ navTo(el.getAttribute('data-s')); }; })(ns[i]);
+  for (var i=0; i<ns.length; i++) {
+    (function(el) { el.onclick = function() { navTo(el.getAttribute('data-s')); }; })(ns[i]);
   }
 })();
 
 // ── COLOR PICKER ──
-(function(){
-  for (var ci = 0; ci < CK.length; ci++) {
-    (function(k){
+(function() {
+  var opt = $('M_copt');
+  for (var i=0; i<CK.length; i++) {
+    (function(k) {
       var d = document.createElement('div');
-      d.className = 'csw'; d.style.background = CBG[k]; d.setAttribute('data-c', k);
-      d.onclick = function(){
-        var sw = document.querySelectorAll('#cCopt .csw');
-        for(var i=0;i<sw.length;i++) sw[i].classList.remove('sel');
+      d.className='csw'; d.style.background=CBG[k]; d.setAttribute('data-c',k);
+      d.onclick = function() {
+        var sw = document.querySelectorAll('#M_copt .csw');
+        for(var j=0;j<sw.length;j++) sw[j].classList.remove('sel');
         d.classList.add('sel');
       };
-      var copt = V('cCopt'); if(copt) copt.appendChild(d);
-    })(CK[ci]);
+      opt.appendChild(d);
+    })(CK[i]);
   }
 })();
-function cGetSel() { var s = document.querySelector('#cCopt .csw.sel'); return s ? s.getAttribute('data-c') : 'p'; }
-function cSetSel(c) { var sw = document.querySelectorAll('#cCopt .csw'); for(var i=0;i<sw.length;i++) sw[i].classList.toggle('sel', sw[i].getAttribute('data-c') === c); }
+function getCsel() { var s=document.querySelector('#M_copt .csw.sel'); return s?s.getAttribute('data-c'):'p'; }
+function setCsel(c) { var sw=document.querySelectorAll('#M_copt .csw'); for(var i=0;i<sw.length;i++) sw[i].classList.toggle('sel',sw[i].getAttribute('data-c')===c); }
 
 // ── LEGEND ──
 function rLeg() {
-  var el = V('cleg'); if(!el) return;
   var h = '<span style="font-size:11px;color:#888;margin-right:4px">색상</span>';
-  for (var i = 0; i < CK.length; i++) {
-    var k = CK[i], a = gFC === k, dm = gFC && gFC !== k;
-    h += '<span class="lchip ' + k + (a?' on':'') + (dm?' dm':'') + '" data-ck="' + k + '">' + (gLabels[k]||DLBL[k]) + ' <span data-ed="' + k + '" style="font-size:9px;opacity:.6">✎</span></span>';
+  for (var i=0; i<CK.length; i++) {
+    var k=CK[i], a=gFC===k, dm=gFC&&gFC!==k;
+    h += '<span class="lchip '+k+(a?' on':'')+(dm?' dm':'')+'" data-ck="'+k+'">'+(gLabels[k]||DLBL[k])+' <span data-ed="'+k+'" style="font-size:9px;opacity:.6;pointer-events:none">✎</span></span>';
   }
-  el.innerHTML = h;
-  var chips = el.querySelectorAll('.lchip');
-  for (var i = 0; i < chips.length; i++) {
-    (function(chip){
+  $('I_leg').innerHTML = h;
+  var chips = $('I_leg').querySelectorAll('.lchip');
+  for (var i=0; i<chips.length; i++) {
+    (function(chip) {
       chip.onclick = function(e) {
-        var tgt = e.target || e.srcElement;
-        var ed = tgt.getAttribute('data-ed');
-        if (!ed && tgt.parentNode) ed = tgt.parentNode.getAttribute('data-ed') === chip.getAttribute('data-ck') ? chip.getAttribute('data-ck') : null;
-        if (tgt.getAttribute('data-ed')) {
-          gLmoKey = tgt.getAttribute('data-ed');
-          V('lblInp').value = gLabels[gLmoKey] || DLBL[gLmoKey] || '';
-          showMo('moLbl'); return;
-        }
-        var ck = chip.getAttribute('data-ck');
-        gFC = (gFC === ck) ? null : ck;
-        rLeg(); rCal(); if(gSel) rDet(gSel);
+        var tgt = e.target||e.srcElement;
+        if (tgt.getAttribute('data-ed')) { gLmoKey=tgt.getAttribute('data-ed'); $('M_li').value=gLabels[gLmoKey]||DLBL[gLmoKey]||''; showM('M_lbl'); return; }
+        var ck=chip.getAttribute('data-ck'); gFC=(gFC===ck)?null:ck; rLeg(); rCal(); if(gSel) rDet(gSel);
       };
     })(chips[i]);
   }
 }
+$('M_lX').onclick = function(){hideM('M_lbl');};
+$('M_lS').onclick = function(){var v=$('M_li').value.trim();if(!v)return;gLabels[gLmoKey]=v;hideM('M_lbl');rLeg();banner('라벨 저장됐어요 ✓');};
 
 // ── CALENDAR ──
 function rCal() {
-  var ml = V('calml'); if(ml) ml.textContent = gY + '년 ' + (gM+1) + '월';
-  var fd = new Date(gY,gM,1).getDay();
-  var dim = new Date(gY,gM+1,0).getDate();
-  var pDim = new Date(gY,gM,0).getDate();
-  var tdK = dkey(gToday.getFullYear(), gToday.getMonth(), gToday.getDate());
-  var cells = [];
-  for (var i=0; i<fd; i++) cells.push({d:pDim-fd+i+1, om:true, key:null});
-  for (var d=1; d<=dim; d++) cells.push({d:d, om:false, key:dkey(gY,gM,d)});
-  while (cells.length%7 !== 0) cells.push({d:cells.length-dim-fd+1, om:true, key:null});
-  var h = '';
-  for (var i=0; i<7; i++) h += '<div class="cgh' + (i===0?' gs':i===6?' ga':'') + '">' + DOW[i] + '</div>';
-  for (var i=0; i<cells.length; i++) {
-    var cell = cells[i], dow = i%7;
-    var ev = (cell.key && gEvts[cell.key]) ? gEvts[cell.key] : null;
-    var chips = '';
-    if (ev && ev.length) {
-      var cnt = ev.length < 3 ? ev.length : 3;
-      for (var j=0; j<cnt; j++) {
-        if (!gFC || ev[j].c === gFC) chips += '<div class="ec ' + (ev[j].c||'p') + '">' + ev[j].t + '</div>';
-      }
-    }
-    var cls = 'cgc' + (cell.om?' om':'') + (cell.key===tdK?' td':'') + (cell.key===gSel?' sl':'');
-    var gncls = 'cgn' + (dow===0?' gs':dow===6?' ga':'') + (cell.om?' om':'');
-    h += '<div class="' + cls + '"' + (cell.key?' data-day="'+cell.key+'"':'') + '><div class="' + gncls + '">' + cell.d + '</div>' + chips + '</div>';
+  $('I_ml').textContent = gY+'년 '+(gM+1)+'월';
+  var fd=new Date(gY,gM,1).getDay(), dim=new Date(gY,gM+1,0).getDate(), pDim=new Date(gY,gM,0).getDate();
+  var tdK=dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
+  var cells=[], i, d;
+  for(i=0;i<fd;i++) cells.push({d:pDim-fd+i+1,om:true,key:null});
+  for(d=1;d<=dim;d++) cells.push({d:d,om:false,key:dkey(gY,gM,d)});
+  while(cells.length%7!==0) cells.push({d:cells.length-dim-fd+1,om:true,key:null});
+  var h='';
+  for(i=0;i<7;i++) h+='<div class="cgh'+(i===0?' gs':i===6?' ga':'')+'">'+ DOW[i]+'</div>';
+  for(i=0;i<cells.length;i++) {
+    var cell=cells[i], dow=i%7, ev=cell.key?gEvts[cell.key]:null, chips='';
+    if(ev&&ev.length) { for(var j=0;j<Math.min(ev.length,3);j++) { if(!gFC||ev[j].c===gFC) chips+='<div class="ec '+(ev[j].c||'p')+'">'+esc(ev[j].t)+'</div>'; } }
+    var cls='cgc'+(cell.om?' om':'')+(cell.key===tdK?' td':'')+(cell.key===gSel?' sl':'');
+    var gncls='cgn'+(dow===0?' gs':dow===6?' ga':'')+(cell.om?' om':'');
+    h+='<div class="'+cls+'"'+(cell.key?' data-day="'+cell.key+'"':'')+'><div class="'+gncls+'">'+cell.d+'</div>'+chips+'</div>';
   }
-  var cg = V('calgrid'); if(cg) cg.innerHTML = h;
+  $('I_grid').innerHTML = h;
 }
 
 function rDet(key) {
-  var el = V('caldet'); if(!el) return;
-  var ev = gEvts[key], d = new Date(key+'T00:00:00'), tot = ev ? ev.length : 0;
-  var ds = (d.getMonth()+1) + '월 ' + d.getDate() + '일 (' + DOW[d.getDay()] + ')';
-  var h = '<div class="flex-row flex-sb" style="margin-bottom:10px;padding-bottom:8px;border-bottom:0.5px solid rgba(0,0,0,.06)">'
-    + '<span style="font-size:15px;font-weight:600">' + ds + '</span>'
-    + '<div class="flex-row gap1">'
-    + '<button class="btn sm" style="background:#FEE500;border-color:#D4C200;color:#3C1E08;font-size:11px" data-kako="'+key+'">공유</button>'
-    + '<button class="btn sm pr" data-addday="'+key+'">+ 추가</button>'
-    + '</div></div>';
-  if (!ev || !tot) { h += '<p class="hint">일정이 없어요</p>'; }
+  var ev=gEvts[key], tot=ev?ev.length:0;
+  var d=new Date(key+'T00:00:00'), ds=(d.getMonth()+1)+'월 '+d.getDate()+'일 ('+DOW[d.getDay()]+')';
+  var h='<div class="row sb2" style="margin-bottom:10px;padding-bottom:8px;border-bottom:0.5px solid rgba(0,0,0,.06)">'
+    +'<span style="font-size:15px;font-weight:600">'+ds+'</span>'
+    +'<div class="row g1"><button class="btn sm" style="background:#FEE500;border-color:#D4C200;color:#3C1E08;font-size:11px" data-kako="'+key+'">공유</button>'
+    +'<button class="btn sm pr" data-addday="'+key+'">+ 추가</button></div></div>';
+  if(!ev||!tot) { h+='<p class="hint">일정이 없어요</p>'; }
   else {
-    for (var ei=0; ei<ev.length; ei++) {
-      var e = ev[ei];
-      if (gFC && e.c !== gFC) continue;
-      var tag = e.grpId ? '<span style="font-size:10px;background:#E1F5EE;color:#0F6E56;border-radius:3px;padding:1px 5px;margin-left:3px">'+(IVLBL[e.grpInterval]||'루틴')+' '+((e.grpIdx||0)+1)+'회차</span>' : '';
-      var upD = ei===0?' disabled':'', dnD = ei===tot-1?' disabled':'';
-      h += '<div class="evb"><div class="flex-row flex-sb" style="margin-bottom:6px">'
-        + '<div class="flex-row gap1" style="flex-wrap:wrap"><span class="ec '+(e.c||'p')+'" style="display:inline-block;font-size:12px;padding:3px 8px">'+e.t+'</span>'+tag+'</div>'
-        + '<div class="flex-row gap1">';
-      if (tot>1) h += '<button class="btn xs" data-up="'+key+'" data-ui="'+ei+'"'+upD+'>▲</button><button class="btn xs" data-dn="'+key+'" data-di="'+ei+'"'+dnD+'>▼</button>';
-      h += '<button class="btn xs" data-edit="'+key+'" data-ei="'+ei+'">수정</button>'
-        + '<button class="btn xs dl" data-del="'+key+'" data-di2="'+ei+'">삭제</button>'
-        + '</div></div>';
-      if (e.m) h += '<div style="font-size:12px;color:#555;margin-bottom:6px">📍 ' + e.m + '</div>';
-      if (e.grpMemo) h += '<div class="memolbl g">공통 메모</div><div class="memobox g">'+e.grpMemo+'</div>';
-      if (e.memo) h += '<div class="memolbl '+(e.grpId?'b':'n')+'">'+(e.grpId?'개별 메모':'메모')+'</div><div class="memobox '+(e.grpId?'b':'n')+'">'+e.memo+'</div>';
-      if (e.n && e.n.length) {
-        h += '<div style="border-top:0.5px solid rgba(0,0,0,.06);padding-top:8px;margin-top:4px"><div class="ntlbl">체크리스트</div>';
-        for (var ni=0; ni<e.n.length; ni++) {
-          var cid = key+'-'+ei+'-'+ni, done = !!gChk[cid];
-          h += '<div class="ni'+(done?' dk':'')+'" id="ni-'+cid+'"><input type="checkbox" id="cb-'+cid+'" data-cid="'+cid+'"'+(done?' checked':'')+'><label for="cb-'+cid+'">'+e.n[ni]+'</label></div>';
+    for(var ei=0;ei<ev.length;ei++) {
+      var e=ev[ei]; if(gFC&&e.c!==gFC) continue;
+      var rpTag=e.grpId?('<span style="font-size:10px;background:#E1F5EE;color:#0F6E56;border-radius:3px;padding:1px 5px;margin-left:3px">'+(IVLBL[e.grpInterval]||'루틴')+' '+((e.grpIdx||0)+1)+'회차</span>'):'';
+      var upD=ei===0?' disabled':'', dnD=ei===tot-1?' disabled':'';
+      h+='<div class="evb"><div class="row sb2" style="margin-bottom:6px">'
+        +'<div class="row g1" style="flex-wrap:wrap"><span class="ec '+(e.c||'p')+'" style="display:inline-block;font-size:12px;padding:3px 8px">'+esc(e.t)+'</span>'+rpTag+'</div>'
+        +'<div class="row g1">';
+      if(tot>1) h+='<button class="btn xs" data-up="'+key+'" data-ui="'+ei+'"'+upD+'>▲</button><button class="btn xs" data-dn="'+key+'" data-di="'+ei+'"'+dnD+'>▼</button>';
+      h+='<button class="btn xs" data-edit="'+key+'" data-ei="'+ei+'">수정</button>'
+        +'<button class="btn xs dl" data-del="'+key+'" data-di2="'+ei+'">삭제</button></div></div>';
+      if(e.m) h+='<div style="font-size:12px;color:#555;margin-bottom:6px">📍 '+esc(e.m)+'</div>';
+      if(e.grpMemo) h+='<div class="memolbl g">공통 메모</div><div class="memobox g">'+esc(e.grpMemo)+'</div>';
+      if(e.memo) h+='<div class="memolbl '+(e.grpId?'b':'n')+'">'+(e.grpId?'개별 메모':'메모')+'</div><div class="memobox '+(e.grpId?'b':'n')+'">'+esc(e.memo)+'</div>';
+      if(e.n&&e.n.length) {
+        h+='<div style="border-top:0.5px solid rgba(0,0,0,.06);padding-top:8px;margin-top:4px"><div class="ntlbl">체크리스트</div>';
+        for(var ni=0;ni<e.n.length;ni++) {
+          var cid2=key+'-'+ei+'-'+ni, done2=!!gChk[cid2];
+          h+='<div class="ni'+(done2?' dk':'')+'" id="ni-'+cid2+'"><input type="checkbox" id="cb-'+cid2+'" data-cid="'+cid2+'"'+(done2?' checked':'')+'><label for="cb-'+cid2+'">'+esc(e.n[ni])+'</label></div>';
         }
-        h += '</div>';
+        h+='</div>';
       }
-      h += '</div>';
+      h+='</div>';
     }
   }
-  el.innerHTML = '<div class="cdet">' + h + '</div>';
+  $('I_det').innerHTML='<div class="cdet">'+h+'</div>';
 }
 
-function calTog(id) { gChk[id]=!gChk[id]; var ni=V('ni-'+id); if(ni) ni.className='ni'+(gChk[id]?' dk':''); fbSet('ycal-chk',gChk); }
+function calTog(id) { gChk[id]=!gChk[id]; var el=$('ni-'+id); if(el) el.className='ni'+(gChk[id]?' dk':''); }
 
-V('calgrid').onclick = function(e) {
-  var tgt = e.target || e.srcElement, c = tgt;
-  while (c && !c.getAttribute('data-day')) c = c.parentNode;
-  if (c && c.getAttribute('data-day')) { gSel = c.getAttribute('data-day'); rCal(); rDet(gSel); }
+function findUp(el, attr) { while(el){if(el.getAttribute&&el.getAttribute(attr))return el;el=el.parentNode;} return null; }
+
+$('I_grid').onclick = function(e) {
+  var c=findUp(e.target,'data-day'); if(c){gSel=c.getAttribute('data-day');rCal();rDet(gSel);}
 };
-V('caldet').onclick = function(e) {
-  var tgt = e.target || e.srcElement;
-  function closest(el, attr) { while(el){if(el.getAttribute&&el.getAttribute(attr))return el;el=el.parentNode;} return null; }
-  var ed=closest(tgt,'data-edit'), dd=closest(tgt,'data-del');
-  var ad=closest(tgt,'data-addday'), kd=closest(tgt,'data-kako');
-  var up=closest(tgt,'data-up'), dn=closest(tgt,'data-dn');
-  if(ed) openCalMo(ed.getAttribute('data-edit'), parseInt(ed.getAttribute('data-ei'),10));
-  if(dd) {
-    var dde = gEvts[dd.getAttribute('data-del')] && gEvts[dd.getAttribute('data-del')][dd.getAttribute('data-di2')];
-    gPend = {type:'del', key:dd.getAttribute('data-del'), idx:parseInt(dd.getAttribute('data-di2'),10)};
-    showScope(dde && dde.grpId ? 'del' : 'del-single');
-  }
-  if(ad) openCalMo(ad.getAttribute('data-addday'), -1);
+$('I_det').onclick = function(e) {
+  var t=e.target, ed=findUp(t,'data-edit'), dd=findUp(t,'data-del'), ad=findUp(t,'data-addday'), kd=findUp(t,'data-kako'), up=findUp(t,'data-up'), dn=findUp(t,'data-dn');
+  if(ed) openCalMo(ed.getAttribute('data-edit'),parseInt(ed.getAttribute('data-ei'),10));
+  if(dd){var dde=gEvts[dd.getAttribute('data-del')]&&gEvts[dd.getAttribute('data-del')][dd.getAttribute('data-di2')];gPend={type:'del',key:dd.getAttribute('data-del'),idx:parseInt(dd.getAttribute('data-di2'),10)};showScope(dde&&dde.grpId?'del':'del-single');}
+  if(ad) openCalMo(ad.getAttribute('data-addday'),-1);
   if(kd) calKako(kd.getAttribute('data-kako'));
-  if(up) { var arr=gEvts[up.getAttribute('data-up')],i=parseInt(up.getAttribute('data-ui'),10); if(arr&&i>0){var tmp=arr[i-1];arr[i-1]=arr[i];arr[i]=tmp;saveEvts();} }
-  if(dn) { var arr=gEvts[dn.getAttribute('data-dn')],i=parseInt(dn.getAttribute('data-di'),10); if(arr&&i<arr.length-1){var tmp=arr[i];arr[i]=arr[i+1];arr[i+1]=tmp;saveEvts();} }
+  if(up){var arr=gEvts[up.getAttribute('data-up')],i=parseInt(up.getAttribute('data-ui'),10);if(arr&&i>0){var tmp=arr[i-1];arr[i-1]=arr[i];arr[i]=tmp;rCal();rDet(gSel);}}
+  if(dn){var arr=gEvts[dn.getAttribute('data-dn')],i=parseInt(dn.getAttribute('data-di'),10);if(arr&&i<arr.length-1){var tmp=arr[i];arr[i]=arr[i+1];arr[i+1]=tmp;rCal();rDet(gSel);}}
 };
-V('caldet').onchange = function(e) { var tgt=e.target||e.srcElement; if(tgt.getAttribute('data-cid')) calTog(tgt.getAttribute('data-cid')); };
-V('btnPrev').onclick = function(){ gM--; if(gM<0){gY--;gM=11;} rCal(); };
-V('btnNext').onclick = function(){ gM++; if(gM>11){gY++;gM=0;} rCal(); };
-V('btnCalAdd').onclick = function(){ openCalMo(null,-1); };
-V('calSq').oninput = function(){
-  var q = this.value.trim().toLowerCase(), wrap = V('calSr');
-  wrap.innerHTML = '';
-  if (!q) return;
-  var res = [], ents = objEntries(gEvts).sort(function(a,b){return a[0].localeCompare(b[0])});
-  for (var i=0; i<ents.length; i++) {
-    var key=ents[i][0], arr=ents[i][1]; if(!arr) continue;
-    for (var j=0; j<arr.length; j++) {
-      var e=arr[j], strs=[e.t,e.m||'',e.memo||''].concat(e.n||[]);
-      var found = false;
-      for(var s=0;s<strs.length;s++){if(strs[s].toLowerCase().indexOf(q)>=0){found=true;break;}}
-      if(found) res.push({key:key, e:e});
-    }
-  }
-  if (!res.length) { wrap.innerHTML='<div class="cdet" style="text-align:center;padding:1rem;color:#888">검색 결과 없음</div>'; return; }
-  var h = '<div class="cdet">';
-  for (var i=0; i<res.length; i++) h += '<div data-goto="'+res[i].key+'" style="display:flex;align-items:center;gap:8px;padding:8px;cursor:pointer;border-bottom:0.5px solid rgba(0,0,0,.05)"><span style="font-size:12px;color:#888;min-width:80px;white-space:nowrap">'+fmtD(res[i].key)+'</span><span class="ec '+(res[i].e.c||'p')+'" style="font-size:11px">'+res[i].e.t+'</span></div>';
-  wrap.innerHTML = h + '</div>';
-  var gs = wrap.querySelectorAll('[data-goto]');
-  for(var i=0;i<gs.length;i++){(function(el){el.onclick=function(){var k=el.getAttribute('data-goto');var nd=new Date(k+'T00:00:00');gY=nd.getFullYear();gM=nd.getMonth();gSel=k;rCal();rDet(k);V('calSq').value='';V('calSr').innerHTML='';}})(gs[i]);}
+$('I_det').onchange = function(e) { var t=e.target; if(t.getAttribute('data-cid')) calTog(t.getAttribute('data-cid')); };
+$('I_prev').onclick = function(){gM--;if(gM<0){gY--;gM=11;}rCal();};
+$('I_next').onclick = function(){gM++;if(gM>11){gY++;gM=0;}rCal();};
+$('I_cadd').onclick = function(){openCalMo(null,-1);};
+$('I_sq').oninput = function(){
+  var q=this.value.trim().toLowerCase(), wrap=$('I_sr'); wrap.innerHTML='';
+  if(!q)return;
+  var res=[],ea=ents(gEvts).sort(function(a,b){return a[0].localeCompare(b[0])});
+  for(var i=0;i<ea.length;i++){var key=ea[i][0],arr=ea[i][1];if(!arr)continue;for(var j=0;j<arr.length;j++){var e=arr[j],found=false;var ss=[e.t,e.m||'',e.memo||''].concat(e.n||[]);for(var s=0;s<ss.length;s++){if(ss[s].toLowerCase().indexOf(q)>=0){found=true;break;}}if(found)res.push({key:key,e:e});}}
+  if(!res.length){wrap.innerHTML='<div class="cdet" style="text-align:center;padding:1rem;color:#888">검색 결과 없음</div>';return;}
+  var h='<div class="cdet">';
+  for(var i=0;i<res.length;i++) h+='<div data-goto="'+res[i].key+'" style="display:flex;align-items:center;gap:8px;padding:8px;cursor:pointer;border-bottom:0.5px solid rgba(0,0,0,.05)"><span style="font-size:12px;color:#888;min-width:80px;white-space:nowrap">'+fmtD(res[i].key)+'</span><span class="ec '+(res[i].e.c||'p')+'" style="font-size:11px">'+esc(res[i].e.t)+'</span></div>';
+  wrap.innerHTML=h+'</div>';
+  var gs=wrap.querySelectorAll('[data-goto]');
+  for(var i=0;i<gs.length;i++){(function(el){el.onclick=function(){var k=el.getAttribute('data-goto');var nd=new Date(k+'T00:00:00');gY=nd.getFullYear();gM=nd.getMonth();gSel=k;rCal();rDet(k);$('I_sq').value='';$('I_sr').innerHTML='';}})(gs[i]);}
 };
 
-// ── REPEAT ──
+// repeat
 function calNext(ds,iv){var d=new Date(ds+'T00:00:00');if(iv==='weekly')d.setDate(d.getDate()+7);else if(iv==='biweekly')d.setDate(d.getDate()+14);else if(iv==='monthly')d.setMonth(d.getMonth()+1);return dkey(d.getFullYear(),d.getMonth(),d.getDate());}
 function calOccs(s,e,iv){var r=[],c=s,i=0;while(c<=e&&i<500){i++;r.push(c);var nx=calNext(c,iv);if(nx<=c)break;c=nx;}return r;}
-function findGrp(gid){var r=[],ents=objEntries(gEvts);for(var i=0;i<ents.length;i++){var k=ents[i][0],arr=ents[i][1];if(!arr)continue;for(var j=0;j<arr.length;j++){if(arr[j]&&arr[j].grpId===gid)r.push({key:k,idx:j,ev:arr[j]});}}r.sort(function(a,b){return a.key.localeCompare(b.key)});return r;}
-function stripGrp(ev){var r={};var ks=objKeys(ev);for(var i=0;i<ks.length;i++)r[ks[i]]=ev[ks[i]];delete r.grpId;delete r.grpIdx;delete r.grpInterval;delete r.grpTitle;delete r.grpNum;r.t=(r.t||'').replace(/\s*\d+회차$/,'');r.grpMemo='';return r;}
-function updRpPrev(){
-  var s=V('cFd').value,e=V('cRed').value,iv=V('cFrp').value,n=V('cRn').checked,pv=V('cRpv');
-  if(!s||!e||e<s||iv==='none'){pv.style.display='none';return;}
-  var cnt=calOccs(s,e,iv).length,dow=DOW[new Date(s+'T00:00:00').getDay()];
-  var lm={weekly:'매주 '+dow+'요일',biweekly:'격주 '+dow+'요일',monthly:'매달 (같은 날)'};
-  pv.textContent=(lm[iv]||iv)+' · 총 '+cnt+'회'+(n?' (회차 번호 자동)':'');pv.style.display='';
-}
-V('cFrp').onchange=function(){this.value==='none'?V('cRpbox').classList.remove('on'):V('cRpbox').classList.add('on');updRpPrev();};
-V('cRet').onchange=function(){V('cRdw').style.display=this.value==='yearend'?'none':'';if(this.value==='yearend')V('cRed').value='2026-12-31';updRpPrev();};
-V('cRn').onchange=updRpPrev; V('cFd').oninput=updRpPrev; V('cRed').oninput=updRpPrev;
+function findGrp(gid){var r=[],ea=ents(gEvts);for(var i=0;i<ea.length;i++){var k=ea[i][0],arr=ea[i][1];if(!arr)continue;for(var j=0;j<arr.length;j++){if(arr[j]&&arr[j].grpId===gid)r.push({key:k,idx:j,ev:arr[j]});}}return r.sort(function(a,b){return a.key.localeCompare(b.key)});}
+function stripGrp(ev){var r={};for(var k in ev){if(ev.hasOwnProperty(k))r[k]=ev[k];}delete r.grpId;delete r.grpIdx;delete r.grpInterval;delete r.grpTitle;delete r.grpNum;r.t=(r.t||'').replace(/\s*\d+회차$/,'');r.grpMemo='';return r;}
+function updRpPrev(){var s=$('M_cfd').value,e=$('M_red').value,iv=$('M_frp').value,n=$('M_rn').checked,pv=$('M_rpv');if(!s||!e||e<s||iv==='none'){pv.style.display='none';return;}var cnt=calOccs(s,e,iv).length,dow=DOW[new Date(s+'T00:00:00').getDay()];var lm={weekly:'매주 '+dow+'요일',biweekly:'격주 '+dow+'요일',monthly:'매달'};pv.textContent=(lm[iv]||iv)+' · 총 '+cnt+'회'+(n?' (회차 번호 자동)':'');pv.style.display='';}
+$('M_frp').onchange=function(){this.value==='none'?$('M_rpb').classList.remove('on'):$('M_rpb').classList.add('on');updRpPrev();};
+$('M_ret').onchange=function(){$('M_rdw').style.display=this.value==='yearend'?'none':'';if(this.value==='yearend')$('M_red').value='2026-12-31';updRpPrev();};
+$('M_rn').onchange=updRpPrev;$('M_cfd').oninput=updRpPrev;$('M_red').oninput=updRpPrev;
 
 function openCalMo(key,idx){
-  gMoSt={key:key,idx:idx};
-  var isEdit=idx>=0&&key&&gEvts[key]&&gEvts[key][idx]!=null;
-  var e=isEdit?gEvts[key][idx]:null;
-  V('moCalTtl').textContent=isEdit?'일정 수정':'일정 추가';
-  V('cFrp').value='none';V('cRpbox').classList.remove('on');V('cRet').value='date';V('cRdw').style.display='';V('cRed').value='';V('cRn').checked=false;V('cRpv').style.display='none';V('cBrk').checked=false;
+  gMoSt={key:key,idx:idx};var isEdit=idx>=0&&key&&gEvts[key]&&gEvts[key][idx]!=null;var e=isEdit?gEvts[key][idx]:null;
+  $('M_calT').textContent=isEdit?'일정 수정':'일정 추가';
+  $('M_frp').value='none';$('M_rpb').classList.remove('on');$('M_ret').value='date';$('M_rdw').style.display='';$('M_red').value='';$('M_rn').checked=false;$('M_rpv').style.display='none';$('M_brk').checked=false;
   if(isEdit){
-    V('cFd').value=key;V('cFt').value=e.t;V('cFm').value=e.m||'';V('cFn').value=(e.n||[]).join('\n');V('cFmo').value=e.memo||'';cSetSel(e.c||'p');
-    if(e.grpId){V('cGrmRow').style.display='';V('cFgm').value=e.grpMemo||'';V('cMl').textContent='개별 메모';V('cRpEdit').style.display='';V('cRpNew').style.display='none';var grp=findGrp(e.grpId);V('cRpInfo').innerHTML='<strong>'+(IVLBL[e.grpInterval]||'루틴')+'</strong> · '+((e.grpIdx||0)+1)+'회차 / 총 '+grp.length+'회';}
-    else{V('cGrmRow').style.display='none';V('cMl').textContent='메모';V('cRpEdit').style.display='none';V('cRpNew').style.display='';}
+    $('M_cfd').value=key;$('M_cft').value=e.t;$('M_cfm').value=e.m||'';$('M_cfn').value=(e.n||[]).join('\n');$('M_cfmo').value=e.memo||'';setCsel(e.c||'p');
+    if(e.grpId){$('M_grm').style.display='';$('M_cfg').value=e.grpMemo||'';$('M_cml').textContent='개별 메모';$('M_rpe').style.display='';$('M_rpn').style.display='none';var grp=findGrp(e.grpId);$('M_rpi').innerHTML='<strong>'+(IVLBL[e.grpInterval]||'루틴')+'</strong> · '+((e.grpIdx||0)+1)+'회차/총 '+grp.length+'회';}
+    else{$('M_grm').style.display='none';$('M_cml').textContent='메모';$('M_rpe').style.display='none';$('M_rpn').style.display='';}
   } else {
-    V('cFd').value=key||gSel||dkey(gY,gM,1);V('cFt').value='';V('cFm').value='';V('cFn').value='';V('cFmo').value='';V('cFgm').value='';cSetSel('p');
-    V('cGrmRow').style.display='none';V('cMl').textContent='메모';V('cRpEdit').style.display='none';V('cRpNew').style.display='';
+    $('M_cfd').value=key||gSel||dkey(gY,gM,1);$('M_cft').value='';$('M_cfm').value='';$('M_cfn').value='';$('M_cfmo').value='';$('M_cfg').value='';setCsel('p');
+    $('M_grm').style.display='none';$('M_cml').textContent='메모';$('M_rpe').style.display='none';$('M_rpn').style.display='';
   }
-  showMo('moCal');
+  showM('M_cal');
 }
-V('btnCalCancel').onclick = function(){ hideMo('moCal'); };
-V('btnCalSave').onclick = function(){
-  var date=V('cFd').value, title=V('cFt').value.trim();
+$('M_calX').onclick=function(){hideM('M_cal');};
+$('M_calS').onclick=function(){
+  var date=$('M_cfd').value,title=$('M_cft').value.trim();
   if(!date||!title){banner('날짜와 제목을 입력해 주세요',true);return;}
-  var key=gMoSt.key,idx=gMoSt.idx;
-  var isEdit=idx>=0&&key&&gEvts[key]&&gEvts[key][idx]!=null;
+  var key=gMoSt.key,idx=gMoSt.idx,isEdit=idx>=0&&key&&gEvts[key]&&gEvts[key][idx]!=null;
   var existing=isEdit?gEvts[key][idx]:null;
-  var doBreak=V('cBrk').checked,repeat=V('cFrp').value,endDate=V('cRed').value,useNum=V('cRn').checked;
-  var fEv={t:title,c:cGetSel(),m:V('cFm').value.trim(),n:[],memo:V('cFmo').value.trim(),grpMemo:V('cFgm').value.trim()};
-  var lines=V('cFn').value.split('\n');for(var i=0;i<lines.length;i++){var l=lines[i].trim();if(l)fEv.n.push(l);}
+  var doBreak=$('M_brk').checked,repeat=$('M_frp').value,endDate=$('M_red').value,useNum=$('M_rn').checked;
+  var fEv={t:title,c:getCsel(),m:$('M_cfm').value.trim(),n:[],memo:$('M_cfmo').value.trim(),grpMemo:$('M_cfg').value.trim()};
+  var lines=$('M_cfn').value.split('\n');for(var i=0;i<lines.length;i++){var l=lines[i].trim();if(l)fEv.n.push(l);}
   gPend={date:date,fEv:fEv,key:key,idx:idx,isEdit:isEdit,existing:existing,doBreak:doBreak,repeat:repeat,endDate:endDate,useNum:useNum};
-  hideMo('moCal');
+  hideM('M_cal');
   if(isEdit&&existing&&existing.grpId){showScope(doBreak?'break':'edit');return;}
   execSave('single');
 };
 
+function copyObj(src,extra){var r={};for(var k in src){if(src.hasOwnProperty(k))r[k]=src[k];}if(extra)for(var k in extra){if(extra.hasOwnProperty(k))r[k]=extra[k];}return r;}
+
 function execSave(scope){
-  if(!gPend||gPend.type==='del') return;
+  if(!gPend||gPend.type==='del')return;
   var date=gPend.date,fEv=gPend.fEv,key=gPend.key,idx=gPend.idx;
-  var isEdit=gPend.isEdit,existing=gPend.existing,doBreak=gPend.doBreak;
-  var repeat=gPend.repeat,endDate=gPend.endDate,useNum=gPend.useNum;
+  var isEdit=gPend.isEdit,existing=gPend.existing,doBreak=gPend.doBreak,repeat=gPend.repeat,endDate=gPend.endDate,useNum=gPend.useNum;
   gPend=null;
+  var i;
   if(isEdit&&existing&&existing.grpId){
-    var grp=findGrp(existing.grpId);
-    var tgts=[];
-    for(var i=0;i<grp.length;i++){
-      if(scope==='single'&&grp[i].key===key&&grp[i].idx===idx) tgts.push(grp[i]);
-      else if(scope==='following'&&grp[i].key>=key) tgts.push(grp[i]);
-      else if(scope==='all') tgts.push(grp[i]);
-    }
+    var grp=findGrp(existing.grpId),tgts=[],gi,gk,gev;
+    for(i=0;i<grp.length;i++){if(scope==='single'&&grp[i].key===key&&grp[i].idx===idx)tgts.push(grp[i]);else if(scope==='following'&&grp[i].key>=key)tgts.push(grp[i]);else if(scope==='all')tgts.push(grp[i]);}
     if(doBreak){
-      var base={};var ks=objKeys(gEvts[key][idx]);for(var ki=0;ki<ks.length;ki++)base[ks[ki]]=gEvts[key][idx][ks[ki]];
-      base.t=fEv.t;base.c=fEv.c;base.m=fEv.m;base.n=fEv.n;base.memo=fEv.memo;
-      gEvts[key][idx]=stripGrp(base);
-      var bk={};
-      for(var i=0;i<tgts.length;i++){if(tgts[i].key===key&&tgts[i].idx===idx)continue;if(!bk[tgts[i].key])bk[tgts[i].key]=[];bk[tgts[i].key].push(tgts[i].idx);}
-      var bke=objEntries(bk);
-      for(var i=0;i<bke.length;i++){var k=bke[i][0],idxs=bke[i][1];idxs.sort(function(a,b){return b-a});for(var j=0;j<idxs.length;j++){if(gEvts[k])gEvts[k].splice(idxs[j],1);}if(gEvts[k]&&!gEvts[k].length)delete gEvts[k];}
-      saveEvts();calGoto(key);banner('루틴 해제됐어요');
+      gEvts[key][idx]=stripGrp(copyObj(gEvts[key][idx],{t:fEv.t,c:fEv.c,m:fEv.m,n:fEv.n,memo:fEv.memo}));
+      var bk={};for(i=0;i<tgts.length;i++){if(tgts[i].key===key&&tgts[i].idx===idx)continue;gk=tgts[i].key;gi=tgts[i].idx;if(!bk[gk])bk[gk]=[];bk[gk].push(gi);}
+      var bke=ents(bk);for(i=0;i<bke.length;i++){var k=bke[i][0],idxs=bke[i][1];idxs.sort(function(a,b){return b-a});for(var j=0;j<idxs.length;j++){if(gEvts[k])gEvts[k].splice(idxs[j],1);}if(gEvts[k]&&!gEvts[k].length)delete gEvts[k];}
+      rCal();calGoto(key);banner('루틴 해제됐어요');
     } else {
-      for(var i=0;i<tgts.length;i++){
-        var gk=tgts[i].key,gi=tgts[i].idx,gev=tgts[i].ev;
-        var base=fEv.t.replace(/\s*\d+회차$/,'');
-        var newT=gev.grpNum?base+' '+((gev.grpIdx||0)+1)+'회차':fEv.t;
-        var upd={};var ks=objKeys(gEvts[gk][gi]);for(var ki=0;ki<ks.length;ki++)upd[ks[ki]]=gEvts[gk][gi][ks[ki]];
-        upd.t=newT;upd.c=fEv.c;upd.m=fEv.m;upd.n=fEv.n;upd.memo=(gk===key&&gi===idx)?fEv.memo:gev.memo;upd.grpMemo=fEv.grpMemo;
-        gEvts[gk][gi]=upd;
-      }
-      saveEvts();calGoto(key);banner('저장됐어요 ✓');
+      for(i=0;i<tgts.length;i++){gk=tgts[i].key;gi=tgts[i].idx;gev=tgts[i].ev;var base=fEv.t.replace(/\s*\d+회차$/,'');var newT=gev.grpNum?base+' '+((gev.grpIdx||0)+1)+'회차':fEv.t;gEvts[gk][gi]=copyObj(gEvts[gk][gi],{t:newT,c:fEv.c,m:fEv.m,n:fEv.n,memo:(gk===key&&gi===idx)?fEv.memo:gev.memo,grpMemo:fEv.grpMemo});}
+      rCal();calGoto(key);banner('저장됐어요 ✓');
     }
     return;
   }
   if(isEdit&&existing&&!existing.grpId){
     if(repeat!=='none'&&endDate&&endDate>=date){
       var gid=uid(),dates=calOccs(date,endDate,repeat);
-      var first={};var ks=objKeys(fEv);for(var ki=0;ki<ks.length;ki++)first[ks[ki]]=fEv[ks[ki]];
-      first.t=useNum?fEv.t+' 1회차':fEv.t;first.grpId=gid;first.grpIdx=0;first.grpInterval=repeat;first.grpTitle=fEv.t;first.grpNum=useNum;first.memo='';first.grpMemo=fEv.memo;
+      var first=copyObj(fEv,{t:useNum?fEv.t+' 1회차':fEv.t,grpId:gid,grpIdx:0,grpInterval:repeat,grpTitle:fEv.t,grpNum:useNum,memo:'',grpMemo:fEv.memo});
       if(key===date){gEvts[key][idx]=first;}else{gEvts[key].splice(idx,1);if(!gEvts[key].length)delete gEvts[key];if(!gEvts[date])gEvts[date]=[];gEvts[date].push(first);}
-      for(var i=1;i<dates.length;i++){var itm={};var ks2=objKeys(fEv);for(var ki=0;ki<ks2.length;ki++)itm[ks2[ki]]=fEv[ks2[ki]];itm.t=useNum?fEv.t+' '+(i+1)+'회차':fEv.t;itm.memo='';itm.grpMemo=fEv.memo;itm.grpId=gid;itm.grpIdx=i;itm.grpInterval=repeat;itm.grpTitle=fEv.t;itm.grpNum=useNum;if(!gEvts[dates[i]])gEvts[dates[i]]=[];gEvts[dates[i]].push(itm);}
-      saveEvts();calGoto(date);banner('루틴 전환 · 총 '+dates.length+'회 ✓');return;
+      for(i=1;i<dates.length;i++){if(!gEvts[dates[i]])gEvts[dates[i]]=[];gEvts[dates[i]].push(copyObj(fEv,{t:useNum?fEv.t+' '+(i+1)+'회차':fEv.t,memo:'',grpMemo:fEv.memo,grpId:gid,grpIdx:i,grpInterval:repeat,grpTitle:fEv.t,grpNum:useNum}));}
+      rCal();calGoto(date);banner('루틴 전환 · 총 '+dates.length+'회 ✓');return;
     }
-    var upd={};var eks=objKeys(existing);for(var ki=0;ki<eks.length;ki++)upd[eks[ki]]=existing[eks[ki]];var fks=objKeys(fEv);for(var ki=0;ki<fks.length;ki++)upd[fks[ki]]=fEv[fks[ki]];
+    var upd=copyObj(existing,fEv);
     if(key===date){gEvts[key][idx]=upd;}else{gEvts[key].splice(idx,1);if(!gEvts[key].length)delete gEvts[key];if(!gEvts[date])gEvts[date]=[];gEvts[date].push(upd);}
-    saveEvts();calGoto(date);banner('저장됐어요 ✓');return;
+    rCal();calGoto(date);banner('저장됐어요 ✓');return;
   }
   if(repeat!=='none'&&endDate&&endDate>=date){
     var gid=uid(),dates=calOccs(date,endDate,repeat);
-    for(var i=0;i<dates.length;i++){var itm={};var ks=objKeys(fEv);for(var ki=0;ki<ks.length;ki++)itm[ks[ki]]=fEv[ks[ki]];itm.t=useNum?fEv.t+' '+(i+1)+'회차':fEv.t;itm.memo='';itm.grpMemo=fEv.memo;itm.grpId=gid;itm.grpIdx=i;itm.grpInterval=repeat;itm.grpTitle=fEv.t;itm.grpNum=useNum;if(!gEvts[dates[i]])gEvts[dates[i]]=[];gEvts[dates[i]].push(itm);}
-    saveEvts();calGoto(date);banner('총 '+dates.length+'개 루틴 저장 ✓');return;
+    for(i=0;i<dates.length;i++){if(!gEvts[dates[i]])gEvts[dates[i]]=[];gEvts[dates[i]].push(copyObj(fEv,{t:useNum?fEv.t+' '+(i+1)+'회차':fEv.t,memo:'',grpMemo:fEv.memo,grpId:gid,grpIdx:i,grpInterval:repeat,grpTitle:fEv.t,grpNum:useNum}));}
+    rCal();calGoto(date);banner('총 '+dates.length+'개 루틴 저장 ✓');return;
   }
-  var itm={};var ks=objKeys(fEv);for(var ki=0;ki<ks.length;ki++)itm[ks[ki]]=fEv[ks[ki]];
-  if(!gEvts[date])gEvts[date]=[];gEvts[date].push(itm);
-  saveEvts();calGoto(date);banner('저장됐어요 ✓');
+  if(!gEvts[date])gEvts[date]=[];gEvts[date].push(copyObj(fEv));rCal();calGoto(date);banner('저장됐어요 ✓');
 }
 
 function execDel(scope){
-  if(!gPend)return;
-  var key=gPend.key,idx=gPend.idx;gPend=null;
-  var e=gEvts[key]&&gEvts[key][idx];if(!e)return;
-  var toDel=[];
+  if(!gPend)return;var key=gPend.key,idx=gPend.idx;gPend=null;var e=gEvts[key]&&gEvts[key][idx];if(!e)return;
+  var toDel=[],i;
   if(!e.grpId||scope==='single'){toDel.push({key:key,idx:idx});}
-  else{var grp=findGrp(e.grpId);for(var i=0;i<grp.length;i++){if(scope==='following'&&grp[i].key<key)continue;toDel.push(grp[i]);}}
-  var bk={};for(var i=0;i<toDel.length;i++){var gk=toDel[i].key,gi=toDel[i].idx;if(!bk[gk])bk[gk]=[];bk[gk].push(gi);}
-  var bke=objEntries(bk);for(var i=0;i<bke.length;i++){var k=bke[i][0],idxs=bke[i][1];idxs.sort(function(a,b){return b-a});for(var j=0;j<idxs.length;j++){if(gEvts[k])gEvts[k].splice(idxs[j],1);}if(gEvts[k]&&!gEvts[k].length)delete gEvts[k];}
-  saveEvts();banner('삭제됐어요');
+  else{var grp=findGrp(e.grpId);for(i=0;i<grp.length;i++){if(scope==='following'&&grp[i].key<key)continue;toDel.push(grp[i]);}}
+  var bk={};for(i=0;i<toDel.length;i++){var gk=toDel[i].key,gi=toDel[i].idx;if(!bk[gk])bk[gk]=[];bk[gk].push(gi);}
+  var bke=ents(bk);for(i=0;i<bke.length;i++){var k=bke[i][0],idxs=bke[i][1];idxs.sort(function(a,b){return b-a});for(var j=0;j<idxs.length;j++){if(gEvts[k])gEvts[k].splice(idxs[j],1);}if(gEvts[k]&&!gEvts[k].length)delete gEvts[k];}
+  rCal();if(gSel)rDet(gSel);banner('삭제됐어요');
 }
 function calGoto(date){gSel=date;var nd=new Date(date+'T00:00:00');gY=nd.getFullYear();gM=nd.getMonth();rCal();rDet(date);}
 
 function showScope(mode){
-  var e=gPend&&gPend.key&&gEvts[gPend.key]&&gEvts[gPend.key][gPend.idx];
-  var t=e?e.t:'';
+  var e=gPend&&gPend.key&&gEvts[gPend.key]&&gEvts[gPend.key][gPend.idx],t=e?e.t:'';
   function mk(l,sub,sc,ac,r){return '<button class="scbtn'+(r?' r':'')+'" data-sc="'+sc+'" data-ac="'+ac+'">'+l+'<span class="scbtn-sub">'+sub+'</span></button>';}
-  var conf={'del-single':{t:'일정 삭제',s:'"'+t+'"를 삭제할까요?',b:mk('삭제','','single','del',true)},'del':{t:'삭제 범위',s:'"'+t+'" 은 루틴이에요.',b:mk('이 일정만','이번 회차','single','del',true)+mk('이후 모두','이번~끝','following','del',true)+mk('전체','모든 회차','all','del',true)},'edit':{t:'수정 범위',s:'"'+t+'" 은 루틴이에요.',b:mk('이 일정만','이번만','single','save')+mk('이후 모두','이번~끝','following','save')+mk('전체','모든 회차','all','save')},'break':{t:'루틴 해제',s:'"'+t+'"',b:mk('이 일정만 해제','이번만','single','save')+mk('이후 해제','이번~끝','following','save')+mk('전체 해제','모두','all','save')}}[mode]||{t:'',s:'',b:''};
-  V('scTtl').textContent=conf.t;V('scSub').textContent=conf.s;V('scBtns').innerHTML=conf.b;
-  var bs=V('scBtns').querySelectorAll('[data-sc]');
-  for(var i=0;i<bs.length;i++){(function(btn){btn.onclick=function(){hideMo('moScope');if(btn.getAttribute('data-ac')==='save')execSave(btn.getAttribute('data-sc'));else execDel(btn.getAttribute('data-sc'));};})(bs[i]);}
-  showMo('moScope');
+  var conf={'del-single':{t:'일정 삭제',s:'"'+t+'"를 삭제할까요?',b:mk('삭제','','single','del',true)},'del':{t:'삭제 범위',s:'"'+t+'"는 루틴이에요.',b:mk('이 일정만','이번 회차','single','del',true)+mk('이후 모두','이번~끝','following','del',true)+mk('전체','모든 회차','all','del',true)},'edit':{t:'수정 범위',s:'"'+t+'"는 루틴이에요.',b:mk('이 일정만','이번만','single','save')+mk('이후 모두','이번~끝','following','save')+mk('전체','모든 회차','all','save')},'break':{t:'루틴 해제',s:'"'+t+'"',b:mk('이 일정만','이번만','single','save')+mk('이후 해제','이번~끝','following','save')+mk('전체 해제','모두','all','save')}}[mode]||{t:'',s:'',b:''};
+  $('M_scT').textContent=conf.t;$('M_scS').textContent=conf.s;$('M_scB').innerHTML=conf.b;
+  var bs=$('M_scB').querySelectorAll('[data-sc]');
+  for(var i=0;i<bs.length;i++){(function(btn){btn.onclick=function(){hideM('M_scope');if(btn.getAttribute('data-ac')==='save')execSave(btn.getAttribute('data-sc'));else execDel(btn.getAttribute('data-sc'));};})(bs[i]);}
+  showM('M_scope');
 }
-V('btnScCancel').onclick=function(){hideMo('moScope');gPend=null;};
-V('btnLblCancel').onclick=function(){hideMo('moLbl');};
-V('btnLblSave').onclick=function(){var v=V('lblInp').value.trim();if(!v)return;gLabels[gLmoKey]=v;fbSet('ycal-labels',gLabels);hideMo('moLbl');banner('라벨 저장됐어요 ✓');};
+$('M_scX').onclick=function(){hideM('M_scope');gPend=null;};
 
-function calKako(key){
-  var ev=gEvts[key];if(!ev||!ev.length){banner('공유할 일정이 없어요',true);return;}
-  var lines=['📅 청년부 일정 — '+fmtD(key),''];
-  for(var ei=0;ei<ev.length;ei++){var e=ev[ei];lines.push('▸ '+e.t);if(e.m)lines.push('  📍 '+e.m);if(e.memo)lines.push('  📝 '+e.memo);if(e.n&&e.n.length){lines.push('  체크:');for(var ni=0;ni<e.n.length;ni++)lines.push('  '+(gChk[key+'-'+ei+'-'+ni]?'✅':'☐')+' '+e.n[ni]);}lines.push('');}
-  var text=lines.join('\n').trim();
-  try{if(navigator.clipboard)navigator.clipboard.writeText(text).then(function(){banner('복사됐어요! 📋')}).catch(function(){fallbackCopy(text);});}catch(ex){fallbackCopy(text);}
-}
-function fallbackCopy(t){var ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;top:-9999px;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');banner('복사됐어요!');}catch(ex){}if(ta.parentNode)ta.parentNode.removeChild(ta);}
+function calKako(key){var ev=gEvts[key];if(!ev||!ev.length){banner('공유할 일정이 없어요',true);return;}var lines=['📅 청년부 일정 — '+fmtD(key),''];for(var ei=0;ei<ev.length;ei++){var e=ev[ei];lines.push('▸ '+e.t);if(e.m)lines.push('  📍 '+e.m);if(e.memo)lines.push('  📝 '+e.memo);if(e.n&&e.n.length){lines.push('  체크:');for(var ni=0;ni<e.n.length;ni++)lines.push('  '+(gChk[key+'-'+ei+'-'+ni]?'✅':'☐')+' '+e.n[ni]);}lines.push('');}var text=lines.join('\n').trim();try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(function(){banner('복사됐어요! 📋');}).catch(function(){fb(text);});}catch(ex){fb(text);}function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;top:-9999px;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');banner('복사됐어요!');}catch(ex){}if(ta.parentNode)ta.parentNode.removeChild(ta);}}
 
 // ── WEDDING ──
 function rWed(){
-  var items=objEntries(gWed).sort(function(a,b){return (a[1].date||'9').localeCompare(b[1].date||'9')});
-  var ws=V('wedSum');if(ws)ws.textContent='총 '+items.length+'건';
-  var h='';
-  for(var i=0;i<items.length;i++){var id=items[i][0],w=items[i][1];var d=w.date?new Date(w.date+'T00:00:00'):null,dow=d?DOW[d.getDay()]:'';var diff=d?Math.ceil((d-gToday)/864e5):null;var ddStr=diff===null?'':(diff<0?'완료':(diff===0?'D-day':'D-'+diff));var isPast=diff!==null&&diff<0;h+='<tr style="'+(isPast?'opacity:.5':'')+'"><td style="text-align:center;font-weight:500">'+(i+1)+'</td><td>'+(!isPast&&ddStr?'<span class="badge">'+ddStr+'</span>':'')+(w.date||'')+(dow?' ('+dow+')':'')+'</td><td style="font-weight:500">'+(w.groom||'')+'</td><td style="font-weight:500">'+(w.bride||'')+'</td><td>'+(w.venue||'')+'</td><td>'+(w.time||'')+'</td><td>'+(w.mc||'-')+'</td><td>'+(w.prayer||'-')+'</td><td>'+(w.officiant||'-')+'</td><td style="font-size:11px;max-width:100px">'+(w.note||'')+'</td><td><button class="btn xs" data-wed="'+id+'">수정</button></td></tr>';}
-  var wb=V('wedTbody');if(wb)wb.innerHTML=h;
+  var items=ents(gWed).sort(function(a,b){return (a[1].date||'9').localeCompare(b[1].date||'9')});
+  $('I_wsum').textContent='총 '+items.length+'건';
+  var h='',i;
+  for(i=0;i<items.length;i++){
+    var id=items[i][0],w=items[i][1];
+    var d=w.date?new Date(w.date+'T00:00:00'):null,dow2=d?DOW[d.getDay()]:'';
+    var diff=d?Math.ceil((d-TODAY)/864e5):null;
+    var ddStr=diff===null?'':(diff<0?'완료':(diff===0?'D-day':'D-'+diff));
+    var isPast=diff!==null&&diff<0;
+    h+='<div style="background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;padding:1rem;margin-bottom:.75rem;'+(isPast?'opacity:.5':'')+'">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.625rem">'
+      +'<div style="display:flex;align-items:center;gap:8px">'
+      +(ddStr&&!isPast?'<span class="badge" style="font-size:12px;padding:3px 8px">'+ddStr+'</span>':'')
+      +'<span style="font-size:16px;font-weight:700">'+esc(w.groom||'')+' 💍 '+esc(w.bride||'')+'</span>'
+      +'</div>'
+      +'<button class="btn xs" data-wed="'+id+'">수정</button>'
+      +'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:13px">'
+      +'<div><span style="color:#888;font-size:11px">날짜</span><div style="font-weight:500">'+(w.date||'')+(dow2?' ('+dow2+')':'')+'</div></div>'
+      +'<div><span style="color:#888;font-size:11px">시간</span><div style="font-weight:500">'+(w.time||'-')+'</div></div>'
+      +'<div style="grid-column:1/-1"><span style="color:#888;font-size:11px">장소</span><div style="font-weight:500">'+esc(w.venue||'-')+'</div></div>'
+      +'<div><span style="color:#888;font-size:11px">사회</span><div>'+esc(w.mc||'-')+'</div></div>'
+      +'<div><span style="color:#888;font-size:11px">기도</span><div>'+esc(w.prayer||'-')+'</div></div>'
+      +'<div style="grid-column:1/-1"><span style="color:#888;font-size:11px">주례</span><div>'+esc(w.officiant||'-')+'</div></div>'
+      +(w.note?'<div style="grid-column:1/-1"><span style="color:#888;font-size:11px">비고</span><div style="font-size:12px;color:#555">'+esc(w.note)+'</div></div>':'')
+      +'</div>'
+      +'</div>';
+  }
+  $('I_wtb').innerHTML=h||'<p class="hint">결혼 정보가 없어요</p>';
 }
-function openWed(id){eWed=id||null;var w=id?gWed[id]:{};V('moWedTtl').textContent=id?'결혼 수정':'결혼 추가';V('wGroom').value=w.groom||'';V('wBride').value=w.bride||'';V('wDate').value=w.date||'';V('wTime').value=w.time||'';V('wVenue').value=w.venue||'';V('wMc').value=w.mc||'';V('wPrayer').value=w.prayer||'';V('wOfficiant').value=w.officiant||'';V('wNote').value=w.note||'';V('btnWedDel').style.display=id?'':'none';showMo('moWed');}
-V('btnWedAdd').onclick=function(){openWed(null);};
-V('sec-wed').onclick=function(e){var tgt=e.target||e.srcElement;while(tgt&&!tgt.getAttribute('data-wed')&&tgt!==this)tgt=tgt.parentNode;if(tgt&&tgt.getAttribute('data-wed'))openWed(tgt.getAttribute('data-wed'));};
-V('btnWedCancel').onclick=function(){hideMo('moWed');};
-V('btnWedDel').onclick=function(){if(!eWed)return;cfm('이 결혼 정보를 삭제할까요?',function(){delete gWed[eWed];fbDel('weddings/'+eWed);hideMo('moWed');rWed();banner('삭제됐어요');});};
-V('btnWedSave').onclick=function(){var g=V('wGroom').value.trim(),b=V('wBride').value.trim();if(!g||!b){banner('신랑, 신부 이름을 입력해 주세요',true);return;}var id=eWed||uid();gWed[id]={groom:g,bride:b,date:V('wDate').value,time:V('wTime').value.trim(),venue:V('wVenue').value.trim(),mc:V('wMc').value.trim()||'-',prayer:V('wPrayer').value.trim()||'-',officiant:V('wOfficiant').value.trim(),note:V('wNote').value.trim()};fbSet('weddings/'+id,gWed[id]);hideMo('moWed');rWed();banner('저장됐어요 ✓');};
+function openWed(id){eWed=id||null;var w=id?gWed[id]:{};$('M_wedT').textContent=id?'결혼 수정':'결혼 추가';$('M_wg').value=w.groom||'';$('M_wb').value=w.bride||'';$('M_wd').value=w.date||'';$('M_wt').value=w.time||'';$('M_wv').value=w.venue||'';$('M_wmc').value=w.mc||'';$('M_wpr').value=w.prayer||'';$('M_wof').value=w.officiant||'';$('M_wno').value=w.note||'';$('M_wdel').style.display=id?'':'none';showM('M_wed');}
+$('I_wadd').onclick=function(){openWed(null);};
+$('I_s_wed').onclick=function(e){var b=findUp(e.target,'data-wed');if(b)openWed(b.getAttribute('data-wed'));};
+$('M_wX').onclick=function(){hideM('M_wed');};
+$('M_wdel').onclick=function(){if(!eWed)return;cfm('이 결혼 정보를 삭제할까요?',function(){delete gWed[eWed];hideM('M_wed');rWed();banner('삭제됐어요');});};
+$('M_wS').onclick=function(){var g=$('M_wg').value.trim(),b=$('M_wb').value.trim();if(!g||!b){banner('신랑, 신부 이름을 입력해 주세요',true);return;}var id=eWed||uid();gWed[id]={groom:g,bride:b,date:$('M_wd').value,time:$('M_wt').value.trim(),venue:$('M_wv').value.trim(),mc:$('M_wmc').value.trim()||'-',prayer:$('M_wpr').value.trim()||'-',officiant:$('M_wof').value.trim(),note:$('M_wno').value.trim()};hideM('M_wed');rWed();banner('저장됐어요 ✓');};
 
 // ── CELLS ──
 function rCells(){
-  var sq=(V('cellsSq').value||'').toLowerCase();
-  var list=objEntries(gCells).sort(function(a,b){return (+a[1].number||0)-(+b[1].number||0)});
-  var totalM=objKeys(gMems).length;
-  var cs=V('cellsSum');if(cs)cs.textContent=list.length+'개 셀 / '+totalM+'명';
-  var h='';
-  for(var i=0;i<list.length;i++){
+  var sq=($('I_csq').value||'').toLowerCase();
+  var list=ents(gCells).sort(function(a,b){return (+a[1].number||0)-(+b[1].number||0)});
+  $('I_csum').textContent=list.length+'개 셀 / '+keys(gMems).length+'명';
+  var h='',i,j;
+  for(i=0;i<list.length;i++){
     var cid=list[i][0],c=list[i][1];
-    var mems=[],mks=objKeys(gMems);
-    for(var j=0;j<mks.length;j++){if(gMems[mks[j]].cellId===cid)mems.push(gMems[mks[j]]);}
+    var mks=keys(gMems),mems=[];for(j=0;j<mks.length;j++){if(gMems[mks[j]].cellId===cid)mems.push(gMems[mks[j]]);}
     var ld=c.leaderId?gMems[c.leaderId]:null;
-    if(sq){var found=false;for(var j=0;j<mems.length;j++){if((mems[j].name||'').toLowerCase().indexOf(sq)>=0){found=true;break;}}if(!found&&!(ld&&(ld.name||'').toLowerCase().indexOf(sq)>=0))continue;}
-    var shown=sq?[]:mems;
-    if(sq){shown=[];for(var j=0;j<mems.length;j++){if((mems[j].name||'').toLowerCase().indexOf(sq)>=0)shown.push(mems[j]);}}
-    var pills='';for(var j=0;j<Math.min(shown.length,6);j++)pills+='<span class="pill">'+shown[j].name+'</span>';
-    if(mems.length>6)pills+='<span class="pill" style="color:#888">+'+(mems.length-6)+'</span>';
-    h+='<div class="cell-card" data-cellid="'+cid+'"><div class="cell-nm">'+c.name+' <span style="font-size:11px;font-weight:400;color:#888">'+mems.length+'명</span></div><div class="cell-ld">👤 '+(ld?ld.name:'미지정')+'</div><div class="pills">'+pills+'</div></div>';
+    if(sq){var found=false;for(j=0;j<mems.length;j++){if((mems[j].name||'').toLowerCase().indexOf(sq)>=0){found=true;break;}}if(!found&&!(ld&&(ld.name||'').toLowerCase().indexOf(sq)>=0))continue;}
+    var shown=sq?[]:mems;if(sq){for(j=0;j<mems.length;j++){if((mems[j].name||'').toLowerCase().indexOf(sq)>=0)shown.push(mems[j]);}}
+    var pills='';for(j=0;j<Math.min(shown.length,6);j++)pills+='<span class="pill">'+esc(shown[j].name)+'</span>';if(mems.length>6)pills+='<span class="pill" style="color:#888">+'+(mems.length-6)+'</span>';
+    h+='<div class="cell-card" data-cellid="'+cid+'"><div class="cell-nm">'+esc(c.name)+' <span style="font-size:11px;font-weight:400;color:#888">'+mems.length+'명</span></div><div class="cell-ld">👤 '+esc(ld?ld.name:'미지정')+'</div><div class="pills">'+pills+'</div></div>';
   }
-  var cg=V('cellsGrid');if(cg)cg.innerHTML=h;
+  $('I_cgrid').innerHTML=h;
 }
-V('cellsSq').oninput=rCells;
-V('sec-cells').onclick=function(e){var tgt=e.target||e.srcElement;while(tgt&&!tgt.getAttribute('data-cellid')&&tgt!==this)tgt=tgt.parentNode;if(tgt&&tgt.getAttribute('data-cellid'))openCell(tgt.getAttribute('data-cellid'));};
-function openCell(cid){eCellId=cid;var c=gCells[cid]||{};V('moCellTtl').textContent=c.name||'셀 상세';V('cellNameInp').value=c.name||'';rMemList(cid);showMo('moCell');}
+$('I_csq').oninput=rCells;
+$('I_s_cells').onclick=function(e){var b=findUp(e.target,'data-cellid');if(b)openCell(b.getAttribute('data-cellid'));};
+function openCell(cid){eCid=cid;var c=gCells[cid]||{};$('M_cellT').textContent=esc(c.name)||'셀 상세';$('M_cni').value=c.name||'';rMemList(cid);showM('M_cell');}
 function rMemList(cid){
-  var mems=objEntries(gMems);var filtered=[];
-  for(var i=0;i<mems.length;i++){if(mems[i][1].cellId===cid)filtered.push(mems[i]);}
-  filtered.sort(function(a,b){var ro={셀리더:0,부리더:1,멤버:2};return(ro[a[1].role]||2)-(ro[b[1].role]||2);});
+  var mks=keys(gMems),mems=[],i;for(i=0;i<mks.length;i++){if(gMems[mks[i]].cellId===cid)mems.push([mks[i],gMems[mks[i]]]);}
+  mems.sort(function(a,b){var ro={셀리더:0,부리더:1,멤버:2};return(ro[a[1].role]||2)-(ro[b[1].role]||2);});
   var c=gCells[cid]||{},h='';
-  if(!filtered.length){h='<p class="hint" style="padding:1rem 0">멤버가 없어요</p>';}
-  else{for(var i=0;i<filtered.length;i++){var mid=filtered[i][0],m=filtered[i][1],isLd=c.leaderId===mid;h+='<div class="mem-row"><span class="mem-name">'+m.name+'</span>'+(m.birthYear?'<span style="font-size:11px;color:#888">'+m.birthYear+'</span>':'')+'<span class="mem-tag'+(isLd?' leader':'')+'">'+m.role+'</span>'+(m.gender?'<span style="font-size:11px;color:#aaa">'+(m.gender==='M'?'남':'여')+'</span>':'')+'<button class="btn xs" data-memid="'+mid+'">수정</button></div>';}}
-  var ml=V('cellMemList');if(ml){ml.innerHTML=h;var bs=ml.querySelectorAll('[data-memid]');for(var i=0;i<bs.length;i++){(function(btn){btn.onclick=function(){openMem(eCellId,btn.getAttribute('data-memid'));};})(bs[i]);}}
+  if(!mems.length){h='<p class="hint" style="padding:1rem 0">멤버가 없어요</p>';}
+  else{for(i=0;i<mems.length;i++){var mid=mems[i][0],m=mems[i][1],isLd=c.leaderId===mid;h+='<div class="mem-row"><span class="mem-name">'+esc(m.name)+'</span>'+(m.birthYear?'<span style="font-size:11px;color:#888">'+m.birthYear+'</span>':'')+'<span class="mem-tag'+(isLd?' leader':'')+'">'+m.role+'</span>'+(m.gender?'<span style="font-size:11px;color:#aaa">'+(m.gender==='M'?'남':'여')+'</span>':'')+'<button class="btn xs" data-memid="'+mid+'">수정</button></div>';}}
+  var ml=$('M_mlist');ml.innerHTML=h;var bs=ml.querySelectorAll('[data-memid]');for(i=0;i<bs.length;i++){(function(btn){btn.onclick=function(){openMem(eCid,btn.getAttribute('data-memid'));};})(bs[i]);}
 }
-V('btnMemAdd').onclick=function(){openMem(eCellId,null);};
-V('btnCellDel').onclick=function(){if(!eCellId)return;var mks=objKeys(gMems),toDel=[];for(var i=0;i<mks.length;i++){if(gMems[mks[i]].cellId===eCellId)toDel.push(mks[i]);}var nm=gCells[eCellId]?gCells[eCellId].name:'이 셀';cfm(nm+' 과 멤버 '+toDel.length+'명을 삭제할까요?',function(){for(var i=0;i<toDel.length;i++){delete gMems[toDel[i]];fbDel('members/'+toDel[i]);}delete gCells[eCellId];fbDel('cells/'+eCellId);hideMo('moCell');rCells();banner('삭제됐어요');});};
-V('btnCellCancel').onclick=function(){hideMo('moCell');};
-V('btnCellSave').onclick=function(){var n=V('cellNameInp').value.trim();if(!n){banner('셀 이름을 입력해 주세요',true);return;}gCells[eCellId].name=n;fbSet('cells/'+eCellId,gCells[eCellId]);rCells();banner('셀 이름 저장됐어요 ✓');};
-V('btnCellAdd').onclick=function(){V('newCellName').value='';showMo('moCellAdd');};
-V('btnCellAddCancel').onclick=function(){hideMo('moCellAdd');};
-V('btnCellAddSave').onclick=function(){var n=V('newCellName').value.trim();if(!n){banner('셀 이름을 입력해 주세요',true);return;}var cid='c_'+uid();gCells[cid]={name:n,number:objKeys(gCells).length+1,color:'g'};fbSet('cells/'+cid,gCells[cid]);hideMo('moCellAdd');rCells();banner(n+' 추가됐어요 ✓');};
-function openMem(cid,mid){eMemId=mid;eCellId=cid;var m=mid?gMems[mid]:{};V('moMemTtl').textContent=mid?'멤버 수정':'멤버 추가';V('memName').value=m.name||'';V('memGender').value=m.gender||'M';V('memBirth').value=m.birthYear||'';V('memPhone').value=m.phone||'';V('memRole').value=m.role||'멤버';V('btnMemDel').style.display=mid?'':'none';showMo('moMem');}
-V('btnMemCancel').onclick=function(){hideMo('moMem');};
-V('btnMemDel').onclick=function(){if(!eMemId)return;var nm=gMems[eMemId]?gMems[eMemId].name:'멤버';cfm('"'+nm+'"를 삭제할까요?',function(){if(gCells[eCellId]&&gCells[eCellId].leaderId===eMemId){gCells[eCellId].leaderId=null;fbSet('cells/'+eCellId,gCells[eCellId]);}delete gMems[eMemId];fbDel('members/'+eMemId);hideMo('moMem');rMemList(eCellId);rCells();banner('삭제됐어요');});};
-V('btnMemSave').onclick=function(){var n=V('memName').value.trim();if(!n){banner('이름을 입력해 주세요',true);return;}var id=eMemId||uid(),role=V('memRole').value;gMems[id]={name:n,gender:V('memGender').value,birthYear:parseInt(V('memBirth').value,10)||null,phone:V('memPhone').value.trim(),cellId:eCellId,role:role,status:'active'};if(role==='셀리더'){gCells[eCellId].leaderId=id;fbSet('cells/'+eCellId,gCells[eCellId]);}fbSet('members/'+id,gMems[id]);hideMo('moMem');rMemList(eCellId);rCells();banner('저장됐어요 ✓');};
+$('M_memadd').onclick=function(){openMem(eCid,null);};
+$('M_celldel').onclick=function(){if(!eCid)return;var mks=keys(gMems),toDel=[],i;for(i=0;i<mks.length;i++){if(gMems[mks[i]].cellId===eCid)toDel.push(mks[i]);}var nm=gCells[eCid]?gCells[eCid].name:'이 셀';cfm(nm+' 과 멤버 '+toDel.length+'명을 삭제할까요?',function(){for(i=0;i<toDel.length;i++){delete gMems[toDel[i]];}delete gCells[eCid];hideM('M_cell');rCells();banner('삭제됐어요');});};
+$('M_cellX').onclick=function(){hideM('M_cell');};
+$('M_cellS').onclick=function(){var n=$('M_cni').value.trim();if(!n){banner('셀 이름을 입력해 주세요',true);return;}gCells[eCid].name=n;rCells();banner('셀 이름 저장됐어요 ✓');};
+$('I_cnadd').onclick=function(){$('M_nnm').value='';showM('M_nadd');};
+$('M_nX').onclick=function(){hideM('M_nadd');};
+$('M_nS').onclick=function(){var n=$('M_nnm').value.trim();if(!n){banner('셀 이름을 입력해 주세요',true);return;}var cid='c_'+uid();gCells[cid]={name:n,number:keys(gCells).length+1,color:'g'};hideM('M_nadd');rCells();banner(n+' 추가됐어요 ✓');};
+function openMem(cid,mid){eMid=mid;eCid=cid;var m=mid?gMems[mid]:{};$('M_memT').textContent=mid?'멤버 수정':'멤버 추가';$('M_mn').value=m.name||'';$('M_mg').value=m.gender||'M';$('M_mb').value=m.birthYear||'';$('M_mp').value=m.phone||'';$('M_mr').value=m.role||'멤버';$('M_mdel').style.display=mid?'':'none';showM('M_mem');}
+$('M_mX').onclick=function(){hideM('M_mem');};
+$('M_mdel').onclick=function(){if(!eMid)return;var nm=gMems[eMid]?gMems[eMid].name:'멤버';cfm('"'+nm+'"를 삭제할까요?',function(){if(gCells[eCid]&&gCells[eCid].leaderId===eMid){gCells[eCid].leaderId=null;}delete gMems[eMid];hideM('M_mem');rMemList(eCid);rCells();banner('삭제됐어요');});};
+$('M_mS').onclick=function(){var n=$('M_mn').value.trim();if(!n){banner('이름을 입력해 주세요',true);return;}var id=eMid||uid(),role=$('M_mr').value;gMems[id]={name:n,gender:$('M_mg').value,birthYear:parseInt($('M_mb').value,10)||null,phone:$('M_mp').value.trim(),cellId:eCid,role:role};if(role==='셀리더'){gCells[eCid].leaderId=id;}hideM('M_mem');rMemList(eCid);rCells();banner('저장됐어요 ✓');};
 
 // ── WORSHIP ──
 function rWorship(){
-  var oList=objEntries(gOrd).sort(function(a,b){return (a[1].date||'').localeCompare(b[1].date||'')});
-  var cList=objEntries(gCom).sort(function(a,b){return (a[1].date||'').localeCompare(b[1].date||'')});
-  var sel=V('worshipSel'),prev=sel.value;
-  if(oList.length){var oh='';for(var i=0;i<oList.length;i++){var o=oList[i][1];oh+='<option value="'+o.date+'"'+(o.date===prev?' selected':'')+'>'+fmtD(o.date)+'</option>';}sel.innerHTML=oh;}
-  else sel.innerHTML='<option value="">예배순서 없음</option>';
-  var selDate=sel.value||'',order={},orderId=null;
-  var ovs=objVals(gOrd),oks=objKeys(gOrd);for(var i=0;i<ovs.length;i++){if(ovs[i].date===selDate){order=ovs[i];orderId=oks[i];break;}}
-  var eb=V('btnOrderEdit');if(eb)eb.setAttribute('data-oid',orderId||'');
+  var oList=sortByDate(ents(gOrd)),kList=sortByDate(ents(gKom));
+  var sel=$('I_wsel'),prev=sel.value;
+  if(oList.length){var oh='';for(var i=0;i<oList.length;i++){var o=oList[i][1];oh+='<option value="'+o.date+'"'+(o.date===prev?' selected':'')+'>'+fmtD(o.date)+'</option>';}sel.innerHTML=oh;}else sel.innerHTML='<option value="">예배순서 없음</option>';
+  var selDate=sel.value||'',order={},orderId=null,ov=vals(gOrd),ok=keys(gOrd);for(var i=0;i<ov.length;i++){if(ov[i].date===selDate){order=ov[i];orderId=ok[i];break;}}
+  var oeb=$('I_oedit');if(oeb)oeb.setAttribute('data-oid',orderId||'');
   var roles=[['예배전기도',order.pre||''],['찬양',order.praise||''],['대표기도',order.repray||''],['말씀',order.sermon||''],['결단',order.decision||'다 같이'],['헌금',order.offering||''],['축도',order.bene||'']];
-  var oh='';for(var i=0;i<roles.length;i++)oh+='<tr><td class="wr-role">'+roles[i][0]+'</td><td class="wr-val">'+roles[i][1]+'</td></tr>';
-  var ot=V('orderTbody');if(ot)ot.innerHTML=oh;
-  var ch='';
-  if(cList.length){for(var i=0;i<cList.length;i++){var id=cList[i][0],c=cList[i][1];ch+='<tr><td style="font-weight:500;white-space:nowrap">'+fmtD(c.date)+'</td><td>'+(c['기도인도']||'')+'</td><td>'+(c['대표기도']||'')+'</td><td>'+(c['헌금위원']||'')+'</td><td>'+(c['주차위원']||'')+'</td><td>'+(c['청소담당']||'')+'</td><td>'+(c['폰타나']||'')+'</td><td><button class="btn xs" data-comm="'+id+'">수정</button></td></tr>';}}
-  else ch='<tr><td colspan="8" style="text-align:center;padding:1.5rem;color:#888">예배위원 데이터가 없어요</td></tr>';
-  var ct=V('commTbody');if(ct)ct.innerHTML=ch;
+  var oh='';for(var i=0;i<roles.length;i++)oh+='<tr><td class="wr-role">'+roles[i][0]+'</td><td class="wr-val">'+esc(roles[i][1])+'</td></tr>';
+  $('I_otb').innerHTML=oh;
+  var kh='';if(!kList.length){kh='<tr><td colspan="8" style="text-align:center;padding:1.5rem;color:#888">예배위원 데이터가 없어요</td></tr>';}else{for(var i=0;i<kList.length;i++){var id=kList[i][0],c=kList[i][1];kh+='<tr><td style="font-weight:500;white-space:nowrap">'+fmtD(c.date)+'</td><td>'+esc(c['기도인도']||'')+'</td><td>'+esc(c['대표기도']||'')+'</td><td>'+esc(c['헌금위원']||'')+'</td><td>'+esc(c['주차위원']||'')+'</td><td>'+esc(c['청소담당']||'')+'</td><td>'+esc(c['폰타나']||'')+'</td><td><button class="btn xs" data-kom="'+id+'">수정</button></td></tr>';}}
+  $('I_ktb').innerHTML=kh;
 }
-function openOrder(id){eOrd=id||null;var o=id?gOrd[id]:{};V('moOrderTtl').textContent=id?'예배순서 수정':'예배순서 추가';V('orDate').value=o.date||'';V('orPre').value=o.pre||'';V('orPraise').value=o.praise||'';V('orRepray').value=o.repray||'';V('orSermon').value=o.sermon||'';V('orDecision').value=o.decision||'다 같이';V('orOffering').value=o.offering||'';V('orBene').value=o.bene||'';V('btnOrderDel').style.display=id?'':'none';showMo('moOrder');}
-function openComm(id){eCom=id||null;var c=id?gCom[id]:{};V('moCommTtl').textContent=id?'예배위원 수정':'예배위원 추가';V('cmDate').value=c.date||'';V('cmPray').value=c['기도인도']||'';V('cmRepray').value=c['대표기도']||'';V('cmOffer').value=c['헌금위원']||'';V('cmPark').value=c['주차위원']||'';V('cmClean').value=c['청소담당']||'';V('cmFont').value=c['폰타나']||'';V('btnCommDel').style.display=id?'':'none';showMo('moComm');}
-V('worshipSel').onchange=rWorship;
-V('btnOrderAdd').onclick=function(){openOrder(null);};
-V('btnOrderEdit').onclick=function(){openOrder(this.getAttribute('data-oid')||null);};
-V('btnCommAdd').onclick=function(){openComm(null);};
-V('sec-worship').onclick=function(e){var tgt=e.target||e.srcElement;while(tgt&&!tgt.getAttribute('data-comm')&&tgt!==this)tgt=tgt.parentNode;if(tgt&&tgt.getAttribute('data-comm'))openComm(tgt.getAttribute('data-comm'));};
-V('btnOrderCancel').onclick=function(){hideMo('moOrder');};
-V('btnOrderDel').onclick=function(){if(!eOrd)return;cfm('예배순서를 삭제할까요?',function(){delete gOrd[eOrd];fbDel('worship_orders/'+eOrd);hideMo('moOrder');rWorship();banner('삭제됐어요');});};
-V('btnOrderSave').onclick=function(){var date=V('orDate').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eOrd||uid();gOrd[id]={date:date,pre:V('orPre').value.trim(),praise:V('orPraise').value.trim(),repray:V('orRepray').value.trim(),sermon:V('orSermon').value.trim(),decision:V('orDecision').value.trim()||'다 같이',offering:V('orOffering').value.trim(),bene:V('orBene').value.trim()};fbSet('worship_orders/'+id,gOrd[id]);hideMo('moOrder');rWorship();banner('저장됐어요 ✓');};
-V('btnCommCancel').onclick=function(){hideMo('moComm');};
-V('btnCommDel').onclick=function(){if(!eCom)return;cfm('예배위원을 삭제할까요?',function(){delete gCom[eCom];fbDel('worship_committee/'+eCom);hideMo('moComm');rWorship();banner('삭제됐어요');});};
-V('btnCommSave').onclick=function(){var date=V('cmDate').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eCom||uid();gCom[id]={date:date,'기도인도':V('cmPray').value.trim(),'대표기도':V('cmRepray').value.trim(),'헌금위원':V('cmOffer').value.trim(),'주차위원':V('cmPark').value.trim(),'청소담당':V('cmClean').value.trim(),'폰타나':V('cmFont').value.trim()};fbSet('worship_committee/'+id,gCom[id]);hideMo('moComm');rWorship();banner('저장됐어요 ✓');};
+function openOrd(id){eOrd=id||null;var o=id?gOrd[id]:{};$('M_ordT').textContent=id?'예배순서 수정':'예배순서 추가';$('M_od').value=o.date||'';$('M_op').value=o.pre||'';$('M_opr').value=o.praise||'';$('M_orp').value=o.repray||'';$('M_os').value=o.sermon||'';$('M_ode').value=o.decision||'다 같이';$('M_of').value=o.offering||'';$('M_ob').value=o.bene||'';$('M_odel').style.display=id?'':'none';showM('M_ord');}
+function openKom(id){eKom=id||null;var c=id?gKom[id]:{};$('M_komT').textContent=id?'예배위원 수정':'예배위원 추가';$('M_kd').value=c.date||'';$('M_kp').value=c['기도인도']||'';$('M_kr').value=c['대표기도']||'';$('M_kh').value=c['헌금위원']||'';$('M_kj').value=c['주차위원']||'';$('M_kc').value=c['청소담당']||'';$('M_kf').value=c['폰타나']||'';$('M_kdel').style.display=id?'':'none';showM('M_kom');}
+$('I_wsel').onchange=rWorship;
+$('I_oadd').onclick=function(){openOrd(null);};
+$('I_oedit').onclick=function(){openOrd(this.getAttribute('data-oid')||null);};
+$('I_kadd').onclick=function(){openKom(null);};
+$('I_s_worship').onclick=function(e){var b=findUp(e.target,'data-kom');if(b)openKom(b.getAttribute('data-kom'));};
+$('M_oX').onclick=function(){hideM('M_ord');};
+$('M_odel').onclick=function(){if(!eOrd)return;cfm('예배순서를 삭제할까요?',function(){delete gOrd[eOrd];hideM('M_ord');rWorship();banner('삭제됐어요');});};
+$('M_oS').onclick=function(){var date=$('M_od').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eOrd||uid();gOrd[id]={date:date,pre:$('M_op').value.trim(),praise:$('M_opr').value.trim(),repray:$('M_orp').value.trim(),sermon:$('M_os').value.trim(),decision:$('M_ode').value.trim()||'다 같이',offering:$('M_of').value.trim(),bene:$('M_ob').value.trim()};hideM('M_ord');rWorship();banner('저장됐어요 ✓');};
+$('M_kX').onclick=function(){hideM('M_kom');};
+$('M_kdel').onclick=function(){if(!eKom)return;cfm('예배위원을 삭제할까요?',function(){delete gKom[eKom];hideM('M_kom');rWorship();banner('삭제됐어요');});};
+$('M_kS').onclick=function(){var date=$('M_kd').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eKom||uid();gKom[id]={date:date,'기도인도':$('M_kp').value.trim(),'대표기도':$('M_kr').value.trim(),'헌금위원':$('M_kh').value.trim(),'주차위원':$('M_kj').value.trim(),'청소담당':$('M_kc').value.trim(),'폰타나':$('M_kf').value.trim()};hideM('M_kom');rWorship();banner('저장됐어요 ✓');};
 
 // ── CHECKLIST ──
 function rChk(){
-  var items=objEntries(gChecks).sort(function(a,b){return (a[1].ts||0)-(b[1].ts||0)});
-  var done=0;for(var i=0;i<items.length;i++){if(items[i][1].done)done++;}
-  var cs=V('chkSum');if(cs)cs.textContent=done+' / '+items.length+'개 완료';
-  var h='';
-  if(!items.length) h='<p class="hint">항목을 추가해 주세요</p>';
-  else for(var i=0;i<items.length;i++){var id=items[i][0],c=items[i][1];h+='<div class="chi'+(c.done?' done':'')+'"><input type="checkbox" data-cid="'+id+'"'+(c.done?' checked':'')+'><span class="chi-t">'+(c.text||'')+'</span>'+(c.who?'<span style="font-size:11px;color:#888">👤 '+c.who+'</span>':'')+'<button class="btn xs" data-cdel="'+id+'">✕</button></div>';}
-  var cl=V('chkList');if(cl)cl.innerHTML=h;
+  var items=ents(gChecks).sort(function(a,b){return (a[1].ts||0)-(b[1].ts||0)});
+  var done=0,i;for(i=0;i<items.length;i++){if(items[i][1].done)done++;}
+  $('I_cksum').textContent=done+' / '+items.length+'개 완료';
+  var h='';if(!items.length){h='<p class="hint">항목을 추가해 주세요</p>';}else{for(i=0;i<items.length;i++){var id=items[i][0],c=items[i][1];h+='<div class="chi'+(c.done?' done':'')+'"><input type="checkbox" data-cid="'+id+'"'+(c.done?' checked':'')+'><span class="chi-t">'+esc(c.text||'')+'</span>'+(c.who?'<span style="font-size:11px;color:#888">👤 '+esc(c.who)+'</span>':'')+'<button class="btn xs" data-cdel="'+id+'">✕</button></div>';}}
+  $('I_cklist').innerHTML=h;
 }
-V('btnChkAdd').onclick=function(){var text=V('chkNew').value.trim();if(!text){banner('항목을 입력해 주세요',true);return;}var who=V('chkWho').value.trim(),id=uid();gChecks[id]={text:text,who:who,done:false,ts:Date.now()};fbSet('checks/'+id,gChecks[id]);V('chkNew').value='';V('chkWho').value='';rChk();banner('추가됐어요 ✓');};
-V('chkNew').onkeydown=function(e){if(e.keyCode===13)V('btnChkAdd').onclick();};
-V('btnChkClear').onclick=function(){var toDel=[];var ks=objKeys(gChecks);for(var i=0;i<ks.length;i++){if(gChecks[ks[i]].done)toDel.push(ks[i]);}if(!toDel.length){banner('완료된 항목이 없어요');return;}for(var i=0;i<toDel.length;i++){delete gChecks[toDel[i]];fbDel('checks/'+toDel[i]);}rChk();banner(toDel.length+'개 삭제됐어요');};
-V('chkList').onclick=function(e){var tgt=e.target||e.srcElement;while(tgt&&!tgt.getAttribute('data-cdel')&&tgt!==this)tgt=tgt.parentNode;if(tgt&&tgt.getAttribute('data-cdel')){var id=tgt.getAttribute('data-cdel');delete gChecks[id];fbDel('checks/'+id);rChk();}};
-V('chkList').onchange=function(e){var tgt=e.target||e.srcElement;if(tgt&&tgt.getAttribute('data-cid')){var id=tgt.getAttribute('data-cid');if(gChecks[id])gChecks[id].done=tgt.checked;fbSet('checks/'+id+'/done',tgt.checked);rChk();}};
+$('I_ckadd').onclick=function(){var text=$('I_cnew').value.trim();if(!text){banner('항목을 입력해 주세요',true);return;}var who=$('I_cwho').value.trim(),id=uid();gChecks[id]={text:text,who:who,done:false,ts:Date.now()};$('I_cnew').value='';$('I_cwho').value='';rChk();banner('추가됐어요 ✓');};
+$('I_cnew').onkeydown=function(e){if((e.keyCode||e.which)===13)$('I_ckadd').onclick();};
+$('I_ckclear').onclick=function(){var ks=keys(gChecks),toDel=[],i;for(i=0;i<ks.length;i++){if(gChecks[ks[i]].done)toDel.push(ks[i]);}if(!toDel.length){banner('완료된 항목이 없어요');return;}for(i=0;i<toDel.length;i++){delete gChecks[toDel[i]];}rChk();banner(toDel.length+'개 삭제됐어요');};
+$('I_cklist').onclick=function(e){var d=findUp(e.target,'data-cdel');if(d){delete gChecks[d.getAttribute('data-cdel')];rChk();}};
+$('I_cklist').onchange=function(e){var t=e.target;if(t&&t.getAttribute('data-cid')){var id=t.getAttribute('data-cid');if(gChecks[id])gChecks[id].done=t.checked;rChk();}};
 
 // ── INIT ──
-rLeg(); rCal(); rWed(); rCells(); rWorship(); rChk();
+rLeg();
+rCal();
+rWed();
+rCells();
+rWorship();
+rChk();
+
+})();
 </script>
 </body>
 </html>
