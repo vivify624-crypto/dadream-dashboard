@@ -497,7 +497,18 @@ var curSec='cal';
 var FB=null;
 function fbSet(path,val){if(FB)try{FB.ref(path).set(val);}catch(e){}}
 function fbDel(path){if(FB)try{FB.ref(path).remove();}catch(e){}}
-function fbOn(path,cb){if(FB)try{FB.ref(path).on('value',function(s){var v=s.val();if(v!=null)cb(v);},function(){});}catch(e){}}
+function fbOn(path, cb){
+  if(!FB) return;
+  try{
+    FB.ref(path).on('value', function(s){
+      cb(s.val());
+    }, function(err){
+      console.log('FB listener error:', path, err);
+    });
+  }catch(e){
+    console.log('FB listener exception:', e);
+  }
+}
 function fbOnce(path,cb){if(FB)try{FB.ref(path).once('value',function(s){cb(s.val());});}catch(e){}}
 
 function initFB(){
@@ -509,42 +520,112 @@ function initFB(){
   }catch(e){console.log('FB error',e);}
 }
 function startFbSync(){
-  // 캘린더
-  fbOnce('ycal-evts',function(v){
-    if(v){gEvts={};var e=ents(v);for(var i=0;i<e.length;i++)gEvts[e[i][0]]=toArr(e[i][1]);}
-    else fbSet('ycal-evts',gEvts);
-    if(curSec==='cal'){rCal();if(gSel)rDet(gSel);}
-    fbOn('ycal-evts',function(v2){if(!v2)return;gEvts={};var e=ents(v2);for(var i=0;i<e.length;i++)gEvts[e[i][0]]=toArr(e[i][1]);if(curSec==='cal'){rCal();if(gSel)rDet(gSel);}});
-  });
-  fbOn('ycal-chk',function(v){gChk=v;if(gSel)rDet(gSel);});
-  fbOn('ycal-labels',function(v){var ks=keys(v);for(var i=0;i<ks.length;i++)gLabels[ks[i]]=v[ks[i]];rLeg();});
-  // 결혼
-  fbOnce('weddings',function(v){
-    if(v)gWed=v; else fbSet('weddings',gWed);
-    if(curSec==='wed')rWed();
-    fbOn('weddings',function(v2){if(!v2)return;gWed=v2;if(curSec==='wed')rWed();});
-  });
-  // 셀
-  fbOnce('cells',function(v){
-    if(v)gCells=v; else fbSet('cells',gCells);
-    fbOnce('members',function(v2){
-      if(v2)gMems=v2; else fbSet('members',gMems);
-      if(curSec==='cells')rCells();
-      fbOn('cells',function(v3){if(!v3)return;gCells=v3;if(curSec==='cells')rCells();});
-      fbOn('members',function(v3){if(!v3)return;gMems=v3;if(curSec==='cells')rCells();});
+  // 캘린더 이벤트
+  fbOnce('ycal-evts', function(v){
+    gEvts = {};
+    if(v){
+      var e = ents(v);
+      for(var i=0;i<e.length;i++) gEvts[e[i][0]] = toArr(e[i][1]);
+    }
+    if(curSec==='cal'){ rCal(); if(gSel) rDet(gSel); }
+
+    fbOn('ycal-evts', function(v2){
+      gEvts = {};
+      if(v2){
+        var e2 = ents(v2);
+        for(var j=0;j<e2.length;j++) gEvts[e2[j][0]] = toArr(e2[j][1]);
+      }
+      if(curSec==='cal'){ rCal(); if(gSel) rDet(gSel); }
     });
   });
-  // 예배
-  fbOnce('worship_orders',function(v){
-    if(v)gOrd=v; else fbSet('worship_orders',gOrd);
-    fbOn('worship_orders',function(v2){if(!v2)return;gOrd=v2;if(curSec==='worship')rWorship();});
+
+  // 캘린더 체크 상태
+  fbOn('ycal-chk', function(v){
+    gChk = v || {};
+    if(gSel) rDet(gSel);
   });
-  fbOnce('worship_committee',function(v){
-    if(v)gKom=v; else fbSet('worship_committee',gKom);
-    fbOn('worship_committee',function(v2){if(!v2)return;gKom=v2;if(curSec==='worship')rWorship();});
+
+  // 캘린더 라벨
+  fbOn('ycal-labels', function(v){
+    gLabels = {
+      p:'예배/훈련',
+      t:'셀/단합',
+      c:'행사/집회',
+      a:'회의/행정',
+      b:'수련회/외부',
+      k:'환영/경조사',
+      g:'기타'
+    };
+    var src = v || {};
+    var ks = keys(src);
+    for(var i=0;i<ks.length;i++) gLabels[ks[i]] = src[ks[i]];
+    rLeg();
   });
-  // 체크
-  fbOn('checks',function(v){gChecks=v;if(curSec==='chk')rChk();});
+
+  // 결혼
+  fbOnce('weddings', function(v){
+    gWed = v || {};
+    if(curSec==='wed') rWed();
+
+    fbOn('weddings', function(v2){
+      gWed = v2 || {};
+      if(curSec==='wed') rWed();
+    });
+  });
+
+  // 셀
+  fbOnce('cells', function(v){
+    gCells = v || {};
+
+    fbOnce('members', function(v2){
+      gMems = v2 || {};
+      if(curSec==='cells') rCells();
+
+      fbOn('cells', function(v3){
+        gCells = v3 || {};
+        if(curSec==='cells'){
+          rCells();
+          if(eCid && $('M_cell').classList.contains('show')) rMemList(eCid);
+        }
+      });
+
+      fbOn('members', function(v4){
+        gMems = v4 || {};
+        if(curSec==='cells'){
+          rCells();
+          if(eCid && $('M_cell').classList.contains('show')) rMemList(eCid);
+        }
+      });
+    });
+  });
+
+  // 예배순서
+  fbOnce('worship_orders', function(v){
+    gOrd = v || {};
+    if(curSec==='worship') rWorship();
+
+    fbOn('worship_orders', function(v2){
+      gOrd = v2 || {};
+      if(curSec==='worship') rWorship();
+    });
+  });
+
+  // 예배위원
+  fbOnce('worship_committee', function(v){
+    gKom = v || {};
+    if(curSec==='worship') rWorship();
+
+    fbOn('worship_committee', function(v2){
+      gKom = v2 || {};
+      if(curSec==='worship') rWorship();
+    });
+  });
+
+  // 체크리스트
+  fbOn('checks', function(v){
+    gChecks = v || {};
+    if(curSec==='chk') rChk();
+  });
 }
 // Firebase 비동기 로드
 (function(){
