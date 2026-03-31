@@ -477,6 +477,7 @@ var built=buildCells();
 /* ============================================================
    STATE
 ============================================================ */
+var _skipListener = {};  // 삭제 중 리스너 무시 플래그
 var gEvts=JSON.parse(JSON.stringify(IEVTS));
 var gWed=JSON.parse(JSON.stringify(IWED));
 var gOrd=JSON.parse(JSON.stringify(IORD));
@@ -850,7 +851,10 @@ $('M_wX').onclick=function(){hideMo('M_wed');};
 $('M_wdel').onclick=function(){
   if(!eWed)return;
   cfm('이 결혼 정보를 삭제할까요?',function(){
-    delete gWed[eWed];fbDel('weddings/'+eWed);hideMo('M_wed');rWed();banner('삭제됐어요');
+    var id=eWed;
+    delete gWed[id];
+    if(FB) FB.ref('weddings/'+id).remove();
+    hideMo('M_wed'); rWed(); banner('삭제됐어요');
   });
 };
 $('M_wS').onclick=function(){
@@ -886,11 +890,14 @@ function openCell(cid){eCid=cid;var c=gCells[cid]||{};$('M_cellT').textContent=e
 $('M_memadd').onclick=function(){openMem(eCid,null);};
 $('M_celldel').onclick=function(){
   if(!eCid)return;
-  var mks=keys(gMems),toDel=[],i;for(i=0;i<mks.length;i++){if(gMems[mks[i]].cellId===eCid)toDel.push(mks[i]);}
+  var mks=keys(gMems),toDel=[],i;
+  for(i=0;i<mks.length;i++){if(gMems[mks[i]].cellId===eCid)toDel.push(mks[i]);}
   var nm=gCells[eCid]?gCells[eCid].name:'이 셀';
   cfm(nm+' 과 멤버 '+toDel.length+'명을 삭제할까요?',function(){
-    for(i=0;i<toDel.length;i++){delete gMems[toDel[i]];fbDel('members/'+toDel[i]);}
-    delete gCells[eCid];fbDel('cells/'+eCid);hideMo('M_cell');rCells();banner('삭제됐어요');
+    var cid2=eCid;
+    for(i=0;i<toDel.length;i++){ delete gMems[toDel[i]]; if(FB) FB.ref('members/'+toDel[i]).remove(); }
+    delete gCells[cid2]; if(FB) FB.ref('cells/'+cid2).remove();
+    hideMo('M_cell'); rCells(); banner('삭제됐어요');
   });
 };
 $('M_cellX').onclick=function(){hideMo('M_cell');};
@@ -995,9 +1002,11 @@ $('M_mdel').onclick=function(){
   if(!eMid)return;
   var nm=gMems[eMid]?gMems[eMid].name:'멤버';
   cfm('"'+nm+'"를 삭제할까요?',function(){
-    if(gCells[eCid]&&gCells[eCid].leaderId===eMid){gCells[eCid].leaderId=null;fbSet('cells/'+eCid,gCells[eCid]);}
-    delete gMems[eMid];fbDel('members/'+eMid);
-    hideMo('M_mem');rMemList(eCid);rCells();banner('삭제됐어요');
+    var mid2=eMid,cid2=eCid;
+    _skipListener.members=true;
+    if(gCells[cid2]&&gCells[cid2].leaderId===mid2){ gCells[cid2].leaderId=null; if(FB) FB.ref('cells/'+cid2+'/leaderId').remove(); }
+    delete gMems[mid2]; if(FB) FB.ref('members/'+mid2).remove().then(function(){setTimeout(function(){_skipListener.members=false;},2000);});
+    hideMo('M_mem'); rMemList(cid2); rCells(); banner('삭제됐어요');
   });
 };
 $('M_mS').onclick=function(){
@@ -1050,10 +1059,26 @@ $('I_oedit').onclick=function(){openOrd(this.getAttribute('data-oid')||null);};
 $('I_kadd').onclick=function(){openKom(null);};
 $('I_s_worship').onclick=function(e){var b=findUp(e.target,'data-kom');if(b)openKom(b.getAttribute('data-kom'));};
 $('M_oX').onclick=function(){hideMo('M_ord');};
-$('M_odel').onclick=function(){if(!eOrd)return;cfm('예배순서를 삭제할까요?',function(){delete gOrd[eOrd];fbDel('worship_orders/'+eOrd);hideMo('M_ord');rWorship();banner('삭제됐어요');});};
+$('M_odel').onclick=function(){
+  if(!eOrd)return;
+  cfm('예배순서를 삭제할까요?',function(){
+    var id=eOrd;
+    _skipListener.orders=true;
+    delete gOrd[id]; if(FB) FB.ref('worship_orders/'+id).remove().then(function(){setTimeout(function(){_skipListener.orders=false;},2000);});
+    hideMo('M_ord'); rWorship(); banner('삭제됐어요');
+  });
+};
 $('M_oS').onclick=function(){var date=$('M_od').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eOrd||uid();gOrd[id]={date:date,pre:$('M_op').value.trim(),praise:$('M_opr').value.trim(),repray:$('M_orp').value.trim(),sermon:$('M_os').value.trim(),decision:$('M_ode').value.trim()||'다 같이',offering:$('M_of').value.trim(),bene:$('M_ob').value.trim()};fbSet('worship_orders/'+id,gOrd[id]);hideMo('M_ord');rWorship();banner('저장됐어요 ✓');};
 $('M_kX').onclick=function(){hideMo('M_kom');};
-$('M_kdel').onclick=function(){if(!eKom)return;cfm('예배위원을 삭제할까요?',function(){delete gKom[eKom];fbDel('worship_committee/'+eKom);hideMo('M_kom');rWorship();banner('삭제됐어요');});};
+$('M_kdel').onclick=function(){
+  if(!eKom)return;
+  cfm('예배위원을 삭제할까요?',function(){
+    var id=eKom;
+    _skipListener.committee=true;
+    delete gKom[id]; if(FB) FB.ref('worship_committee/'+id).remove().then(function(){setTimeout(function(){_skipListener.committee=false;},2000);});
+    hideMo('M_kom'); rWorship(); banner('삭제됐어요');
+  });
+};
 $('M_kS').onclick=function(){var date=$('M_kd').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eKom||uid();gKom[id]={date:date,'기도인도':$('M_kp').value.trim(),'대표기도':$('M_kr').value.trim(),'헌금위원':$('M_kh').value.trim(),'주차위원':$('M_kj').value.trim(),'청소담당':$('M_kc').value.trim(),'폰타나':$('M_kf').value.trim()};fbSet('worship_committee/'+id,gKom[id]);hideMo('M_kom');rWorship();banner('저장됐어요 ✓');};
 
 /* ============================================================
