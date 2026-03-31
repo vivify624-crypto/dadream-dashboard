@@ -228,35 +228,37 @@ textarea.fi{resize:vertical}
     </div>
     <!-- 예배 -->
     <div class="sec" id="I_s_worship">
-      <div class="row sb2 mb2" style="flex-wrap:wrap;gap:8px">
-        <select id="I_wsel" class="fi" style="width:160px"></select>
-        <div class="row g1">
-          <button class="btn sm pr" id="I_oadd">+ 예배순서</button>
-          <button class="btn sm pr" id="I_kadd">+ 예배위원</button>
+      <div id="I_ww">
+        <div class="row sb2 mb2" style="flex-wrap:wrap;gap:8px">
+          <select id="I_wsel" class="fi" style="width:160px"></select>
+          <div class="row g1">
+            <button class="btn sm pr" id="I_oadd">+ 예배순서</button>
+            <button class="btn sm pr" id="I_kadd">+ 예배위원</button>
+          </div>
         </div>
-      </div>
-      <!-- 예배순서: 테이블 width:auto로 내용에 맞게 -->
-      <div class="card mb2" style="max-width:600px;margin-left:auto;margin-right:auto">
-        <div class="ct-t"><span>✼ 예배순서</span><button class="btn sm" id="I_oedit">수정</button></div>
-        <div class="tw"><table style="width:100%"><tbody id="I_otb"></tbody></table></div>
-      </div>
-      <!-- 예배위원 -->
-      <div class="card" style="max-width:600px;margin-left:auto;margin-right:auto">
-        <div class="ct-t"><span>✼ 예배위원</span></div>
-        <div class="tw"><table style="width:100%"><tbody id="I_ktb"></tbody></table></div>
+        <div class="card mb2">
+          <div class="ct-t"><span>✼ 예배순서</span><button class="btn sm" id="I_oedit">수정</button></div>
+          <div class="tw"><table style="width:100%"><tbody id="I_otb"></tbody></table></div>
+        </div>
+        <div class="card">
+          <div class="ct-t"><span>✼ 예배위원</span></div>
+          <div class="tw"><table style="width:100%"><tbody id="I_ktb"></tbody></table></div>
+        </div>
       </div>
     </div>
     <!-- 체크리스트 -->
     <div class="sec" id="I_s_chk">
-      <div class="card mb2">
-        <div class="row g1" style="flex-wrap:wrap">
-          <input class="fi" type="text" id="I_cnew" placeholder="새 항목 입력..." style="flex:1;min-width:140px">
-          <input class="fi" type="text" id="I_cwho" placeholder="담당자" style="width:80px">
-          <button class="btn pr" id="I_ckadd">+ 추가</button>
+      <div id="I_ckw">
+        <div class="card mb2">
+          <div class="row g1" style="flex-wrap:wrap">
+            <input class="fi" type="text" id="I_cnew" placeholder="새 항목 입력..." style="flex:1;min-width:140px">
+            <input class="fi" type="text" id="I_cwho" placeholder="담당자" style="width:80px">
+            <button class="btn pr" id="I_ckadd">+ 추가</button>
+          </div>
         </div>
+        <div class="row sb2 mb2"><span class="mu" id="I_cksum"></span><button class="btn sm" id="I_ckclear">완료 지우기</button></div>
+        <div id="I_cklist"></div>
       </div>
-      <div class="row sb2 mb2"><span class="mu" id="I_cksum"></span><button class="btn sm" id="I_ckclear">완료 지우기</button></div>
-      <div id="I_cklist"></div>
     </div>
   </div>
 </div>
