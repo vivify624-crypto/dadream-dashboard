@@ -161,10 +161,38 @@ textarea.fi{resize:vertical}
   .frow{flex-direction:column;gap:0}
 }
 @media (min-width:1100px){
-  #I_s_cal{max-width:1280px;margin:0 auto;}
+  #I_s_cal,
   #I_s_wed,
-  #I_s_worship{max-width:1180px;margin:0 auto;}
+  #I_s_worship{
+    width:calc(100% - 56px);
+    max-width:960px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  #I_s_cal .cdet{padding:.85rem .95rem;}
+  #I_s_cal .evb{margin-bottom:10px;padding-bottom:10px;}
+  #I_s_cal .memobox{padding:7px 10px;line-height:1.55;margin-bottom:4px;}
+  #I_s_cal .ni{margin-bottom:4px;}
+
+  #I_s_wed .row.sb2.mb2,
+  #I_s_wed > div:nth-child(2),
+  #I_s_worship > .row{margin-bottom:.7rem !important;}
+
+  #I_wtb > div{padding:.85rem .95rem !important;margin-bottom:.55rem !important;border-radius:10px !important;}
+  #I_wtb > div > div:first-child{margin-bottom:.45rem !important;}
+  #I_wtb > div > div:last-child{font-size:12px !important;}
+  #I_wtb > div > div:last-child > div{padding:4px 0 !important;line-height:1.35 !important;}
+
+  #I_s_worship .card{padding:1rem !important;}
+  #I_s_worship .card.mb2{margin-bottom:.7rem !important;}
+  #I_s_worship .ct-t{margin-bottom:.6rem !important;}
+  #I_s_worship th{padding:6px 8px !important;font-size:11px !important;}
+  #I_s_worship td{padding:6px 8px !important;font-size:12px !important;line-height:1.35 !important;}
+  #I_s_worship .wr-role{width:82px !important;padding:7px 9px !important;font-size:12px !important;}
+  #I_s_worship .wr-val{padding:7px 9px !important;font-size:12px !important;line-height:1.35 !important;}
 }
+
 </style>
 </head>
 <body>
