@@ -555,7 +555,7 @@ function rDet(key) {
   $('I_det').innerHTML='<div class="cdet">'+h+'</div>';
 }
 
-function calTog(id) { gChk[id]=!gChk[id]; var el=$('ni-'+id); if(el) el.className='ni'+(gChk[id]?' dk':''); }
+function calTog(id) { gChk[id]=!gChk[id]; var el=$('ni-'+id); if(el) el.className='ni'+(gChk[id]?' dk':''); fbSet('ycal-chk',gChk); }
 
 function findUp(el, attr) { while(el){if(el.getAttribute&&el.getAttribute(attr))return el;el=el.parentNode;} return null; }
 
@@ -666,7 +666,7 @@ function execSave(scope){
     for(i=0;i<dates.length;i++){if(!gEvts[dates[i]])gEvts[dates[i]]=[];gEvts[dates[i]].push(copyObj(fEv,{t:useNum?fEv.t+' '+(i+1)+'회차':fEv.t,memo:'',grpMemo:fEv.memo,grpId:gid,grpIdx:i,grpInterval:repeat,grpTitle:fEv.t,grpNum:useNum}));}
     rCal();calGoto(date);banner('총 '+dates.length+'개 루틴 저장 ✓');return;
   }
-  if(!gEvts[date])gEvts[date]=[];gEvts[date].push(copyObj(fEv));rCal();calGoto(date);banner('저장됐어요 ✓');
+  if(!gEvts[date])gEvts[date]=[];gEvts[date].push(copyObj(fEv));fbSet('ycal-evts',gEvts);rCal();calGoto(date);banner('저장됐어요 ✓');
 }
 
 function execDel(scope){
@@ -729,8 +729,8 @@ function openWed(id){eWed=id||null;var w=id?gWed[id]:{};$('M_wedT').textContent=
 $('I_wadd').onclick=function(){openWed(null);};
 $('I_s_wed').onclick=function(e){var b=findUp(e.target,'data-wed');if(b)openWed(b.getAttribute('data-wed'));};
 $('M_wX').onclick=function(){hideM('M_wed');};
-$('M_wdel').onclick=function(){if(!eWed)return;cfm('이 결혼 정보를 삭제할까요?',function(){delete gWed[eWed];hideM('M_wed');rWed();banner('삭제됐어요');});};
-$('M_wS').onclick=function(){var g=$('M_wg').value.trim(),b=$('M_wb').value.trim();if(!g||!b){banner('신랑, 신부 이름을 입력해 주세요',true);return;}var id=eWed||uid();gWed[id]={groom:g,bride:b,date:$('M_wd').value,time:$('M_wt').value.trim(),venue:$('M_wv').value.trim(),mc:$('M_wmc').value.trim()||'-',prayer:$('M_wpr').value.trim()||'-',officiant:$('M_wof').value.trim(),note:$('M_wno').value.trim()};hideM('M_wed');rWed();banner('저장됐어요 ✓');};
+$('M_wdel').onclick=function(){if(!eWed)return;cfm('이 결혼 정보를 삭제할까요?',function(){delete gWed[eWed];fbDel('weddings/'+eWed);hideM('M_wed');rWed();banner('삭제됐어요');});};
+$('M_wS').onclick=function(){var g=$('M_wg').value.trim(),b=$('M_wb').value.trim();if(!g||!b){banner('신랑, 신부 이름을 입력해 주세요',true);return;}var id=eWed||uid();gWed[id]={groom:g,bride:b,date:$('M_wd').value,time:$('M_wt').value.trim(),venue:$('M_wv').value.trim(),mc:$('M_wmc').value.trim()||'-',prayer:$('M_wpr').value.trim()||'-',officiant:$('M_wof').value.trim(),note:$('M_wno').value.trim()};fbSet('weddings/'+id,gWed[id]);hideM('M_wed');rWed();banner('저장됐어요 ✓');};
 
 // ── CELLS ──
 function rCells(){
@@ -761,16 +761,16 @@ function rMemList(cid){
   var ml=$('M_mlist');ml.innerHTML=h;var bs=ml.querySelectorAll('[data-memid]');for(i=0;i<bs.length;i++){(function(btn){btn.onclick=function(){openMem(eCid,btn.getAttribute('data-memid'));};})(bs[i]);}
 }
 $('M_memadd').onclick=function(){openMem(eCid,null);};
-$('M_celldel').onclick=function(){if(!eCid)return;var mks=keys(gMems),toDel=[],i;for(i=0;i<mks.length;i++){if(gMems[mks[i]].cellId===eCid)toDel.push(mks[i]);}var nm=gCells[eCid]?gCells[eCid].name:'이 셀';cfm(nm+' 과 멤버 '+toDel.length+'명을 삭제할까요?',function(){for(i=0;i<toDel.length;i++){delete gMems[toDel[i]];}delete gCells[eCid];hideM('M_cell');rCells();banner('삭제됐어요');});};
+$('M_celldel').onclick=function(){if(!eCid)return;var mks=keys(gMems),toDel=[],i;for(i=0;i<mks.length;i++){if(gMems[mks[i]].cellId===eCid)toDel.push(mks[i]);}var nm=gCells[eCid]?gCells[eCid].name:'이 셀';cfm(nm+' 과 멤버 '+toDel.length+'명을 삭제할까요?',function(){for(i=0;i<toDel.length;i++){delete gMems[toDel[i]];fbDel('members/'+toDel[i]);}delete gCells[eCid];fbDel('cells/'+eCid);hideM('M_cell');rCells();banner('삭제됐어요');});};
 $('M_cellX').onclick=function(){hideM('M_cell');};
-$('M_cellS').onclick=function(){var n=$('M_cni').value.trim();if(!n){banner('셀 이름을 입력해 주세요',true);return;}gCells[eCid].name=n;rCells();banner('셀 이름 저장됐어요 ✓');};
+$('M_cellS').onclick=function(){var n=$('M_cni').value.trim();if(!n){banner('셀 이름을 입력해 주세요',true);return;}gCells[eCid].name=n;fbSet('cells/'+eCid,gCells[eCid]);rCells();banner('셀 이름 저장됐어요 ✓');};
 $('I_cnadd').onclick=function(){$('M_nnm').value='';showM('M_nadd');};
 $('M_nX').onclick=function(){hideM('M_nadd');};
-$('M_nS').onclick=function(){var n=$('M_nnm').value.trim();if(!n){banner('셀 이름을 입력해 주세요',true);return;}var cid='c_'+uid();gCells[cid]={name:n,number:keys(gCells).length+1,color:'g'};hideM('M_nadd');rCells();banner(n+' 추가됐어요 ✓');};
+$('M_nS').onclick=function(){var n=$('M_nnm').value.trim();if(!n){banner('셀 이름을 입력해 주세요',true);return;}var cid='c_'+uid();gCells[cid]={name:n,number:keys(gCells).length+1,color:'g'};fbSet('cells/'+cid,gCells[cid]);hideM('M_nadd');rCells();banner(n+' 추가됐어요 ✓');};
 function openMem(cid,mid){eMid=mid;eCid=cid;var m=mid?gMems[mid]:{};$('M_memT').textContent=mid?'멤버 수정':'멤버 추가';$('M_mn').value=m.name||'';$('M_mg').value=m.gender||'M';$('M_mb').value=m.birthYear||'';$('M_mp').value=m.phone||'';$('M_mr').value=m.role||'멤버';$('M_mdel').style.display=mid?'':'none';showM('M_mem');}
 $('M_mX').onclick=function(){hideM('M_mem');};
-$('M_mdel').onclick=function(){if(!eMid)return;var nm=gMems[eMid]?gMems[eMid].name:'멤버';cfm('"'+nm+'"를 삭제할까요?',function(){if(gCells[eCid]&&gCells[eCid].leaderId===eMid){gCells[eCid].leaderId=null;}delete gMems[eMid];hideM('M_mem');rMemList(eCid);rCells();banner('삭제됐어요');});};
-$('M_mS').onclick=function(){var n=$('M_mn').value.trim();if(!n){banner('이름을 입력해 주세요',true);return;}var id=eMid||uid(),role=$('M_mr').value;gMems[id]={name:n,gender:$('M_mg').value,birthYear:parseInt($('M_mb').value,10)||null,phone:$('M_mp').value.trim(),cellId:eCid,role:role};if(role==='셀리더'){gCells[eCid].leaderId=id;}hideM('M_mem');rMemList(eCid);rCells();banner('저장됐어요 ✓');};
+$('M_mdel').onclick=function(){if(!eMid)return;var nm=gMems[eMid]?gMems[eMid].name:'멤버';cfm('"'+nm+'"를 삭제할까요?',function(){if(gCells[eCid]&&gCells[eCid].leaderId===eMid){gCells[eCid].leaderId=null;fbSet('cells/'+eCid,gCells[eCid]);}delete gMems[eMid];fbDel('members/'+eMid);hideM('M_mem');rMemList(eCid);rCells();banner('삭제됐어요');});};
+$('M_mS').onclick=function(){var n=$('M_mn').value.trim();if(!n){banner('이름을 입력해 주세요',true);return;}var id=eMid||uid(),role=$('M_mr').value;gMems[id]={name:n,gender:$('M_mg').value,birthYear:parseInt($('M_mb').value,10)||null,phone:$('M_mp').value.trim(),cellId:eCid,role:role};if(role==='셀리더'){gCells[eCid].leaderId=id;fbSet('cells/'+eCid,gCells[eCid]);}fbSet('members/'+id,gMems[id]);hideM('M_mem');rMemList(eCid);rCells();banner('저장됐어요 ✓');};
 
 // ── WORSHIP ──
 function rWorship(){
@@ -793,11 +793,11 @@ $('I_oedit').onclick=function(){openOrd(this.getAttribute('data-oid')||null);};
 $('I_kadd').onclick=function(){openKom(null);};
 $('I_s_worship').onclick=function(e){var b=findUp(e.target,'data-kom');if(b)openKom(b.getAttribute('data-kom'));};
 $('M_oX').onclick=function(){hideM('M_ord');};
-$('M_odel').onclick=function(){if(!eOrd)return;cfm('예배순서를 삭제할까요?',function(){delete gOrd[eOrd];hideM('M_ord');rWorship();banner('삭제됐어요');});};
-$('M_oS').onclick=function(){var date=$('M_od').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eOrd||uid();gOrd[id]={date:date,pre:$('M_op').value.trim(),praise:$('M_opr').value.trim(),repray:$('M_orp').value.trim(),sermon:$('M_os').value.trim(),decision:$('M_ode').value.trim()||'다 같이',offering:$('M_of').value.trim(),bene:$('M_ob').value.trim()};hideM('M_ord');rWorship();banner('저장됐어요 ✓');};
+$('M_odel').onclick=function(){if(!eOrd)return;cfm('예배순서를 삭제할까요?',function(){delete gOrd[eOrd];fbDel('worship_orders/'+eOrd);hideM('M_ord');rWorship();banner('삭제됐어요');});};
+$('M_oS').onclick=function(){var date=$('M_od').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eOrd||uid();gOrd[id]={date:date,pre:$('M_op').value.trim(),praise:$('M_opr').value.trim(),repray:$('M_orp').value.trim(),sermon:$('M_os').value.trim(),decision:$('M_ode').value.trim()||'다 같이',offering:$('M_of').value.trim(),bene:$('M_ob').value.trim()};fbSet('worship_orders/'+id,gOrd[id]);hideM('M_ord');rWorship();banner('저장됐어요 ✓');};
 $('M_kX').onclick=function(){hideM('M_kom');};
-$('M_kdel').onclick=function(){if(!eKom)return;cfm('예배위원을 삭제할까요?',function(){delete gKom[eKom];hideM('M_kom');rWorship();banner('삭제됐어요');});};
-$('M_kS').onclick=function(){var date=$('M_kd').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eKom||uid();gKom[id]={date:date,'기도인도':$('M_kp').value.trim(),'대표기도':$('M_kr').value.trim(),'헌금위원':$('M_kh').value.trim(),'주차위원':$('M_kj').value.trim(),'청소담당':$('M_kc').value.trim(),'폰타나':$('M_kf').value.trim()};hideM('M_kom');rWorship();banner('저장됐어요 ✓');};
+$('M_kdel').onclick=function(){if(!eKom)return;cfm('예배위원을 삭제할까요?',function(){delete gKom[eKom];fbDel('worship_committee/'+eKom);hideM('M_kom');rWorship();banner('삭제됐어요');});};
+$('M_kS').onclick=function(){var date=$('M_kd').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eKom||uid();gKom[id]={date:date,'기도인도':$('M_kp').value.trim(),'대표기도':$('M_kr').value.trim(),'헌금위원':$('M_kh').value.trim(),'주차위원':$('M_kj').value.trim(),'청소담당':$('M_kc').value.trim(),'폰타나':$('M_kf').value.trim()};fbSet('worship_committee/'+id,gKom[id]);hideM('M_kom');rWorship();banner('저장됐어요 ✓');};
 
 // ── CHECKLIST ──
 function rChk(){
@@ -807,19 +807,81 @@ function rChk(){
   var h='';if(!items.length){h='<p class="hint">항목을 추가해 주세요</p>';}else{for(i=0;i<items.length;i++){var id=items[i][0],c=items[i][1];h+='<div class="chi'+(c.done?' done':'')+'"><input type="checkbox" data-cid="'+id+'"'+(c.done?' checked':'')+'><span class="chi-t">'+esc(c.text||'')+'</span>'+(c.who?'<span style="font-size:11px;color:#888">👤 '+esc(c.who)+'</span>':'')+'<button class="btn xs" data-cdel="'+id+'">✕</button></div>';}}
   $('I_cklist').innerHTML=h;
 }
-$('I_ckadd').onclick=function(){var text=$('I_cnew').value.trim();if(!text){banner('항목을 입력해 주세요',true);return;}var who=$('I_cwho').value.trim(),id=uid();gChecks[id]={text:text,who:who,done:false,ts:Date.now()};$('I_cnew').value='';$('I_cwho').value='';rChk();banner('추가됐어요 ✓');};
+$('I_ckadd').onclick=function(){var text=$('I_cnew').value.trim();if(!text){banner('항목을 입력해 주세요',true);return;}var who=$('I_cwho').value.trim(),id=uid();gChecks[id]={text:text,who:who,done:false,ts:Date.now()};fbSet('checks/'+id,gChecks[id]);$('I_cnew').value='';$('I_cwho').value='';rChk();banner('추가됐어요 ✓');};
 $('I_cnew').onkeydown=function(e){if((e.keyCode||e.which)===13)$('I_ckadd').onclick();};
-$('I_ckclear').onclick=function(){var ks=keys(gChecks),toDel=[],i;for(i=0;i<ks.length;i++){if(gChecks[ks[i]].done)toDel.push(ks[i]);}if(!toDel.length){banner('완료된 항목이 없어요');return;}for(i=0;i<toDel.length;i++){delete gChecks[toDel[i]];}rChk();banner(toDel.length+'개 삭제됐어요');};
-$('I_cklist').onclick=function(e){var d=findUp(e.target,'data-cdel');if(d){delete gChecks[d.getAttribute('data-cdel')];rChk();}};
-$('I_cklist').onchange=function(e){var t=e.target;if(t&&t.getAttribute('data-cid')){var id=t.getAttribute('data-cid');if(gChecks[id])gChecks[id].done=t.checked;rChk();}};
+$('I_ckclear').onclick=function(){var ks=keys(gChecks),toDel=[],i;for(i=0;i<ks.length;i++){if(gChecks[ks[i]].done)toDel.push(ks[i]);}if(!toDel.length){banner('완료된 항목이 없어요');return;}for(i=0;i<toDel.length;i++){delete gChecks[toDel[i]];fbDel('checks/'+toDel[i]);}rChk();banner(toDel.length+'개 삭제됐어요');};
+$('I_cklist').onclick=function(e){var d=findUp(e.target,'data-cdel');if(d){var cid3=d.getAttribute('data-cdel');delete gChecks[cid3];fbDel('checks/'+cid3);rChk();}};
+$('I_cklist').onchange=function(e){var t=e.target;if(t&&t.getAttribute('data-cid')){var id=t.getAttribute('data-cid');if(gChecks[id]){gChecks[id].done=t.checked;fbSet('checks/'+id+'/done',t.checked);}rChk();}};
 
-// ── INIT ──
-rLeg();
-rCal();
-rWed();
-rCells();
-rWorship();
-rChk();
+// ── INIT (로컬 먼저 렌더) ──
+rLeg(); rCal(); rWed(); rCells(); rWorship(); rChk();
+
+// ── FIREBASE 연동 ──
+function loadFirebase() {
+  var s1 = document.createElement('script');
+  s1.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js';
+  s1.onload = function() {
+    var s2 = document.createElement('script');
+    s2.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js';
+    s2.onload = function() {
+      var s3 = document.createElement('script');
+      s3.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js';
+      s3.onload = initFB;
+      document.head.appendChild(s3);
+    };
+    document.head.appendChild(s2);
+  };
+  document.head.appendChild(s1);
+}
+
+var FB = null, FS = null;
+function initFB() {
+  try {
+    var app = firebase.initializeApp({
+      apiKey:"AIzaSyCYzIoHqTze7xstmkDZvcG-skgDk1hi4pA",
+      authDomain:"youth-calendar-12793.firebaseapp.com",
+      databaseURL:"https://youth-calendar-12793-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId:"youth-calendar-12793",
+      storageBucket:"youth-calendar-12793.appspot.com",
+      messagingSenderId:"286339113904",
+      appId:"1:286339113904:web:b9f8876da982aa47faec75"
+    });
+    FB = firebase.database();
+    FS = firebase.storage();
+    document.querySelector('[data-s="cal"]').parentNode.parentNode.nextElementSibling.textContent = '● Firebase 연결됨';
+    attachListeners();
+  } catch(e) { console.log('FB init error', e); }
+}
+
+function fbSet(path, val) { if(FB) FB.ref(path).set(val); }
+function fbDel(path) { if(FB) FB.ref(path).remove(); }
+
+function toArr(v) {
+  if(!v) return [];
+  if(v instanceof Array) return v;
+  var ks = Object.keys(v).sort(function(a,b){return +a-+b}), r=[];
+  for(var i=0;i<ks.length;i++) r.push(v[ks[i]]);
+  return r;
+}
+
+function attachListeners() {
+  FB.ref('ycal-evts').on('value', function(s){ var v=s.val(); if(!v)return; gEvts={}; var e=ents(v); for(var i=0;i<e.length;i++) gEvts[e[i][0]]=toArr(e[i][1]); if(curSec==='cal'){rCal();if(gSel)rDet(gSel);} });
+  FB.ref('ycal-chk').on('value', function(s){ var v=s.val(); if(v) gChk=v; if(gSel) rDet(gSel); });
+  FB.ref('ycal-labels').on('value', function(s){ var v=s.val(); if(!v)return; var ks=keys(v); for(var i=0;i<ks.length;i++) gLabels[ks[i]]=v[ks[i]]; rLeg(); });
+  FB.ref('weddings').on('value', function(s){ var v=s.val(); if(v){gWed=v;} if(curSec==='wed') rWed(); });
+  FB.ref('cells').on('value', function(s){ var v=s.val(); if(v){gCells=v;} if(curSec==='cells') rCells(); });
+  FB.ref('members').on('value', function(s){ var v=s.val(); if(v){gMems=v;} if(curSec==='cells') rCells(); });
+  FB.ref('worship_orders').on('value', function(s){ var v=s.val(); if(v){gOrd=v;} if(curSec==='worship') rWorship(); });
+  FB.ref('worship_committee').on('value', function(s){ var v=s.val(); if(v){gKom=v;} if(curSec==='worship') rWorship(); });
+  FB.ref('checks').on('value', function(s){ var v=s.val(); if(v){gChecks=v;} else{gChecks={};} if(curSec==='chk') rChk(); });
+  // 초기 데이터 Firebase에 없으면 업로드
+  FB.ref('weddings').once('value', function(s){ if(!s.val()) fbSet('weddings', gWed); });
+  FB.ref('worship_orders').once('value', function(s){ if(!s.val()) fbSet('worship_orders', gOrd); });
+  FB.ref('worship_committee').once('value', function(s){ if(!s.val()) fbSet('worship_committee', gKom); });
+  FB.ref('ycal-evts').once('value', function(s){ if(!s.val()) fbSet('ycal-evts', gEvts); });
+}
+
+loadFirebase();
 
 })();
 </script>
