@@ -165,64 +165,89 @@ textarea.fi{resize:vertical}
   #I_s_cal{max-width:1280px;margin:0 auto;}
 }
 @media (min-width:1100px){
-  /* ===== 예배 영역: PC에서만 간격 살짝 축소 ===== */
-  #I_s_worship{
-    max-width:1280px;
-    margin:0 auto;
-  }
-
-  #I_s_worship .card{
-    padding:.95rem 1rem !important;
-  }
-
-  #I_s_worship .ct-t{
-    margin-bottom:.6rem !important;
-  }
-
-  #I_s_worship th{
-    padding:6px 8px !important;
-    font-size:11px !important;
-  }
-
-  #I_s_worship td{
-    padding:6px 8px !important;
-    font-size:12px !important;
-  }
-
-  #I_s_worship .wr-role{
-    width:78px !important;
-    padding:7px 10px !important;
-    font-size:12px !important;
-  }
-
-  #I_s_worship .wr-val{
-    padding:7px 10px !important;
-    font-size:12px !important;
-  }
-
-  /* ===== 결혼 영역: PC에서만 카드 세로 여백 축소 ===== */
+  /* ===== 공통: PC에서 내용 폭만 살짝 정리 ===== */
+  #I_s_worship,
   #I_s_wed{
     max-width:1280px;
     margin:0 auto;
   }
 
+  /* ===== 예배 영역 ===== */
+  #I_s_worship .row.sb2.mb2{
+    margin-bottom:.55rem !important;
+  }
+
+  #I_s_worship .card{
+    padding:.8rem .9rem !important;
+    border-radius:10px !important;
+  }
+
+  #I_s_worship .card.mb2{
+    margin-bottom:.6rem !important;
+  }
+
+  #I_s_worship .ct-t{
+    font-size:13px !important;
+    margin-bottom:.45rem !important;
+  }
+
+  #I_s_worship table{
+    font-size:12px !important;
+  }
+
+  #I_s_worship th{
+    padding:5px 7px !important;
+    font-size:11px !important;
+  }
+
+  #I_s_worship td{
+    padding:5px 7px !important;
+    font-size:12px !important;
+    line-height:1.35 !important;
+  }
+
+  #I_s_worship .wr-role{
+    width:72px !important;
+    padding:6px 8px !important;
+    font-size:12px !important;
+  }
+
+  #I_s_worship .wr-val{
+    padding:6px 8px !important;
+    font-size:12px !important;
+    line-height:1.35 !important;
+  }
+
+  #I_s_worship .btn.sm,
+  #I_s_worship .btn.xs{
+    padding:4px 8px !important;
+    font-size:11px !important;
+  }
+
+  /* ===== 결혼 영역 ===== */
+  #I_s_wed .row.sb2.mb2{
+    margin-bottom:.55rem !important;
+  }
+
   #I_s_wed > div:nth-child(2){
     margin-bottom:.7rem !important;
+    font-size:13px !important;
   }
 
   #I_wtb > div{
-    padding:.85rem 1rem !important;
-    margin-bottom:.55rem !important;
+    padding:.72rem .9rem !important;
+    margin-bottom:.45rem !important;
     border-radius:10px !important;
   }
 
   #I_wtb > div > div:first-child{
-    margin-bottom:.5rem !important;
+    margin-bottom:.45rem !important;
     gap:6px !important;
   }
 
-  #I_wtb > div > div:first-child span[style*="font-size:16px"]{
+  #I_wtb > div > div:first-child span{
     font-size:15px !important;
+    line-height:1.3 !important;
   }
 
   #I_wtb > div > div:last-child{
@@ -230,16 +255,17 @@ textarea.fi{resize:vertical}
   }
 
   #I_wtb > div > div:last-child > div{
-    padding:5px 0 !important;
+    padding:4px 0 !important;
+    line-height:1.35 !important;
   }
 
   #I_wtb > div > div:last-child > div:nth-child(even){
-    padding-left:10px !important;
+    padding-left:8px !important;
   }
 
   #I_wtb .badge{
     font-size:9px !important;
-    padding:2px 5px !important;
+    padding:1px 5px !important;
   }
 
   #I_wtb button{
