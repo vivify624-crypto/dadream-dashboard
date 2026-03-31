@@ -103,6 +103,10 @@ textarea.fi{resize:vertical}
 .cell-ld{font-size:11px;color:#888;margin-bottom:5px}
 .pills{display:flex;flex-wrap:wrap;gap:3px}
 .pill{font-size:10px;background:#f5f5f3;border-radius:12px;padding:2px 7px;border:0.5px solid rgba(0,0,0,.06)}
+.av{width:34px;height:34px;border-radius:50%;background:#EEEDFE;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;vertical-align:middle}
+.av img{width:100%;height:100%;object-fit:cover}
+.av-lg{width:72px;height:72px;border-radius:50%;background:#EEEDFE;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.av-lg img{width:100%;height:100%;object-fit:cover}
 .mem-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-top:0.5px solid rgba(0,0,0,.06)}
 .mem-name{flex:1;font-size:13px;font-weight:500}
 .mem-tag{font-size:10px;background:#EEEDFE;color:#3C3489;border-radius:3px;padding:1px 5px}
@@ -276,6 +280,14 @@ textarea.fi{resize:vertical}
 
 <div class="ov" id="M_mem" style="padding-top:40px"><div class="mbox">
   <div class="mo-t" id="M_memT">멤버 추가</div>
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+    <div class="av-lg" id="M_mav">👤</div>
+    <div>
+      <input type="file" id="M_mpf" accept="image/*" style="display:none">
+      <button class="btn sm" id="M_mpb" type="button">📷 사진 선택</button>
+      <div id="M_mpd" style="display:none;margin-top:6px"><button class="btn xs dl" id="M_mpdel" type="button">사진 삭제</button></div>
+    </div>
+  </div>
   <div class="fr"><label class="fl">이름 *</label><input class="fi" type="text" id="M_mn"></div>
   <div class="frow">
     <div class="fr"><label class="fl">성별</label><select class="fi" id="M_mg"><option value="M">남</option><option value="F">여</option></select></div>
@@ -333,6 +345,7 @@ var IVLBL = {weekly:'매주',biweekly:'격주',monthly:'매달'};
 var gY = 2026, gM = (TODAY.getFullYear()===2026 ? TODAY.getMonth() : 2);
 var gSel = null, gFC = null, gPend = null, gMoSt = null, gLmoKey = null;
 var eWed = null, eOrd = null, eKom = null, eCid = null, eMid = null;
+var mPhotoFile = null, mPhotoURL = null;
 var curSec = 'cal';
 
 // init data
