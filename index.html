@@ -122,9 +122,9 @@ textarea.fi{resize:vertical}
 /* 예배순서 */
 .wr-role{font-size:13px;font-weight:600;color:#3C3489;padding:9px 12px;border-right:0.5px solid rgba(0,0,0,.06);white-space:nowrap;background:#f9f9ff;width:90px}
 .wr-val{font-size:13px;padding:9px 12px;word-break:break-word;white-space:normal}
-.chi{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:8px;margin-bottom:6px}
-.chi.done .chi-t{text-decoration:line-through;color:#888}
-.chi-t{flex:1;font-size:13px}
+.chi{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:6px;margin-bottom:4px}
+.chi.done .chi-t{text-decoration:line-through;color:#bbb}
+.chi-t{flex:1;font-size:12px}
 .scbox{background:#fff;border-radius:14px;padding:1.5rem;max-width:340px;width:100%;margin:0 auto}
 .scbtn{padding:10px 14px;border-radius:8px;font-size:13px;cursor:pointer;border:0.5px solid rgba(0,0,0,.12);background:#fff;text-align:left;font-family:inherit;width:100%;margin-bottom:6px;display:block}
 .scbtn.r{border-color:#F09595;color:#A32D2D}
@@ -144,6 +144,7 @@ textarea.fi{resize:vertical}
   .ct{padding:.75rem .875rem 80px}.g3{grid-template-columns:1fr 1fr}
   .topbar{padding:.75rem 1rem}.mbox.wide{max-width:100%}
   .frow{flex-direction:column;gap:0}
+  .cgc{min-height:52px}
 }
 @media (min-width:1100px){
   #I_s_cal,
@@ -239,10 +240,10 @@ textarea.fi{resize:vertical}
         <div class="ct-t"><span>✼ 예배순서</span><button class="btn sm" id="I_oedit">수정</button></div>
         <div class="tw"><table style="width:100%"><tbody id="I_otb"></tbody></table></div>
       </div>
-      <!-- 예배위원: 기존 full-width 유지 -->
-      <div class="card">
+      <!-- 예배위원 -->
+      <div class="card" style="max-width:480px">
         <div class="ct-t"><span>✼ 예배위원</span></div>
-        <div class="tw"><table><thead><tr><th>날짜</th><th>기도인도</th><th>대표기도</th><th>헌금위원</th><th>주차위원</th><th>청소담당</th><th>폰타나</th><th></th></tr></thead><tbody id="I_ktb"></tbody></table></div>
+        <div class="tw"><table style="width:100%"><tbody id="I_ktb"></tbody></table></div>
       </div>
     </div>
     <!-- 체크리스트 -->
@@ -716,27 +717,27 @@ function rWed(){
     if(ddStr&&!isPast)h+='<span class="badge">'+ddStr+'</span>';
     h+='<span style="font-size:15px;font-weight:700">'+esc(w.groom||'')+' 💍 '+esc(w.bride||'')+'</span>';
     h+='</div><button class="btn xs" data-wed="'+id+'">수정</button></div>';
-    /* 날짜·시간·장소 한 줄 */
+    /* 날짜·시간·장소 */
     var dateStr=(w.date||'')+(dow2?' ('+dow2+')':'');
-    h+='<div style="font-size:13px;color:#333;margin-bottom:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 14px">';
+    h+='<div style="font-size:13px;color:#1a1a1a;margin-bottom:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 14px">';
     if(dateStr)h+='<span><strong>'+esc(dateStr)+'</strong>'+(w.time?' &nbsp;'+esc(w.time):'')+'</span>';
-    if(w.venue&&w.venue!=='-')h+='<span style="color:#666">📍 '+esc(w.venue)+'</span>';
+    if(w.venue&&w.venue!=='-')h+='<span style="color:#1a1a1a">📍 '+esc(w.venue)+'</span>';
     h+='</div>';
-    /* 사회·기도·주례 한 줄 */
+    /* 사회·기도·주례 */
     var roles=[];
     if(w.mc&&w.mc!=='-')roles.push('사회: '+w.mc);
     if(w.prayer&&w.prayer!=='-')roles.push('기도: '+w.prayer);
     if(w.officiant&&w.officiant!=='-')roles.push('주례: '+w.officiant);
     if(roles.length){
-      h+='<div style="font-size:12px;color:#777;display:flex;flex-wrap:wrap;gap:2px 0">';
+      h+='<div style="font-size:13px;color:#1a1a1a;display:flex;flex-wrap:wrap;gap:2px 0">';
       for(var ri=0;ri<roles.length;ri++){
-        if(ri>0)h+='<span style="color:#ddd;margin:0 7px">|</span>';
+        if(ri>0)h+='<span style="color:#bbb;margin:0 8px">|</span>';
         h+=esc(roles[ri]);
       }
       h+='</div>';
     }
-    if(w.extra&&w.extra!=='-')h+='<div style="font-size:12px;color:#888;margin-top:4px">'+esc(w.extra)+'</div>';
-    if(w.note)h+='<div style="font-size:11px;color:#aaa;margin-top:5px;padding-top:5px;border-top:0.5px solid rgba(0,0,0,.06)">'+esc(w.note)+'</div>';
+    if(w.extra&&w.extra!=='-')h+='<div style="font-size:13px;color:#1a1a1a;margin-top:4px">'+esc(w.extra)+'</div>';
+    if(w.note)h+='<div style="font-size:12px;color:#555;margin-top:5px;padding-top:5px;border-top:0.5px solid rgba(0,0,0,.06)">'+esc(w.note)+'</div>';
     h+='</div>';
   }
   $('I_wtb').innerHTML=h||'<p class="hint">결혼 정보가 없어요</p>';
@@ -893,9 +894,27 @@ function rWorship(){
   var roles=[['예배전기도',order.pre||''],['찬양',order.praise||''],['대표기도',order.repray||''],['말씀',order.sermon||''],['결단',order.decision||'다 같이'],['헌금',order.offering||''],['축도',order.bene||'']];
   var oh='';for(var i=0;i<roles.length;i++)oh+='<tr><td class="wr-role">'+roles[i][0]+'</td><td class="wr-val">'+esc(roles[i][1])+'</td></tr>';
   $('I_otb').innerHTML=oh;
+  var KOMROLES=['기도인도','대표기도','헌금위원','주차위원','청소담당','폰타나'];
   var kh='';
-  if(!kList.length){kh='<tr><td colspan="8" style="text-align:center;padding:1.5rem;color:#888">예배위원 데이터가 없어요</td></tr>';}
-  else{for(var i=0;i<kList.length;i++){var id2=kList[i][0],k=kList[i][1];kh+='<tr><td style="font-weight:500;white-space:nowrap">'+fmtD(k.date)+'</td><td>'+esc(k['기도인도']||'')+'</td><td>'+esc(k['대표기도']||'')+'</td><td>'+esc(k['헌금위원']||'')+'</td><td>'+esc(k['주차위원']||'')+'</td><td>'+esc(k['청소담당']||'')+'</td><td>'+esc(k['폰타나']||'')+'</td><td><button class="btn xs" data-kom="'+id2+'">수정</button></td></tr>';}}
+  if(!kList.length){
+    kh='<tr><td class="wr-role">날짜</td><td class="wr-val" style="color:#888">데이터 없음</td></tr>';
+  } else {
+    // 날짜 행 (헤더 역할) + 수정 버튼
+    kh+='<tr><td class="wr-role">날짜</td>';
+    for(var i=0;i<kList.length;i++){
+      var id2=kList[i][0],k=kList[i][1];
+      kh+='<td class="wr-val"><div style="display:flex;align-items:center;gap:6px"><span style="font-weight:600">'+fmtD(k.date)+'</span><button class="btn xs" data-kom="'+id2+'">수정</button></div></td>';
+    }
+    kh+='</tr>';
+    // 역할별 행
+    for(var ri=0;ri<KOMROLES.length;ri++){
+      kh+='<tr><td class="wr-role">'+KOMROLES[ri]+'</td>';
+      for(var i=0;i<kList.length;i++){
+        kh+='<td class="wr-val">'+esc(kList[i][1][KOMROLES[ri]]||'')+'</td>';
+      }
+      kh+='</tr>';
+    }
+  }
   $('I_ktb').innerHTML=kh;
 }
 function openOrd(id){eOrd=id||null;var o=id?gOrd[id]:{};$('M_ordT').textContent=id?'예배순서 수정':'예배순서 추가';$('M_od').value=o.date||'';$('M_op').value=o.pre||'';$('M_opr').value=o.praise||'';$('M_orp').value=o.repray||'';$('M_os').value=o.sermon||'';$('M_ode').value=o.decision||'다 같이';$('M_of').value=o.offering||'';$('M_ob').value=o.bene||'';$('M_odel').style.display=id?'':'none';showMo('M_ord');}
