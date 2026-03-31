@@ -75,10 +75,10 @@ textarea.fi{resize:vertical}
 .ec.c{background:#FAECE7;color:#993C1D}.ec.a{background:#FAEEDA;color:#854F0B}
 .ec.b{background:#E6F1FB;color:#185FA5}.ec.k{background:#FBEAF0;color:#993556}
 .ec.g{background:#F1EFE8;color:#5F5E5A}
-.cdet{margin-top:.75rem;background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;padding:1rem}
+.cdet{margin-top:.75rem;background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;padding:1rem;overflow-x:hidden;word-break:break-word}
 .evb{margin-bottom:12px;padding-bottom:12px;border-bottom:0.5px solid rgba(0,0,0,.06)}
 .evb:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.memobox{border-radius:8px;padding:8px 12px;font-size:13px;line-height:1.7;white-space:pre-wrap;margin-bottom:6px}
+.memobox{border-radius:8px;padding:8px 12px;font-size:13px;line-height:1.7;white-space:pre-wrap;margin-bottom:6px;word-break:break-word;overflow-wrap:break-word;max-width:100%;overflow-x:hidden}
 .memobox.g{background:#E1F5EE}.memobox.b{background:#E6F1FB}.memobox.n{background:#f5f5f3}
 .memolbl{font-size:11px;font-weight:500;margin-bottom:4px}
 .memolbl.g{color:#0F6E56}.memolbl.b{color:#185FA5}.memolbl.n{color:#888}
@@ -111,6 +111,12 @@ textarea.fi{resize:vertical}
 .mem-name{flex:1;font-size:13px;font-weight:500}
 .mem-tag{font-size:10px;background:#EEEDFE;color:#3C3489;border-radius:3px;padding:1px 5px}
 .mem-tag.leader{background:#FAEEDA;color:#854F0B}
+.mtag{display:inline-block;font-size:10px;border-radius:10px;padding:1px 7px;font-weight:500;margin-right:3px}
+.mtag.care{background:#FCEBEB;color:#A32D2D}
+.mtag.new{background:#E1F5EE;color:#0F6E56}
+.mtag.faith{background:#E6F1FB;color:#185FA5}
+.mtag.lead{background:#EEEDFE;color:#3C3489}
+.mtag.etc{background:#f5f5f3;color:#555}
 .wr-role{font-size:13px;font-weight:600;color:#3C3489;padding:9px 12px;border-right:0.5px solid rgba(0,0,0,.06);white-space:nowrap;background:#f9f9ff;width:90px}
 .wr-val{font-size:13px;padding:9px 12px}
 .chi{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:8px;margin-bottom:6px}
@@ -257,6 +263,7 @@ textarea.fi{resize:vertical}
   <div class="fr"><label class="fl">장소</label><input class="fi" type="text" id="M_wv"></div>
   <div class="frow"><div class="fr"><label class="fl">사회</label><input class="fi" type="text" id="M_wmc"></div><div class="fr"><label class="fl">기도</label><input class="fi" type="text" id="M_wpr"></div></div>
   <div class="fr"><label class="fl">주례</label><input class="fi" type="text" id="M_wof"></div>
+  <div class="fr"><label class="fl">기타</label><input class="fi" type="text" id="M_wex" placeholder="예: 교회에서 진행, 피로연 있음 등"></div>
   <div class="fr"><label class="fl">비고</label><textarea class="fi" id="M_wno" rows="2"></textarea></div>
   <div class="mo-f"><button class="btn dl" id="M_wdel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="M_wX">취소</button><button class="btn pr" id="M_wS">저장</button></div>
 </div></div>
@@ -281,11 +288,14 @@ textarea.fi{resize:vertical}
 <div class="ov" id="M_mem" style="padding-top:40px"><div class="mbox">
   <div class="mo-t" id="M_memT">멤버 추가</div>
   <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
-    <div class="av-lg" id="M_mav">👤</div>
+    <label for="M_mpf" style="cursor:pointer">
+      <div class="av-lg" id="M_mav">👤</div>
+    </label>
     <div>
-      <input type="file" id="M_mpf" accept="image/*" style="display:none">
-      <button class="btn sm" id="M_mpb" type="button">📷 사진 선택</button>
+      <label for="M_mpf" class="btn sm" style="cursor:pointer;display:inline-block">📷 사진 선택</label>
+      <input type="file" id="M_mpf" accept="image/*" style="position:absolute;width:1px;height:1px;opacity:0">
       <div id="M_mpd" style="display:none;margin-top:6px"><button class="btn xs dl" id="M_mpdel" type="button">사진 삭제</button></div>
+      <div style="font-size:11px;color:#888;margin-top:4px">아바타 또는 버튼 탭</div>
     </div>
   </div>
   <div class="fr"><label class="fl">이름 *</label><input class="fi" type="text" id="M_mn"></div>
@@ -295,6 +305,16 @@ textarea.fi{resize:vertical}
   </div>
   <div class="fr"><label class="fl">연락처</label><input class="fi" type="tel" id="M_mp" placeholder="010-0000-0000"></div>
   <div class="fr"><label class="fl">역할</label><select class="fi" id="M_mr"><option value="셀리더">셀리더</option><option value="부리더">부리더</option><option value="멤버" selected>멤버</option></select></div>
+  <div class="fr">
+    <label class="fl">태그 (복수 선택 가능)</label>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px" id="M_mtags">
+      <label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px"><input type="checkbox" value="care"> <span class="mtag care">케어인원</span></label>
+      <label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px"><input type="checkbox" value="new"> <span class="mtag new">새내기</span></label>
+      <label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px"><input type="checkbox" value="faith"> <span class="mtag faith">새신자</span></label>
+      <label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px"><input type="checkbox" value="lead"> <span class="mtag lead">리더준비</span></label>
+      <label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px"><input type="checkbox" value="etc"> <span class="mtag etc">기타</span></label>
+    </div>
+  </div>
   <div class="mo-f"><button class="btn dl" id="M_mdel" style="display:none;margin-right:auto">삭제</button><button class="btn" id="M_mX">취소</button><button class="btn pr" id="M_mS">저장</button></div>
 </div></div>
 
@@ -731,19 +751,20 @@ function rWed(){
       +'<div style="grid-column:1/-1;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,.07)"><span style="color:#888;font-size:11px">장소</span><div style="font-weight:500;margin-top:2px">'+esc(w.venue||'-')+'</div></div>'
       +'<div style="padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,.07)"><span style="color:#888;font-size:11px">사회</span><div style="margin-top:2px">'+esc(w.mc||'-')+'</div></div>'
       +'<div style="padding:8px 0 8px 12px;border-bottom:0.5px solid rgba(0,0,0,.07)"><span style="color:#888;font-size:11px">기도</span><div style="margin-top:2px">'+esc(w.prayer||'-')+'</div></div>'
-      +'<div style="grid-column:1/-1;padding:8px 0'+(w.note?';border-bottom:0.5px solid rgba(0,0,0,.07)':'')+'"><span style="color:#888;font-size:11px">주례</span><div style="margin-top:2px">'+esc(w.officiant||'-')+'</div></div>'
+      +'<div style="grid-column:1/-1;padding:8px 0'+(w.extra||w.note?';border-bottom:0.5px solid rgba(0,0,0,.07)':'')+'"><span style="color:#888;font-size:11px">주례</span><div style="margin-top:2px">'+esc(w.officiant||'-')+'</div></div>'
+      +(w.extra?'<div style="grid-column:1/-1;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,.07)"><span style="color:#888;font-size:11px">기타</span><div style="margin-top:2px">'+esc(w.extra)+'</div></div>':'')
       +(w.note?'<div style="grid-column:1/-1;padding:8px 0"><span style="color:#888;font-size:11px">비고</span><div style="font-size:12px;color:#555;margin-top:2px">'+esc(w.note)+'</div></div>':'')
       +'</div>'
       +'</div>';
   }
   $('I_wtb').innerHTML=h||'<p class="hint">결혼 정보가 없어요</p>';
 }
-function openWed(id){eWed=id||null;var w=id?gWed[id]:{};$('M_wedT').textContent=id?'결혼 수정':'결혼 추가';$('M_wg').value=w.groom||'';$('M_wb').value=w.bride||'';$('M_wd').value=w.date||'';$('M_wt').value=w.time||'';$('M_wv').value=w.venue||'';$('M_wmc').value=w.mc||'';$('M_wpr').value=w.prayer||'';$('M_wof').value=w.officiant||'';$('M_wno').value=w.note||'';$('M_wdel').style.display=id?'':'none';showM('M_wed');}
+function openWed(id){eWed=id||null;var w=id?gWed[id]:{};$('M_wedT').textContent=id?'결혼 수정':'결혼 추가';$('M_wg').value=w.groom||'';$('M_wb').value=w.bride||'';$('M_wd').value=w.date||'';$('M_wt').value=w.time||'';$('M_wv').value=w.venue||'';$('M_wmc').value=w.mc||'';$('M_wpr').value=w.prayer||'';$('M_wof').value=w.officiant||'';$('M_wex').value=w.extra||'';$('M_wno').value=w.note||'';$('M_wdel').style.display=id?'':'none';showM('M_wed');}
 $('I_wadd').onclick=function(){openWed(null);};
 $('I_s_wed').onclick=function(e){var b=findUp(e.target,'data-wed');if(b)openWed(b.getAttribute('data-wed'));};
 $('M_wX').onclick=function(){hideM('M_wed');};
 $('M_wdel').onclick=function(){if(!eWed)return;cfm('이 결혼 정보를 삭제할까요?',function(){delete gWed[eWed];fbDel('weddings/'+eWed);hideM('M_wed');rWed();banner('삭제됐어요');});};
-$('M_wS').onclick=function(){var g=$('M_wg').value.trim(),b=$('M_wb').value.trim();if(!g||!b){banner('신랑, 신부 이름을 입력해 주세요',true);return;}var id=eWed||uid();gWed[id]={groom:g,bride:b,date:$('M_wd').value,time:$('M_wt').value.trim(),venue:$('M_wv').value.trim(),mc:$('M_wmc').value.trim()||'-',prayer:$('M_wpr').value.trim()||'-',officiant:$('M_wof').value.trim(),note:$('M_wno').value.trim()};fbSet('weddings/'+id,gWed[id]);hideM('M_wed');rWed();banner('저장됐어요 ✓');};
+$('M_wS').onclick=function(){var g=$('M_wg').value.trim(),b=$('M_wb').value.trim();if(!g||!b){banner('신랑, 신부 이름을 입력해 주세요',true);return;}var id=eWed||uid();gWed[id]={groom:g,bride:b,date:$('M_wd').value,time:$('M_wt').value.trim(),venue:$('M_wv').value.trim(),mc:$('M_wmc').value.trim()||'-',prayer:$('M_wpr').value.trim()||'-',officiant:$('M_wof').value.trim(),extra:$('M_wex').value.trim(),note:$('M_wno').value.trim()};fbSet('weddings/'+id,gWed[id]);hideM('M_wed');rWed();banner('저장됐어요 ✓');};
 
 // ── CELLS ──
 function rCells(){
@@ -832,14 +853,15 @@ rLeg(); rCal(); rWed(); rCells(); rWorship(); rChk();
 // ── FIREBASE 연동 ──
 function loadFirebase() {
   var s1 = document.createElement('script');
-  s1.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js';
+  s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.0/firebase-app-compat.min.js';
   s1.onload = function() {
     var s2 = document.createElement('script');
-    s2.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js';
+    s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.0/firebase-database-compat.min.js';
     s2.onload = function() {
       var s3 = document.createElement('script');
-      s3.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js';
+      s3.src = 'https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.0/firebase-storage-compat.min.js';
       s3.onload = initFB;
+      s3.onerror = function(){ initFBnoStorage(); };
       document.head.appendChild(s3);
     };
     document.head.appendChild(s2);
@@ -893,13 +915,15 @@ function attachListeners() {
     if(curSec==='wed') rWed();
     FB.ref('weddings').on('value', function(s2){ var v=s2.val(); if(!v)return; gWed=v; if(curSec==='wed') rWed(); });
   });
+  // 셀/멤버 초기 데이터 Firebase에 없으면 업로드 (이게 없으면 셀 추가 시 기존 데이터 날아감)
   FB.ref('cells').once('value', function(s){
-    if(s.val()) gCells=s.val();
+    if(s.val()) { gCells=s.val(); if(curSec==='cells') rCells(); }
+    else { fbSet('cells', gCells); }
     FB.ref('cells').on('value', function(s2){ var v=s2.val(); if(!v)return; gCells=v; if(curSec==='cells') rCells(); });
   });
   FB.ref('members').once('value', function(s){
-    if(s.val()) gMems=s.val();
-    if(curSec==='cells') rCells();
+    if(s.val()) { gMems=s.val(); if(curSec==='cells') rCells(); }
+    else { fbSet('members', gMems); }
     FB.ref('members').on('value', function(s2){ var v=s2.val(); if(!v)return; gMems=v; if(curSec==='cells') rCells(); });
   });
   FB.ref('worship_orders').once('value', function(s){
