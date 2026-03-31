@@ -712,14 +712,14 @@ function rWed(){
       +'</div>'
       +'<button class="btn xs" data-wed="'+id+'">수정</button>'
       +'</div>'
-      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:13px">'
-      +'<div><span style="color:#888;font-size:11px">날짜</span><div style="font-weight:500">'+(w.date||'')+(dow2?' ('+dow2+')':'')+'</div></div>'
-      +'<div><span style="color:#888;font-size:11px">시간</span><div style="font-weight:500">'+(w.time||'-')+'</div></div>'
-      +'<div style="grid-column:1/-1"><span style="color:#888;font-size:11px">장소</span><div style="font-weight:500">'+esc(w.venue||'-')+'</div></div>'
-      +'<div><span style="color:#888;font-size:11px">사회</span><div>'+esc(w.mc||'-')+'</div></div>'
-      +'<div><span style="color:#888;font-size:11px">기도</span><div>'+esc(w.prayer||'-')+'</div></div>'
-      +'<div style="grid-column:1/-1"><span style="color:#888;font-size:11px">주례</span><div>'+esc(w.officiant||'-')+'</div></div>'
-      +(w.note?'<div style="grid-column:1/-1"><span style="color:#888;font-size:11px">비고</span><div style="font-size:12px;color:#555">'+esc(w.note)+'</div></div>':'')
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:13px">'
+      +'<div style="padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,.07)"><span style="color:#888;font-size:11px">날짜</span><div style="font-weight:500;margin-top:2px">'+(w.date||'')+(dow2?' ('+dow2+')':'')+'</div></div>'
+      +'<div style="padding:8px 0 8px 12px;border-bottom:0.5px solid rgba(0,0,0,.07)"><span style="color:#888;font-size:11px">시간</span><div style="font-weight:500;margin-top:2px">'+(w.time||'-')+'</div></div>'
+      +'<div style="grid-column:1/-1;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,.07)"><span style="color:#888;font-size:11px">장소</span><div style="font-weight:500;margin-top:2px">'+esc(w.venue||'-')+'</div></div>'
+      +'<div style="padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,.07)"><span style="color:#888;font-size:11px">사회</span><div style="margin-top:2px">'+esc(w.mc||'-')+'</div></div>'
+      +'<div style="padding:8px 0 8px 12px;border-bottom:0.5px solid rgba(0,0,0,.07)"><span style="color:#888;font-size:11px">기도</span><div style="margin-top:2px">'+esc(w.prayer||'-')+'</div></div>'
+      +'<div style="grid-column:1/-1;padding:8px 0'+(w.note?';border-bottom:0.5px solid rgba(0,0,0,.07)':'')+'"><span style="color:#888;font-size:11px">주례</span><div style="margin-top:2px">'+esc(w.officiant||'-')+'</div></div>'
+      +(w.note?'<div style="grid-column:1/-1;padding:8px 0"><span style="color:#888;font-size:11px">비고</span><div style="font-size:12px;color:#555;margin-top:2px">'+esc(w.note)+'</div></div>':'')
       +'</div>'
       +'</div>';
   }
@@ -744,7 +744,7 @@ function rCells(){
     var ld=c.leaderId?gMems[c.leaderId]:null;
     if(sq){var found=false;for(j=0;j<mems.length;j++){if((mems[j].name||'').toLowerCase().indexOf(sq)>=0){found=true;break;}}if(!found&&!(ld&&(ld.name||'').toLowerCase().indexOf(sq)>=0))continue;}
     var shown=sq?[]:mems;if(sq){for(j=0;j<mems.length;j++){if((mems[j].name||'').toLowerCase().indexOf(sq)>=0)shown.push(mems[j]);}}
-    var pills='';for(j=0;j<Math.min(shown.length,6);j++)pills+='<span class="pill">'+esc(shown[j].name)+'</span>';if(mems.length>6)pills+='<span class="pill" style="color:#888">+'+(mems.length-6)+'</span>';
+    var pills='';for(j=0;j<shown.length;j++)pills+='<span class="pill">'+esc(shown[j].name)+'</span>';
     h+='<div class="cell-card" data-cellid="'+cid+'"><div class="cell-nm">'+esc(c.name)+' <span style="font-size:11px;font-weight:400;color:#888">'+mems.length+'명</span></div><div class="cell-ld">👤 '+esc(ld?ld.name:'미지정')+'</div><div class="pills">'+pills+'</div></div>';
   }
   $('I_cgrid').innerHTML=h;
