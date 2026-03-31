@@ -145,7 +145,7 @@ textarea.fi{resize:vertical}
     <div class="sni" data-s="worship">🙏 이번 주 예배</div>
     <div class="sni" data-s="chk">✅ 체크리스트</div>
   </nav>
-  <div style="padding:.75rem 1rem;border-top:0.5px solid rgba(0,0,0,.06);font-size:11px;color:#888">● 로컬 저장</div>
+  <div id="I_fbst" style="padding:.75rem 1rem;border-top:0.5px solid rgba(0,0,0,.06);font-size:11px;color:#888">● 로컬 저장</div>
 </div>
 <div class="main">
   <div class="topbar"><span class="tb-t" id="I_tbt">일정 캘린더</span></div>
@@ -848,7 +848,7 @@ function initFB() {
     });
     FB = firebase.database();
     FS = firebase.storage();
-    document.querySelector('[data-s="cal"]').parentNode.parentNode.nextElementSibling.textContent = '● Firebase 연결됨';
+    var fbst = $('I_fbst'); if(fbst) fbst.textContent = '● Firebase 연결됨';
     attachListeners();
   } catch(e) { console.log('FB init error', e); }
 }
@@ -865,20 +865,41 @@ function toArr(v) {
 }
 
 function attachListeners() {
-  FB.ref('ycal-evts').on('value', function(s){ var v=s.val(); if(!v)return; gEvts={}; var e=ents(v); for(var i=0;i<e.length;i++) gEvts[e[i][0]]=toArr(e[i][1]); if(curSec==='cal'){rCal();if(gSel)rDet(gSel);} });
+  // 초기 데이터 없으면 업로드, 있으면 그걸로 덮어쓰기
+  FB.ref('ycal-evts').once('value', function(s){
+    if(s.val()){ var v=s.val(); gEvts={}; var e=ents(v); for(var i=0;i<e.length;i++) gEvts[e[i][0]]=toArr(e[i][1]); }
+    else fbSet('ycal-evts', gEvts);
+    if(curSec==='cal'){rCal();if(gSel)rDet(gSel);}
+    // 이후 실시간 동기화
+    FB.ref('ycal-evts').on('value', function(s2){ var v=s2.val(); if(!v)return; gEvts={}; var e=ents(v); for(var i=0;i<e.length;i++) gEvts[e[i][0]]=toArr(e[i][1]); if(curSec==='cal'){rCal();if(gSel)rDet(gSel);} });
+  });
   FB.ref('ycal-chk').on('value', function(s){ var v=s.val(); if(v) gChk=v; if(gSel) rDet(gSel); });
   FB.ref('ycal-labels').on('value', function(s){ var v=s.val(); if(!v)return; var ks=keys(v); for(var i=0;i<ks.length;i++) gLabels[ks[i]]=v[ks[i]]; rLeg(); });
-  FB.ref('weddings').on('value', function(s){ var v=s.val(); if(v){gWed=v;} if(curSec==='wed') rWed(); });
-  FB.ref('cells').on('value', function(s){ var v=s.val(); if(v){gCells=v;} if(curSec==='cells') rCells(); });
-  FB.ref('members').on('value', function(s){ var v=s.val(); if(v){gMems=v;} if(curSec==='cells') rCells(); });
-  FB.ref('worship_orders').on('value', function(s){ var v=s.val(); if(v){gOrd=v;} if(curSec==='worship') rWorship(); });
-  FB.ref('worship_committee').on('value', function(s){ var v=s.val(); if(v){gKom=v;} if(curSec==='worship') rWorship(); });
-  FB.ref('checks').on('value', function(s){ var v=s.val(); if(v){gChecks=v;} else{gChecks={};} if(curSec==='chk') rChk(); });
-  // 초기 데이터 Firebase에 없으면 업로드
-  FB.ref('weddings').once('value', function(s){ if(!s.val()) fbSet('weddings', gWed); });
-  FB.ref('worship_orders').once('value', function(s){ if(!s.val()) fbSet('worship_orders', gOrd); });
-  FB.ref('worship_committee').once('value', function(s){ if(!s.val()) fbSet('worship_committee', gKom); });
-  FB.ref('ycal-evts').once('value', function(s){ if(!s.val()) fbSet('ycal-evts', gEvts); });
+  FB.ref('weddings').once('value', function(s){
+    if(s.val()) gWed=s.val(); else fbSet('weddings', gWed);
+    if(curSec==='wed') rWed();
+    FB.ref('weddings').on('value', function(s2){ var v=s2.val(); if(!v)return; gWed=v; if(curSec==='wed') rWed(); });
+  });
+  FB.ref('cells').once('value', function(s){
+    if(s.val()) gCells=s.val();
+    FB.ref('cells').on('value', function(s2){ var v=s2.val(); if(!v)return; gCells=v; if(curSec==='cells') rCells(); });
+  });
+  FB.ref('members').once('value', function(s){
+    if(s.val()) gMems=s.val();
+    if(curSec==='cells') rCells();
+    FB.ref('members').on('value', function(s2){ var v=s2.val(); if(!v)return; gMems=v; if(curSec==='cells') rCells(); });
+  });
+  FB.ref('worship_orders').once('value', function(s){
+    if(s.val()) gOrd=s.val(); else fbSet('worship_orders', gOrd);
+    if(curSec==='worship') rWorship();
+    FB.ref('worship_orders').on('value', function(s2){ var v=s2.val(); if(!v)return; gOrd=v; if(curSec==='worship') rWorship(); });
+  });
+  FB.ref('worship_committee').once('value', function(s){
+    if(s.val()) gKom=s.val(); else fbSet('worship_committee', gKom);
+    if(curSec==='worship') rWorship();
+    FB.ref('worship_committee').on('value', function(s2){ var v=s2.val(); if(!v)return; gKom=v; if(curSec==='worship') rWorship(); });
+  });
+  FB.ref('checks').on('value', function(s){ var v=s.val(); if(v) gChecks=v; if(curSec==='chk') rChk(); });
 }
 
 loadFirebase();
