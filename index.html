@@ -900,14 +900,14 @@ function rWorship(){
     kh+='<tr><td class="wr-role">날짜</td>';
     for(var i=0;i<kList.length;i++){
       var id2=kList[i][0],k=kList[i][1];
-      kh+='<td class="wr-val"><div style="display:flex;align-items:center;gap:6px"><span style="font-weight:600">'+fmtD(k.date)+'</span><button class="btn xs" data-kom="'+id2+'">수정</button></div></td>';
+      kh+='<td class="wr-val" style="position:relative;text-align:center"><span style="font-weight:600">'+fmtD(k.date)+'</span><button class="btn xs" data-kom="'+id2+'" style="position:absolute;left:50%;margin-left:32px;top:50%;transform:translateY(-50%)">수정</button></td>';
     }
     kh+='</tr>';
     // 역할별 행
-    for(var ri=0;ri<KOMROLES.length;ri++){
+          for(var ri=0;ri<KOMROLES.length;ri++){
       kh+='<tr><td class="wr-role">'+KOMROLES[ri]+'</td>';
       for(var i=0;i<kList.length;i++){
-        kh+='<td class="wr-val">'+esc(kList[i][1][KOMROLES[ri]]||'')+'</td>';
+        kh+='<td class="wr-val" style="text-align:center">'+esc(kList[i][1][KOMROLES[ri]]||'')+'</td>';
       }
       kh+='</tr>';
     }
