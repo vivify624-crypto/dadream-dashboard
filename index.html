@@ -71,7 +71,10 @@ textarea.fi{resize:vertical}
 .cgc.td .cgn{font-size:11px;font-weight:500;width:20px;height:20px;display:flex;align-items:center;justify-content:center;margin-bottom:1px}
 .cgn{font-size:11px;font-weight:500;width:20px;height:20px;display:flex;align-items:center;justify-content:center;margin-bottom:2px}
 .cgn.gs{color:#B85030}.cgn.ga{color:#185FA5}.cgn.om{color:#bbb}
-.ec{font-size:9px;border-radius:3px;padding:1px 4px;margin-bottom:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;display:block;line-height:1.25}
+.ec{font-size:9px;border-radius:3px;padding:1px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;display:block;line-height:1.25}
+.ec-wrap{display:flex;align-items:center;gap:4px;margin-bottom:1px;min-width:0}
+.ec-wrap .ec{margin-bottom:0;min-width:0;flex:1}
+.ec-lbl{font-size:10px;line-height:1;color:rgba(60,52,137,.58);font-weight:400;letter-spacing:-.01em;white-space:nowrap;flex-shrink:0}
 .ec.p{background:#EEEDFE;color:#3C3489}.ec.t{background:#E1F5EE;color:#0F6E56}
 .ec.c{background:#FAECE7;color:#993C1D}.ec.a{background:#FAEEDA;color:#854F0B}
 .ec.b{background:#E6F1FB;color:#185FA5}.ec.k{background:#FBEAF0;color:#993556}
@@ -96,8 +99,13 @@ textarea.fi{resize:vertical}
 .brkbox{background:#FCEBEB;border-radius:8px;padding:8px 12px;border:0.5px solid #F09595;margin-top:7px}
 .divr{border:none;border-top:0.5px solid rgba(0,0,0,.06);margin:8px 0}
 .copt{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.csw-item{display:inline-flex;align-items:center;gap:7px;padding:4px 8px;border-radius:999px;background:#fff;border:0.5px solid rgba(0,0,0,.08);cursor:pointer}
+.csw-item:hover{background:#fafafe}
 .csw{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;flex-shrink:0}
 .csw.sel{border-color:#222}
+.csw-txt{font-size:11px;line-height:1;color:rgba(26,26,26,.58);font-weight:400;white-space:nowrap}
+.csw-item:focus{outline:none}
+.csw-item .csw.sel + .csw-txt{color:rgba(26,26,26,.78)}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
 .cell-card{background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:10px;padding:.875rem;cursor:pointer}
 .cell-nm{font-size:13px;font-weight:600;color:#3C3489;margin-bottom:3px}
@@ -349,6 +357,7 @@ textarea.fi{resize:vertical}
   </div>
   <div class="fr"><label class="fl">연락처</label><input class="fi" type="tel" id="M_mp" placeholder="010-0000-0000"></div>
   <div class="fr"><label class="fl">역할</label><select class="fi" id="M_mr"><option value="셀리더">셀리더</option><option value="부리더">부리더</option><option value="멤버" selected>멤버</option></select></div>
+  <div class="fr"><label class="fl">메모/특이사항</label><textarea class="fi" id="M_mnote" rows="3" placeholder="건강, 케어 포인트, 참고사항 등을 적어 주세요"></textarea></div>
   <div class="fr">
     <label class="fl">태그</label>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px" id="M_mtags">
@@ -419,6 +428,7 @@ function banner(msg,err){
 }
 function showMo(id){ var e=$(id); if(e){e.classList.add('show');e.scrollTop=0;} }
 function hideMo(id){ var e=$(id); if(e)e.classList.remove('show'); }
+function calLabel(c){ return gLabels[c]||DLBL[c]||'기타'; }
 var cfmCb=null;
 function cfm(msg,cb){ $('M_cfmT').textContent=msg; cfmCb=cb; showMo('M_cfm'); }
 $('M_cfmY').onclick=function(){hideMo('M_cfm');if(cfmCb)cfmCb();};
@@ -507,7 +517,8 @@ function navTo(id){
 }
 (function(){var ns=document.querySelectorAll('.sni,.mni');for(var i=0;i<ns.length;i++){(function(el){el.onclick=function(){navTo(el.getAttribute('data-s'));};})(ns[i]);}})();
 /* COLOR PICKER */
-(function(){var opt=$('M_copt');for(var i=0;i<CK.length;i++){(function(k){var d=document.createElement('div');d.className='csw';d.style.background=CBG[k];d.setAttribute('data-c',k);d.onclick=function(){var sw=document.querySelectorAll('#M_copt .csw');for(var j=0;j<sw.length;j++)sw[j].classList.remove('sel');d.classList.add('sel');};opt.appendChild(d);})(CK[i]);}})();
+(function(){var opt=$('M_copt');for(var i=0;i<CK.length;i++){(function(k){var item=document.createElement('button');item.type='button';item.className='csw-item';item.setAttribute('data-c',k);var d=document.createElement('div');d.className='csw';d.style.background=CBG[k];d.setAttribute('data-c',k);var t=document.createElement('span');t.className='csw-txt';t.textContent=calLabel(k);item.appendChild(d);item.appendChild(t);item.onclick=function(){var sw=document.querySelectorAll('#M_copt .csw');for(var j=0;j<sw.length;j++)sw[j].classList.remove('sel');d.classList.add('sel');};opt.appendChild(item);})(CK[i]);}})();
+function refreshCswLabels(){var items=document.querySelectorAll('#M_copt .csw-item');for(var i=0;i<items.length;i++){var c=items[i].getAttribute('data-c'),t=items[i].querySelector('.csw-txt');if(t)t.textContent=calLabel(c);}}
 function getCsel(){var s=document.querySelector('#M_copt .csw.sel');return s?s.getAttribute('data-c'):'p';}
 function setCsel(c){var sw=document.querySelectorAll('#M_copt .csw');for(var i=0;i<sw.length;i++)sw[i].classList.toggle('sel',sw[i].getAttribute('data-c')===c);}
 /* LEGEND */
@@ -519,7 +530,7 @@ function rLeg(){
   for(var i=0;i<chips.length;i++){(function(chip){chip.onclick=function(e){var tgt=e.target||e.srcElement;if(tgt.getAttribute('data-ed')){gLmoKey=tgt.getAttribute('data-ed');$('M_li').value=gLabels[gLmoKey]||DLBL[gLmoKey]||'';showMo('M_lbl');return;}var ck=chip.getAttribute('data-ck');gFC=(gFC===ck)?null:ck;rLeg();rCal();if(gSel)rDet(gSel);};})(chips[i]);}
 }
 $('M_lX').onclick=function(){hideMo('M_lbl');};
-$('M_lS').onclick=function(){var v=$('M_li').value.trim();if(!v)return;gLabels[gLmoKey]=v;fbSet('ycal-labels',gLabels);hideMo('M_lbl');banner('라벨 저장됐어요 ✓');};
+$('M_lS').onclick=function(){var v=$('M_li').value.trim();if(!v)return;gLabels[gLmoKey]=v;fbSet('ycal-labels',gLabels);refreshCswLabels();if(gSel)rDet(gSel);rCal();hideMo('M_lbl');banner('라벨 저장됐어요 ✓');};
 /* CALENDAR */
 function rCal(){
   $('I_ml').textContent=gY+'년 '+(gM+1)+'월';
@@ -533,7 +544,7 @@ function rCal(){
   for(i=0;i<7;i++)h+='<div class="cgh'+(i===0?' gs':i===6?' ga':'')+'">'+ DOW[i]+'</div>';
   for(i=0;i<cells.length;i++){
     var cell=cells[i],dow=i%7,ev=cell.key?gEvts[cell.key]:null,chips='';
-    if(ev&&ev.length){for(var j=0;j<Math.min(ev.length,3);j++){if(!gFC||ev[j].c===gFC)chips+='<div class="ec '+(ev[j].c||'p')+'">'+esc(ev[j].t)+'</div>';}}
+    if(ev&&ev.length){for(var j=0;j<Math.min(ev.length,3);j++){if(!gFC||ev[j].c===gFC)chips+='<div class="ec-wrap"><div class="ec '+(ev[j].c||'p')+'">'+esc(ev[j].t)+'</div><span class="ec-lbl">'+esc(calLabel(ev[j].c||'p'))+'</span></div>';}}
     var cls='cgc'+(cell.om?' om':'')+(cell.key===tdK?' td':'')+(cell.key===gSel?' sl':'');
     var gncls='cgn'+(dow===0?' gs':dow===6?' ga':'')+(cell.om?' om':'');
     h+='<div class="'+cls+'"'+(cell.key?' data-day="'+cell.key+'"':'')+'><div class="'+gncls+'">'+cell.d+'</div>'+chips+'</div>';
@@ -554,7 +565,7 @@ function rDet(key){
       var rpTag=e.grpId?('<span style="font-size:10px;background:#E1F5EE;color:#0F6E56;border-radius:3px;padding:1px 5px;margin-left:3px">'+(IVLBL[e.grpInterval]||'루틴')+' '+((e.grpIdx||0)+1)+'회차</span>'):'';
       var upD=ei===0?' disabled':'',dnD=ei===tot-1?' disabled':'';
       h+='<div class="evb"><div class="row sb2" style="margin-bottom:6px">'
-        +'<div class="row g1" style="flex-wrap:wrap"><span class="ec '+(e.c||'p')+'" style="display:inline-block;font-size:12px;padding:3px 8px">'+esc(e.t)+'</span>'+rpTag+'</div>'
+        +'<div class="row g1" style="flex-wrap:wrap"><span class="ec-wrap" style="display:inline-flex;align-items:center;gap:6px"><span class="ec '+(e.c||'p')+'" style="display:inline-block;font-size:12px;padding:3px 8px">'+esc(e.t)+'</span><span class="ec-lbl" style="font-size:11px">'+esc(calLabel(e.c||'p'))+'</span></span>'+rpTag+'</div>'
         +'<div class="row g1">';
       if(tot>1)h+='<button class="btn xs" data-up="'+key+'" data-ui="'+ei+'"'+upD+'>▲</button><button class="btn xs" data-dn="'+key+'" data-di="'+ei+'"'+dnD+'>▼</button>';
       h+='<button class="btn xs" data-edit="'+key+'" data-ei="'+ei+'">수정</button>'
@@ -593,7 +604,7 @@ $('I_sq').oninput=function(){
   for(var i=0;i<ea.length;i++){var key=ea[i][0],arr=ea[i][1];if(!arr)continue;for(var j=0;j<arr.length;j++){var e=arr[j],ss=[e.t,e.m||'',e.memo||''].concat(e.n||[]),f=false;for(var s=0;s<ss.length;s++){if(ss[s].toLowerCase().indexOf(q)>=0){f=true;break;}}if(f)res.push({key:key,e:e});}}
   if(!res.length){wrap.innerHTML='<div class="cdet" style="text-align:center;padding:1rem;color:#888">검색 결과 없음</div>';return;}
   var h='<div class="cdet">';
-  for(var i=0;i<res.length;i++)h+='<div data-goto="'+res[i].key+'" style="display:flex;align-items:center;gap:8px;padding:8px;cursor:pointer;border-bottom:0.5px solid rgba(0,0,0,.05)"><span style="font-size:12px;color:#888;min-width:80px;white-space:nowrap">'+fmtD(res[i].key)+'</span><span class="ec '+(res[i].e.c||'p')+'" style="font-size:11px">'+esc(res[i].e.t)+'</span></div>';
+  for(var i=0;i<res.length;i++)h+='<div data-goto="'+res[i].key+'" style="display:flex;align-items:center;gap:8px;padding:8px;cursor:pointer;border-bottom:0.5px solid rgba(0,0,0,.05)"><span style="font-size:12px;color:#888;min-width:80px;white-space:nowrap">'+fmtD(res[i].key)+'</span><span class="ec-wrap" style="display:inline-flex;align-items:center;gap:6px;min-width:0"><span class="ec '+(res[i].e.c||'p')+'" style="font-size:11px">'+esc(res[i].e.t)+'</span><span class="ec-lbl">'+esc(calLabel(res[i].e.c||'p'))+'</span></span></div>';
   wrap.innerHTML=h+'</div>';
   var gs=wrap.querySelectorAll('[data-goto]');
   for(var i=0;i<gs.length;i++){(function(el){el.onclick=function(){var k=el.getAttribute('data-goto');var nd=new Date(k+'T00:00:00');gY=nd.getFullYear();gM=nd.getMonth();gSel=k;rCal();rDet(k);$('I_sq').value='';$('I_sr').innerHTML='';};})(gs[i]);}
@@ -827,23 +838,17 @@ $('M_mpf').onchange=function(){
   var file=this.files[0];if(!file)return;
   var fr=new FileReader();
   fr.onload=function(ev){
-    var dataUrl=ev.target.result;var img=new Image();
-    img.onload=function(){
-      var MAX=260,w=img.width,h=img.height;
-      if(w>h){if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}}else{if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}}
-      var cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);
-      var b64=cv.toDataURL('image/jpeg',0.78);mPhotoURL=b64;
-      var av=$('M_mav');av.innerHTML='<img src="'+b64+'" style="width:100%;height:100%;object-fit:cover">';$('M_mpd').style.display='';
-    };
-    img.onerror=function(){banner('이미지를 읽을 수 없어요',true);};img.src=dataUrl;
+    var dataUrl=ev.target.result;mPhotoURL=dataUrl;
+    var av=$('M_mav');av.innerHTML='<img src="'+dataUrl+'" style="width:100%;height:100%;object-fit:cover">';$('M_mpd').style.display='';
   };
+  fr.onerror=function(){banner('이미지를 읽을 수 없어요',true);};
   fr.readAsDataURL(file);
 };
 $('M_mpdel').onclick=function(){mPhotoURL='';$('M_mav').innerHTML='👤';$('M_mpd').style.display='none';$('M_mpf').value='';};
 function openMem(cid,mid){
   eMid=mid;eCid=cid;mPhotoURL=null;var m=mid?gMems[mid]:{};
   $('M_memT').textContent=mid?'멤버 수정':'멤버 추가';
-  $('M_mn').value=m.name||'';$('M_mg').value=m.gender||'M';$('M_mb').value=m.birthYear||'';$('M_mp').value=m.phone||'';$('M_mr').value=m.role||'멤버';
+  $('M_mn').value=m.name||'';$('M_mg').value=m.gender||'M';$('M_mb').value=m.birthYear||'';$('M_mp').value=m.phone||'';$('M_mr').value=m.role||'멤버';$('M_mnote').value=m.notes||'';
   $('M_mdel').style.display=mid?'':'none';
   var av=$('M_mav');
   if(m.photo){av.innerHTML='<img src="'+m.photo+'" style="width:100%;height:100%;object-fit:cover">';$('M_mpd').style.display='';}else{av.innerHTML='👤';$('M_mpd').style.display='none';}
@@ -871,6 +876,7 @@ $('M_mS').onclick=function(){
   var by=parseInt($('M_mb').value,10);if(by)md.birthYear=by;
   var ph=$('M_mp').value.trim();if(ph)md.phone=ph;
   if(selTags.length)md.tags=selTags;
+  var note=$('M_mnote').value.trim();if(note)md.notes=note;
   if(mPhotoURL===null){if(eMid&&gMems[eMid]&&gMems[eMid].photo)md.photo=gMems[eMid].photo;}
   else if(mPhotoURL!=='')md.photo=mPhotoURL;
   gMems[id]=md;
