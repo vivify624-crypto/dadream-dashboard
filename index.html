@@ -103,9 +103,9 @@ textarea.fi{resize:vertical}
 .csw-item:hover{background:#fafafe}
 .csw{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;flex-shrink:0}
 .csw.sel{border-color:#222}
-.csw-txt{font-size:11px;line-height:1;color:rgba(26,26,26,.58);font-weight:400;white-space:nowrap}
+.csw-txt{font-size:11px;line-height:1;color:rgba(26,26,26,.46);font-weight:400;white-space:nowrap}
 .csw-item:focus{outline:none}
-.csw-item .csw.sel + .csw-txt{color:rgba(26,26,26,.78)}
+.csw-item .csw.sel + .csw-txt{color:rgba(26,26,26,.62)}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
 .cell-card{background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:10px;padding:.875rem;cursor:pointer}
 .cell-nm{font-size:13px;font-weight:600;color:#3C3489;margin-bottom:3px}
@@ -544,7 +544,7 @@ function rCal(){
   for(i=0;i<7;i++)h+='<div class="cgh'+(i===0?' gs':i===6?' ga':'')+'">'+ DOW[i]+'</div>';
   for(i=0;i<cells.length;i++){
     var cell=cells[i],dow=i%7,ev=cell.key?gEvts[cell.key]:null,chips='';
-    if(ev&&ev.length){for(var j=0;j<Math.min(ev.length,3);j++){if(!gFC||ev[j].c===gFC)chips+='<div class="ec-wrap"><div class="ec '+(ev[j].c||'p')+'">'+esc(ev[j].t)+'</div><span class="ec-lbl">'+esc(calLabel(ev[j].c||'p'))+'</span></div>';}}
+    if(ev&&ev.length){for(var j=0;j<Math.min(ev.length,3);j++){if(!gFC||ev[j].c===gFC)chips+='<div class="ec '+(ev[j].c||'p')+'">'+esc(ev[j].t)+'</div>';}}
     var cls='cgc'+(cell.om?' om':'')+(cell.key===tdK?' td':'')+(cell.key===gSel?' sl':'');
     var gncls='cgn'+(dow===0?' gs':dow===6?' ga':'')+(cell.om?' om':'');
     h+='<div class="'+cls+'"'+(cell.key?' data-day="'+cell.key+'"':'')+'><div class="'+gncls+'">'+cell.d+'</div>'+chips+'</div>';
@@ -565,7 +565,7 @@ function rDet(key){
       var rpTag=e.grpId?('<span style="font-size:10px;background:#E1F5EE;color:#0F6E56;border-radius:3px;padding:1px 5px;margin-left:3px">'+(IVLBL[e.grpInterval]||'루틴')+' '+((e.grpIdx||0)+1)+'회차</span>'):'';
       var upD=ei===0?' disabled':'',dnD=ei===tot-1?' disabled':'';
       h+='<div class="evb"><div class="row sb2" style="margin-bottom:6px">'
-        +'<div class="row g1" style="flex-wrap:wrap"><span class="ec-wrap" style="display:inline-flex;align-items:center;gap:6px"><span class="ec '+(e.c||'p')+'" style="display:inline-block;font-size:12px;padding:3px 8px">'+esc(e.t)+'</span><span class="ec-lbl" style="font-size:11px">'+esc(calLabel(e.c||'p'))+'</span></span>'+rpTag+'</div>'
+        +'<div class="row g1" style="flex-wrap:wrap"><span class="ec '+(e.c||'p')+'" style="display:inline-block;font-size:12px;padding:3px 8px">'+esc(e.t)+'</span>'+rpTag+'</div>'
         +'<div class="row g1">';
       if(tot>1)h+='<button class="btn xs" data-up="'+key+'" data-ui="'+ei+'"'+upD+'>▲</button><button class="btn xs" data-dn="'+key+'" data-di="'+ei+'"'+dnD+'>▼</button>';
       h+='<button class="btn xs" data-edit="'+key+'" data-ei="'+ei+'">수정</button>'
@@ -604,7 +604,7 @@ $('I_sq').oninput=function(){
   for(var i=0;i<ea.length;i++){var key=ea[i][0],arr=ea[i][1];if(!arr)continue;for(var j=0;j<arr.length;j++){var e=arr[j],ss=[e.t,e.m||'',e.memo||''].concat(e.n||[]),f=false;for(var s=0;s<ss.length;s++){if(ss[s].toLowerCase().indexOf(q)>=0){f=true;break;}}if(f)res.push({key:key,e:e});}}
   if(!res.length){wrap.innerHTML='<div class="cdet" style="text-align:center;padding:1rem;color:#888">검색 결과 없음</div>';return;}
   var h='<div class="cdet">';
-  for(var i=0;i<res.length;i++)h+='<div data-goto="'+res[i].key+'" style="display:flex;align-items:center;gap:8px;padding:8px;cursor:pointer;border-bottom:0.5px solid rgba(0,0,0,.05)"><span style="font-size:12px;color:#888;min-width:80px;white-space:nowrap">'+fmtD(res[i].key)+'</span><span class="ec-wrap" style="display:inline-flex;align-items:center;gap:6px;min-width:0"><span class="ec '+(res[i].e.c||'p')+'" style="font-size:11px">'+esc(res[i].e.t)+'</span><span class="ec-lbl">'+esc(calLabel(res[i].e.c||'p'))+'</span></span></div>';
+  for(var i=0;i<res.length;i++)h+='<div data-goto="'+res[i].key+'" style="display:flex;align-items:center;gap:8px;padding:8px;cursor:pointer;border-bottom:0.5px solid rgba(0,0,0,.05)"><span style="font-size:12px;color:#888;min-width:80px;white-space:nowrap">'+fmtD(res[i].key)+'</span><span class="ec '+(res[i].e.c||'p')+'" style="font-size:11px">'+esc(res[i].e.t)+'</span></div>';
   wrap.innerHTML=h+'</div>';
   var gs=wrap.querySelectorAll('[data-goto]');
   for(var i=0;i<gs.length;i++){(function(el){el.onclick=function(){var k=el.getAttribute('data-goto');var nd=new Date(k+'T00:00:00');gY=nd.getFullYear();gM=nd.getMonth();gSel=k;rCal();rDet(k);$('I_sq').value='';$('I_sr').innerHTML='';};})(gs[i]);}
