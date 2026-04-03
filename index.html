@@ -147,12 +147,52 @@ textarea.fi{resize:vertical}
 .mu{color:#888;font-size:12px}
 .mb2{margin-bottom:1rem}
 .badge{display:inline-block;font-size:10px;border-radius:4px;padding:2px 6px;font-weight:500;margin-right:4px;background:#FAEEDA;color:#854F0B}
+.att-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+.att-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.att-sum{font-size:12px;color:#888}
+.att-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.att-col{display:flex;flex-direction:column;gap:10px}
+.att-col-head{font-size:12px;font-weight:600;color:#888;padding:2px 4px}
+.att-line{background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;padding:.8rem .9rem}
+.att-line-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.att-title{font-size:13px;font-weight:700;color:#3C3489;line-height:1.2}
+.att-meta{font-size:11px;color:#888;line-height:1.45;margin-top:3px}
+.att-chip{display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;border:0.5px solid transparent;white-space:nowrap}
+.att-chip.none{background:#f5f5f3;border-color:rgba(0,0,0,.08);color:#888}
+.att-chip.ok{background:#E1F5EE;border-color:#5DCAA5;color:#0F6E56}
+.att-chip.f2{background:#E6F1FB;border-color:#8DB7E6;color:#185FA5}
+.att-chip.f3{background:#EEEDFE;border-color:#B9B4F6;color:#3C3489}
+.att-chip.vision{background:#FAECE7;border-color:#E2AF98;color:#993C1D}
+.att-chip.abs{background:#FCEBEB;border-color:#F09595;color:#A32D2D}
+.att-chip.late{background:#FAEEDA;border-color:#E5C06C;color:#854F0B}
+.att-chip.work{background:#F1EFE8;border-color:#CFC7B7;color:#5F5E5A}
+.att-chip.etc{background:#f0f0f0;border-color:#d8d8d8;color:#666}
+.att-select{width:100%;font-size:12px;padding:7px 10px}
+.att-select.none{background:#fff;color:#888;border-color:rgba(0,0,0,.15)}
+.att-select.ok{background:#F3FCF8;color:#0F6E56;border-color:#5DCAA5}
+.att-select.f2{background:#F4F8FE;color:#185FA5;border-color:#8DB7E6}
+.att-select.f3{background:#F6F5FE;color:#3C3489;border-color:#B9B4F6}
+.att-select.vision{background:#FDF5F2;color:#993C1D;border-color:#E2AF98}
+.att-select.abs{background:#FFF6F6;color:#A32D2D;border-color:#F09595}
+.att-select.late{background:#FFF9EE;color:#854F0B;border-color:#E5C06C}
+.att-select.work{background:#F7F6F3;color:#5F5E5A;border-color:#CFC7B7}
+.att-select.etc{background:#f7f7f7;color:#666;border-color:#d8d8d8}
+.att-reason{margin-top:8px}
+.att-note{font-size:11px;color:#888;margin-top:5px;line-height:1.4}
+.att-empty{font-size:12px;color:#aaa;padding:.4rem 0}
 @media(max-width:700px){
   .sb{display:none}.main{margin-left:0}.mob-nav{display:block}
   .ct{padding:.75rem .875rem 80px}.g3{grid-template-columns:1fr 1fr}
   .topbar{padding:.75rem 1rem}.mbox.wide{max-width:100%}
   .frow{flex-direction:column;gap:0}
   .cgc{min-height:52px}
+  .att-grid{grid-template-columns:1fr}
+  .att-toolbar{align-items:stretch}
+  .att-tools{width:100%}
+  .att-tools .fi{flex:1;min-width:0 !important;width:auto !important}
+  .att-col{gap:8px}
+  .att-line{padding:.75rem .8rem}
+  .att-select{width:100%;max-width:none}
   #I_det .evb{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,.1)}
   #I_det .evb:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
   #I_det .evb .btn.xs{background:#fff;border-color:rgba(0,0,0,.1);color:rgba(26,26,26,.54)}
@@ -196,6 +236,7 @@ textarea.fi{resize:vertical}
     <div class="sni on" data-s="cal">📅 일정 캘린더</div>
     <div class="sni" data-s="wed">💍 결혼 현황</div>
     <div class="sni" data-s="cells">👥 셀 명단</div>
+    <div class="sni" data-s="gchk">☑️ 금철 출석체크</div>
     <div class="sni" data-s="worship">🙏 이번 주 예배</div>
     <div class="sni" data-s="chk">✅ 체크리스트</div>
   </nav>
@@ -239,6 +280,19 @@ textarea.fi{resize:vertical}
       </div>
       <div class="g3" id="I_cgrid"></div>
     </div>
+    <!-- 금철 출석체크 -->
+    <div class="sec" id="I_s_gchk">
+      <div class="att-toolbar">
+        <div class="att-tools">
+          <input class="fi" type="date" id="I_gd" style="width:150px">
+          <input class="fi" type="text" id="I_gq" placeholder="이름 검색..." style="width:140px">
+          <button class="btn sm" id="I_gall">전체 출석</button>
+          <button class="btn sm" id="I_gclear">전체 해제</button>
+        </div>
+        <div class="att-sum" id="I_gsum"></div>
+      </div>
+      <div class="att-grid" id="I_ggrid"></div>
+    </div>
     <!-- 예배 -->
     <div class="sec" id="I_s_worship">
       <div id="I_ww">
@@ -279,6 +333,7 @@ textarea.fi{resize:vertical}
   <div class="mni on" data-s="cal"><div class="mni-ic">📅</div>일정</div>
   <div class="mni" data-s="wed"><div class="mni-ic">💍</div>결혼</div>
   <div class="mni" data-s="cells"><div class="mni-ic">👥</div>셀</div>
+  <div class="mni" data-s="gchk"><div class="mni-ic">☑️</div>출석</div>
   <div class="mni" data-s="worship"><div class="mni-ic">🙏</div>예배</div>
   <div class="mni" data-s="chk"><div class="mni-ic">✅</div>체크</div>
 </div></div>
@@ -469,6 +524,7 @@ var gKom=JSON.parse(JSON.stringify(ICOM));
 var gCells=built.nc, gMems=built.nm;
 var gChk={}, gLabels={p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'};
 var gChecks={};
+var gGchk={};
 var gY=2026, gM=(TODAY.getFullYear()===2026?TODAY.getMonth():2);
 var gSel=null, gFC=null, gPend=null, gMoSt=null, gLmoKey=null;
 var eWed=null, eOrd=null, eKom=null, eCid=null, eMid=null;
@@ -497,10 +553,11 @@ function startFbSync(){
   fbOn('ycal-chk',function(v){gChk=v||{};if(gSel)rDet(gSel);});
   fbOn('ycal-labels',function(v){gLabels={p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'};var src=v||{};var ks=keys(src);for(var i=0;i<ks.length;i++)gLabels[ks[i]]=src[ks[i]];rLeg();});
   fbOnce('weddings',function(v){gWed=v||{};if(curSec==='wed')rWed();fbOn('weddings',function(v2){gWed=v2||{};if(curSec==='wed')rWed();});});
-  fbOnce('cells',function(v){gCells=v||{};fbOnce('members',function(v2){gMems=v2||{};if(curSec==='cells')rCells();fbOn('cells',function(v3){gCells=v3||{};if(curSec==='cells'){rCells();if(eCid&&$('M_cell').classList.contains('show'))rMemList(eCid);}});fbOn('members',function(v4){gMems=v4||{};if(curSec==='cells'){rCells();if(eCid&&$('M_cell').classList.contains('show'))rMemList(eCid);}});});});
+  fbOnce('cells',function(v){gCells=v||{};fbOnce('members',function(v2){gMems=v2||{};if(curSec==='cells')rCells();if(curSec==='gchk')rGchk();fbOn('cells',function(v3){gCells=v3||{};if(curSec==='cells'){rCells();if(eCid&&$('M_cell').classList.contains('show'))rMemList(eCid);}if(curSec==='gchk')rGchk();});fbOn('members',function(v4){gMems=v4||{};if(curSec==='cells'){rCells();if(eCid&&$('M_cell').classList.contains('show'))rMemList(eCid);}if(curSec==='gchk')rGchk();});});});
   fbOnce('worship_orders',function(v){gOrd=v||{};if(curSec==='worship')rWorship();fbOn('worship_orders',function(v2){gOrd=v2||{};if(curSec==='worship')rWorship();});});
   fbOnce('worship_committee',function(v){gKom=v||{};if(curSec==='worship')rWorship();fbOn('worship_committee',function(v2){gKom=v2||{};if(curSec==='worship')rWorship();});});
   fbOn('checks',function(v){gChecks=v||{};if(curSec==='chk')rChk();});
+  fbOn('gf_attendance',function(v){gGchk=v||{};if(curSec==='gchk')rGchk();});
 }
 (function(){
   var s1=document.createElement('script');
@@ -509,7 +566,7 @@ function startFbSync(){
   document.head.appendChild(s1);
 })();
 /* NAVIGATION */
-var STITLE={cal:'일정 캘린더',wed:'결혼 현황',cells:'셀 명단',worship:'이번 주 예배 담당자',chk:'이번주 체크리스트'};
+var STITLE={cal:'일정 캘린더',wed:'결혼 현황',cells:'셀 명단',gchk:'금철 출석체크',worship:'이번 주 예배 담당자',chk:'이번주 체크리스트'};
 function navTo(id){
   var ns=document.querySelectorAll('.sni,.mni'),i;
   for(i=0;i<ns.length;i++)ns[i].classList.toggle('on',ns[i].getAttribute('data-s')===id);
@@ -518,7 +575,7 @@ function navTo(id){
   $('I_s_'+id).classList.add('on');
   $('I_tbt').textContent=STITLE[id]||'';
   curSec=id;
-  if(id==='cal')rCal();if(id==='wed')rWed();if(id==='cells')rCells();if(id==='worship')rWorship();if(id==='chk')rChk();
+  if(id==='cal')rCal();if(id==='wed')rWed();if(id==='cells')rCells();if(id==='gchk')rGchk();if(id==='worship')rWorship();if(id==='chk')rChk();
 }
 (function(){var ns=document.querySelectorAll('.sni,.mni');for(var i=0;i<ns.length;i++){(function(el){el.onclick=function(){navTo(el.getAttribute('data-s'));};})(ns[i]);}})();
 /* COLOR PICKER */
@@ -843,24 +900,8 @@ $('M_mpf').onchange=function(){
   var file=this.files[0];if(!file)return;
   var fr=new FileReader();
   fr.onload=function(ev){
-    var dataUrl=ev.target.result;
-    var img=new Image();
-    img.onload=function(){
-      var w=img.width,h=img.height,maxSide=960;
-      if(Math.max(w,h)<=maxSide){
-        mPhotoURL=dataUrl;
-        var av=$('M_mav');av.innerHTML='<img src="'+dataUrl+'" style="width:100%;height:100%;object-fit:cover">';$('M_mpd').style.display='';
-        return;
-      }
-      var ratio=maxSide/Math.max(w,h),nw=Math.round(w*ratio),nh=Math.round(h*ratio);
-      var cv=document.createElement('canvas');cv.width=nw;cv.height=nh;
-      var cx=cv.getContext('2d');cx.drawImage(img,0,0,nw,nh);
-      var out=cv.toDataURL('image/jpeg',0.9);
-      mPhotoURL=out;
-      var av=$('M_mav');av.innerHTML='<img src="'+out+'" style="width:100%;height:100%;object-fit:cover">';$('M_mpd').style.display='';
-    };
-    img.onerror=function(){banner('이미지를 처리할 수 없어요',true);};
-    img.src=dataUrl;
+    var dataUrl=ev.target.result;mPhotoURL=dataUrl;
+    var av=$('M_mav');av.innerHTML='<img src="'+dataUrl+'" style="width:100%;height:100%;object-fit:cover">';$('M_mpd').style.display='';
   };
   fr.onerror=function(){banner('이미지를 읽을 수 없어요',true);};
   fr.readAsDataURL(file);
@@ -904,6 +945,129 @@ $('M_mS').onclick=function(){
   if(role==='셀리더'){gCells[eCid].leaderId=id;fbSet('cells/'+eCid,gCells[eCid]);}
   fbSet('members/'+id,md);mPhotoURL=null;
   hideMo('M_mem');rMemList(eCid);rCells();banner('저장됐어요 ✓');
+};
+/* GF ATTENDANCE */
+var GSTAT=['출석','2층','3층','비전센터','불참','2층(늦참)','2층(야근)','3층(늦참)','3층(야근)','2층or3층(늦참)','2층or3층(야근)','기타'];
+function attDs(){
+  var v=$('I_gd').value;
+  return v||dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
+}
+function attNeedReason(st){ return st==='불참'||st==='기타'; }
+function attCellNum(c){
+  if(c&&c.number!=null&&c.number!=='') return parseInt(c.number,10)||0;
+  var m=(c&&c.name?String(c.name):'').match(/(\d+)/);
+  return m?parseInt(m[1],10):0;
+}
+function attStatusCls(st){
+  if(!st) return 'none';
+  if(st==='출석') return 'ok';
+  if(st==='2층') return 'f2';
+  if(st==='3층') return 'f3';
+  if(st==='비전센터') return 'vision';
+  if(st==='불참') return 'abs';
+  if(st.indexOf('늦참')>=0) return 'late';
+  if(st.indexOf('야근')>=0) return 'work';
+  return 'etc';
+}
+function attLeaderOfCell(cid,c){
+  if(c&&c.leaderId&&gMems[c.leaderId]) return [c.leaderId,gMems[c.leaderId]];
+  var mks=keys(gMems);
+  for(var i=0;i<mks.length;i++){
+    var mid=mks[i],m=gMems[mid];
+    if(m.cellId===cid&&m.role==='셀리더') return [mid,m];
+  }
+  return null;
+}
+function attRec(ds,mid){
+  var r=gGchk[ds]&&gGchk[ds][mid]?gGchk[ds][mid]:null;
+  if(r&&r.checked&&!r.status) return {status:'출석',reason:r.reason||'',ts:r.ts||0};
+  return r||null;
+}
+function attSave(ds,mid,status,reason){
+  if(!status){
+    if(gGchk[ds]){
+      delete gGchk[ds][mid];
+      if(!keys(gGchk[ds]).length) delete gGchk[ds];
+    }
+    fbDel('gf_attendance/'+ds+'/'+mid);
+    return;
+  }
+  if(!gGchk[ds]) gGchk[ds]={};
+  var payload={status:status,ts:Date.now()};
+  if(reason) payload.reason=reason;
+  gGchk[ds][mid]=payload;
+  fbSet('gf_attendance/'+ds+'/'+mid,payload);
+}
+function attBuildLine(cellNum,c,m,mid,status,reason){
+  var cls=attStatusCls(status);
+  var opts='<option value="">미체크</option>';
+  for(var j=0;j<GSTAT.length;j++) opts+='<option value="'+GSTAT[j]+'"'+(status===GSTAT[j]?' selected':'')+'>'+GSTAT[j]+'</option>';
+  var h='<div class="att-line"><div class="att-line-top"><div><div class="att-title">'+esc((cellNum||'?')+'셀')+'</div><div class="att-meta">'+esc(m.name||'')+' · 셀리더'+(m.birthYear?' · '+esc(String(m.birthYear)):'')+'</div></div><span class="att-chip '+cls+'">'+esc(status||'미체크')+'</span></div>';
+  h+='<select class="fi att-select '+cls+'" data-astatus="'+mid+'">'+opts+'</select>';
+  if(attNeedReason(status)||reason){
+    h+='<textarea class="fi att-reason" data-areason="'+mid+'" rows="2" placeholder="'+(status==='불참'?'불참 사유 작성':status==='기타'?'기타 사유 작성':'사유 작성')+'">'+esc(reason)+'</textarea><div class="att-note">불참/기타 선택 시 사유를 적을 수 있어요.</div>';
+  }
+  h+='</div>';
+  return h;
+}
+function rGchk(){
+  if(!$('I_gd').value)$('I_gd').value=dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
+  var ds=attDs(),q=($('I_gq').value||'').toLowerCase();
+  var cells=ents(gCells).sort(function(a,b){return attCellNum(a[1])-attCellNum(b[1]);});
+  var total=0,done=0,left=[],right=[];
+  for(var i=0;i<cells.length;i++){
+    var cid=cells[i][0],c=cells[i][1],ld=attLeaderOfCell(cid,c),cellNum=attCellNum(c);
+    if(!ld)continue;
+    var mid=ld[0],m=ld[1],kw=((c.name||'')+' '+(m.name||'')).toLowerCase();
+    if(q&&kw.indexOf(q)<0)continue;
+    var rec=attRec(ds,mid),status=rec&&rec.status?rec.status:'',reason=rec&&rec.reason?rec.reason:'';
+    total++; if(status)done++;
+    var line=attBuildLine(cellNum,c,m,mid,status,reason);
+    if(cellNum>=26) right.push(line); else left.push(line);
+  }
+  $('I_gsum').textContent=(q?'검색 결과 기준 · ':'')+done+' / '+total+'명 입력';
+  if(!left.length&&!right.length){
+    $('I_ggrid').innerHTML='<div class="card" style="grid-column:1/-1;text-align:center;color:#888">표시할 셀리더가 없어요</div>';
+    return;
+  }
+  var h='<div class="att-col"><div class="att-col-head">1~25셀</div>'+(left.length?left.join(''):'<div class="att-empty">표시할 셀이 없어요</div>')+'</div>'
+    +'<div class="att-col"><div class="att-col-head">26~46셀</div>'+(right.length?right.join(''):'<div class="att-empty">표시할 셀이 없어요</div>')+'</div>';
+  $('I_ggrid').innerHTML=h;
+}
+$('I_gd').onchange=rGchk;
+$('I_gq').oninput=rGchk;
+$('I_gall').onclick=function(){
+  var ds=attDs(),cells=ents(gCells),pack={};
+  for(var i=0;i<cells.length;i++){
+    var ld=attLeaderOfCell(cells[i][0],cells[i][1]);
+    if(ld)pack[ld[0]]={status:'출석',ts:Date.now()};
+  }
+  gGchk[ds]=pack;
+  fbSet('gf_attendance/'+ds,pack);
+  rGchk();
+  banner('셀리더 전체 출석 처리됐어요 ✓');
+};
+$('I_gclear').onclick=function(){
+  var ds=attDs();
+  delete gGchk[ds];
+  fbDel('gf_attendance/'+ds);
+  rGchk();
+  banner('전체 해제됐어요');
+};
+$('I_ggrid').onchange=function(e){
+  var t=e.target;if(!t)return;var ds=attDs();
+  if(t.getAttribute('data-astatus')){
+    var mid=t.getAttribute('data-astatus'),st=t.value,rec=attRec(ds,mid),rs=rec&&rec.reason?rec.reason:'';
+    if(!attNeedReason(st))rs='';
+    attSave(ds,mid,st,rs);
+    rGchk();
+    return;
+  }
+  if(t.getAttribute('data-areason')){
+    var mid2=t.getAttribute('data-areason'),rec2=attRec(ds,mid2),st2=rec2&&rec2.status?rec2.status:'';
+    if(!st2)return;
+    attSave(ds,mid2,st2,t.value.trim());
+  }
 };
 /* WORSHIP */
 function rWorship(){
@@ -983,7 +1147,7 @@ $('I_ckclear').onclick=function(){var ks=keys(gChecks),toDel=[],i;for(i=0;i<ks.l
 $('I_cklist').onclick=function(e){var d=findUp(e.target,'data-cdel');if(d){delete gChecks[d.getAttribute('data-cdel')];fbDel('checks/'+d.getAttribute('data-cdel'));rChk();}};
 $('I_cklist').onchange=function(e){var t=e.target;if(t&&t.getAttribute('data-cid')){var id=t.getAttribute('data-cid');if(gChecks[id]){gChecks[id].done=t.checked;fbSet('checks/'+id+'/done',t.checked);}rChk();}};
 /* INIT */
-rLeg();rCal();rWed();rCells();rWorship();rChk();
+rLeg();rCal();rWed();rCells();rGchk();rWorship();rChk();
 })();
 </script>
 </body>
