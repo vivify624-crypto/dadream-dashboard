@@ -153,11 +153,11 @@ textarea.fi{resize:vertical}
 .att-syncing{opacity:.72}
 .att-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
 .att-line{background:#fff;border:1px solid rgba(60,52,137,.12);border-radius:16px;padding:.96rem 1.05rem;box-shadow:0 3px 14px rgba(60,52,137,.06)}
-.att-line-top{display:flex;align-items:center;gap:12px;min-width:0}
-.att-main{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+.att-line-top{display:flex;align-items:center;justify-content:flex-start;gap:14px;min-width:0}
+.att-main{display:flex;align-items:center;gap:12px;min-width:0;flex:0 1 420px}
 .att-title{font-size:18px;font-weight:900;color:#312b74;line-height:1;white-space:nowrap;letter-spacing:-.015em;flex:0 0 auto}
-.att-meta{font-size:17px;font-weight:900;color:#141414;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
-.att-select{width:140px;min-width:140px;max-width:140px;font-size:14px;font-weight:800;padding:8px 10px;border-radius:11px;flex:0 0 140px;border-width:1.5px}
+.att-meta{font-size:17px;font-weight:900;color:#141414;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 260px}
+.att-select{width:140px;min-width:140px;max-width:140px;font-size:14px;font-weight:800;padding:8px 10px;border-radius:11px;flex:0 0 140px;border-width:1.5px;margin-left:4px}
 .att-select.none{background:#fff;color:#888;border-color:rgba(0,0,0,.15)}
 .att-select.ok{background:#F3FCF8;color:#0F6E56;border-color:#5DCAA5}
 .att-select.f2{background:#F4F8FE;color:#185FA5;border-color:#8DB7E6}
@@ -189,13 +189,15 @@ textarea.fi{resize:vertical}
   .att-toolbar{align-items:stretch}
   .att-tools{width:100%;gap:6px}
   .att-tools .fi{flex:1;min-width:0 !important;width:auto !important}
-  .att-tools .btn{padding:7px 10px;font-size:12px}
+  #I_gd{flex:1.35 !important;min-width:132px !important;width:132px !important;font-size:12px}
+  #I_gq{flex:1.05 !important;min-width:110px !important}
+  .att-tools .btn{padding:7px 10px;font-size:12px;flex:0 0 auto}
   .att-line{padding:.82rem .82rem;border-radius:14px}
   .att-line-top{gap:8px}
-  .att-main{gap:9px;min-width:0}
+  .att-main{gap:9px;min-width:0;flex:1}
   .att-title{font-size:17px}
-  .att-meta{font-size:16px}
-  .att-select{width:104px;min-width:104px;max-width:104px;padding:7px 7px;font-size:12px;border-radius:10px}
+  .att-meta{font-size:16px;flex:1}
+  .att-select{width:104px;min-width:104px;max-width:104px;padding:7px 7px;font-size:12px;border-radius:10px;margin-left:0}
   .att-reason-wrap{margin-top:8px}
   .att-reason-label{font-size:11px;padding:4px 8px;margin-bottom:6px}
   .att-reason{font-size:13px;padding:9px 10px;border-radius:10px}
@@ -243,7 +245,7 @@ textarea.fi{resize:vertical}
     <div class="sni on" data-s="cal">📅 일정 캘린더</div>
     <div class="sni" data-s="wed">💍 결혼 현황</div>
     <div class="sni" data-s="cells">👥 셀 명단</div>
-    <div class="sni" data-s="gchk">🙋 금철 출석체크</div>
+    <div class="sni" data-s="gchk">🙋 출석체크</div>
     <div class="sni" data-s="worship">🙏 이번 주 예배</div>
     <div class="sni" data-s="chk">✅ 체크리스트</div>
   </nav>
@@ -287,7 +289,7 @@ textarea.fi{resize:vertical}
       </div>
       <div class="g3" id="I_cgrid"></div>
     </div>
-    <!-- 금철 출석체크 -->
+    <!-- 출석체크 -->
     <div class="sec" id="I_s_gchk">
       <div class="att-toolbar">
         <div class="att-tools">
@@ -585,7 +587,7 @@ function startFbSync(){
   document.head.appendChild(s1);
 })();
 /* NAVIGATION */
-var STITLE={cal:'일정 캘린더',wed:'결혼 현황',cells:'셀 명단',gchk:'금철 출석체크',worship:'이번 주 예배 담당자',chk:'이번주 체크리스트'};
+var STITLE={cal:'일정 캘린더',wed:'결혼 현황',cells:'셀 명단',gchk:'출석체크',worship:'이번 주 예배 담당자',chk:'이번주 체크리스트'};
 function navTo(id){
   var ns=document.querySelectorAll('.sni,.mni'),i;
   for(i=0;i<ns.length;i++)ns[i].classList.toggle('on',ns[i].getAttribute('data-s')===id);
