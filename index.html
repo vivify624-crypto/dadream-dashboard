@@ -152,12 +152,13 @@ textarea.fi{resize:vertical}
 .att-sum{font-size:12px;color:#888}
 .att-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .att-col{display:flex;flex-direction:column;gap:10px}
-.att-col-head{font-size:12px;font-weight:600;color:#888;padding:2px 4px}
-.att-line{background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;padding:.8rem .9rem}
-.att-line-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
-.att-title{font-size:13px;font-weight:700;color:#3C3489;line-height:1.2}
-.att-meta{font-size:11px;color:#888;line-height:1.45;margin-top:3px}
-.att-chip{display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;border:0.5px solid transparent;white-space:nowrap}
+.att-col-head{font-size:12px;font-weight:700;color:#7a7696;padding:2px 4px}
+.att-line{background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;padding:.62rem .72rem;box-shadow:0 1px 4px rgba(60,52,137,.04)}
+.att-line-top{display:flex;align-items:center;gap:8px;margin-bottom:0;min-width:0}
+.att-main{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+.att-title{font-size:12px;font-weight:800;color:#3C3489;line-height:1;white-space:nowrap;flex:0 0 auto}
+.att-meta{font-size:12px;color:#444;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
+.att-chip{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;padding:4px 8px;border-radius:999px;border:0.5px solid transparent;white-space:nowrap;flex:0 0 auto}
 .att-chip.none{background:#f5f5f3;border-color:rgba(0,0,0,.08);color:#888}
 .att-chip.ok{background:#E1F5EE;border-color:#5DCAA5;color:#0F6E56}
 .att-chip.f2{background:#E6F1FB;border-color:#8DB7E6;color:#185FA5}
@@ -167,7 +168,7 @@ textarea.fi{resize:vertical}
 .att-chip.late{background:#FAEEDA;border-color:#E5C06C;color:#854F0B}
 .att-chip.work{background:#F1EFE8;border-color:#CFC7B7;color:#5F5E5A}
 .att-chip.etc{background:#f0f0f0;border-color:#d8d8d8;color:#666}
-.att-select{width:100%;font-size:12px;padding:7px 10px}
+.att-select{width:108px;min-width:108px;max-width:108px;font-size:12px;padding:6px 8px;border-radius:9px;flex:0 0 108px}
 .att-select.none{background:#fff;color:#888;border-color:rgba(0,0,0,.15)}
 .att-select.ok{background:#F3FCF8;color:#0F6E56;border-color:#5DCAA5}
 .att-select.f2{background:#F4F8FE;color:#185FA5;border-color:#8DB7E6}
@@ -177,22 +178,31 @@ textarea.fi{resize:vertical}
 .att-select.late{background:#FFF9EE;color:#854F0B;border-color:#E5C06C}
 .att-select.work{background:#F7F6F3;color:#5F5E5A;border-color:#CFC7B7}
 .att-select.etc{background:#f7f7f7;color:#666;border-color:#d8d8d8}
-.att-reason{margin-top:8px}
-.att-note{font-size:11px;color:#888;margin-top:5px;line-height:1.4}
+.att-reason{margin-top:7px}
+.att-note{font-size:10px;color:#888;margin-top:4px;line-height:1.35}
 .att-empty{font-size:12px;color:#aaa;padding:.4rem 0}
 @media(max-width:700px){
   .sb{display:none}.main{margin-left:0}.mob-nav{display:block}
-  .ct{padding:.75rem .875rem 80px}.g3{grid-template-columns:1fr 1fr}
-  .topbar{padding:.75rem 1rem}.mbox.wide{max-width:100%}
+  .ct{padding:.75rem .72rem 80px}.g3{grid-template-columns:1fr 1fr}
+  .topbar{padding:.75rem .9rem}.mbox.wide{max-width:100%}
   .frow{flex-direction:column;gap:0}
   .cgc{min-height:52px}
-  .att-grid{grid-template-columns:1fr}
+  .att-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   .att-toolbar{align-items:stretch}
-  .att-tools{width:100%}
+  .att-tools{width:100%;gap:6px}
   .att-tools .fi{flex:1;min-width:0 !important;width:auto !important}
-  .att-col{gap:8px}
-  .att-line{padding:.75rem .8rem}
-  .att-select{width:100%;max-width:none}
+  .att-tools .btn{padding:7px 10px;font-size:12px}
+  .att-col{gap:6px}
+  .att-col-head{padding:0 2px;font-size:11px}
+  .att-line{padding:.5rem .48rem;border-radius:10px}
+  .att-line-top{gap:5px}
+  .att-main{gap:5px;min-width:0}
+  .att-title{font-size:11px}
+  .att-meta{font-size:11px}
+  .att-chip{padding:3px 6px;font-size:9px}
+  .att-select{width:74px;min-width:74px;max-width:74px;padding:4px 5px;font-size:10px;border-radius:8px}
+  .att-reason{margin-top:5px;font-size:11px;padding:6px 7px}
+  .att-note{font-size:9px}
   #I_det .evb{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,.1)}
   #I_det .evb:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
   #I_det .evb .btn.xs{background:#fff;border-color:rgba(0,0,0,.1);color:rgba(26,26,26,.54)}
@@ -1002,8 +1012,7 @@ function attBuildLine(cellNum,c,m,mid,status,reason){
   var cls=attStatusCls(status);
   var opts='<option value="">미체크</option>';
   for(var j=0;j<GSTAT.length;j++) opts+='<option value="'+GSTAT[j]+'"'+(status===GSTAT[j]?' selected':'')+'>'+GSTAT[j]+'</option>';
-  var h='<div class="att-line"><div class="att-line-top"><div><div class="att-title">'+esc((cellNum||'?')+'셀')+'</div><div class="att-meta">'+esc(m.name||'')+' · 셀리더'+(m.birthYear?' · '+esc(String(m.birthYear)):'')+'</div></div><span class="att-chip '+cls+'">'+esc(status||'미체크')+'</span></div>';
-  h+='<select class="fi att-select '+cls+'" data-astatus="'+mid+'">'+opts+'</select>';
+  var h='<div class="att-line"><div class="att-line-top"><div class="att-main"><div class="att-title">'+esc((cellNum||'?')+'셀')+'</div><div class="att-meta">'+esc(m.name||'')+'</div></div><span class="att-chip '+cls+'">'+esc(status||'미체크')+'</span><select class="fi att-select '+cls+'" data-astatus="'+mid+'">'+opts+'</select></div>';
   if(attNeedReason(status)||reason){
     h+='<textarea class="fi att-reason" data-areason="'+mid+'" rows="2" placeholder="'+(status==='불참'?'불참 사유 작성':status==='기타'?'기타 사유 작성':'사유 작성')+'">'+esc(reason)+'</textarea><div class="att-note">불참/기타 선택 시 사유를 적을 수 있어요.</div>';
   }
