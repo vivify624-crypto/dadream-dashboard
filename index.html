@@ -147,39 +147,36 @@ textarea.fi{resize:vertical}
 .mu{color:#888;font-size:12px}
 .mb2{margin-bottom:1rem}
 .badge{display:inline-block;font-size:10px;border-radius:4px;padding:2px 6px;font-weight:500;margin-right:4px;background:#FAEEDA;color:#854F0B}
-.att-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+.att-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:1rem}
 .att-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.att-sum{font-size:12px;color:#888}
-.att-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.att-col{display:flex;flex-direction:column;gap:10px}
-.att-col-head{font-size:12px;font-weight:700;color:#7a7696;padding:2px 4px}
-.att-line{background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;padding:.62rem .72rem;box-shadow:0 1px 4px rgba(60,52,137,.04)}
-.att-line-top{display:flex;align-items:center;gap:8px;margin-bottom:0;min-width:0}
-.att-main{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
-.att-title{font-size:12px;font-weight:800;color:#3C3489;line-height:1;white-space:nowrap;flex:0 0 auto}
-.att-meta{font-size:12px;color:#444;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
-.att-chip{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;padding:4px 8px;border-radius:999px;border:0.5px solid transparent;white-space:nowrap;flex:0 0 auto}
-.att-chip.none{background:#f5f5f3;border-color:rgba(0,0,0,.08);color:#888}
-.att-chip.ok{background:#E1F5EE;border-color:#5DCAA5;color:#0F6E56}
-.att-chip.f2{background:#E6F1FB;border-color:#8DB7E6;color:#185FA5}
-.att-chip.f3{background:#EEEDFE;border-color:#B9B4F6;color:#3C3489}
-.att-chip.vision{background:#FAECE7;border-color:#E2AF98;color:#993C1D}
-.att-chip.abs{background:#FCEBEB;border-color:#F09595;color:#A32D2D}
-.att-chip.late{background:#FAEEDA;border-color:#E5C06C;color:#854F0B}
-.att-chip.work{background:#F1EFE8;border-color:#CFC7B7;color:#5F5E5A}
-.att-chip.etc{background:#f0f0f0;border-color:#d8d8d8;color:#666}
-.att-select{width:108px;min-width:108px;max-width:108px;font-size:12px;padding:6px 8px;border-radius:9px;flex:0 0 108px}
+.att-sum{font-size:13px;color:#777;font-weight:700}
+.att-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.att-line{background:#fff;border:1px solid rgba(60,52,137,.12);border-radius:16px;padding:.96rem 1.05rem;box-shadow:0 3px 14px rgba(60,52,137,.06)}
+.att-line-top{display:flex;align-items:center;gap:12px;min-width:0}
+.att-main{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+.att-title{font-size:18px;font-weight:900;color:#312b74;line-height:1;white-space:nowrap;letter-spacing:-.015em;flex:0 0 auto}
+.att-meta{font-size:17px;font-weight:900;color:#141414;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
+.att-select{width:140px;min-width:140px;max-width:140px;font-size:14px;font-weight:800;padding:8px 10px;border-radius:11px;flex:0 0 140px;border-width:1.5px}
 .att-select.none{background:#fff;color:#888;border-color:rgba(0,0,0,.15)}
 .att-select.ok{background:#F3FCF8;color:#0F6E56;border-color:#5DCAA5}
 .att-select.f2{background:#F4F8FE;color:#185FA5;border-color:#8DB7E6}
 .att-select.f3{background:#F6F5FE;color:#3C3489;border-color:#B9B4F6}
 .att-select.vision{background:#FDF5F2;color:#993C1D;border-color:#E2AF98}
-.att-select.abs{background:#FFF6F6;color:#A32D2D;border-color:#F09595}
+.att-select.abs{background:#FFF1F1;color:#A32D2D;border-color:#F09595}
 .att-select.late{background:#FFF9EE;color:#854F0B;border-color:#E5C06C}
 .att-select.work{background:#F7F6F3;color:#5F5E5A;border-color:#CFC7B7}
-.att-select.etc{background:#f7f7f7;color:#666;border-color:#d8d8d8}
-.att-reason{margin-top:7px}
-.att-note{font-size:10px;color:#888;margin-top:4px;line-height:1.35}
+.att-select.etc{background:#F5F5F5;color:#666;border-color:#D3D3D3}
+.att-reason-wrap{margin-top:10px}
+.att-reason-label{display:inline-block;font-size:12px;font-weight:900;padding:4px 9px;border-radius:999px;margin-bottom:7px;letter-spacing:-.01em}
+.att-reason-label.abs{background:#FCEBEB;color:#A32D2D;border:1px solid #F09595}
+.att-reason-label.etc{background:#F1F1F1;color:#555;border:1px solid #D5D5D5}
+.att-reason{margin-top:0;font-size:14px;line-height:1.5;font-weight:800;padding:10px 12px;border-radius:12px;border:1.5px solid rgba(0,0,0,.1)}
+.att-reason.abs{background:#FFF7F7;border-color:#F09595;color:#8C2323}
+.att-reason.etc{background:#F8F8F8;border-color:#D5D5D5;color:#4E4E4E}
+.att-reason::placeholder{font-weight:700;color:rgba(0,0,0,.38)}
+.att-note{font-size:12px;font-weight:800;margin-top:6px;line-height:1.4}
+.att-note.abs{color:#A32D2D}
+.att-note.etc{color:#666}
 .att-empty{font-size:12px;color:#aaa;padding:.4rem 0}
 @media(max-width:700px){
   .sb{display:none}.main{margin-left:0}.mob-nav{display:block}
@@ -187,22 +184,21 @@ textarea.fi{resize:vertical}
   .topbar{padding:.75rem .9rem}.mbox.wide{max-width:100%}
   .frow{flex-direction:column;gap:0}
   .cgc{min-height:52px}
-  .att-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .att-grid{grid-template-columns:minmax(0,1fr);gap:9px}
   .att-toolbar{align-items:stretch}
   .att-tools{width:100%;gap:6px}
   .att-tools .fi{flex:1;min-width:0 !important;width:auto !important}
   .att-tools .btn{padding:7px 10px;font-size:12px}
-  .att-col{gap:6px}
-  .att-col-head{padding:0 2px;font-size:11px}
-  .att-line{padding:.5rem .48rem;border-radius:10px}
-  .att-line-top{gap:5px}
-  .att-main{gap:5px;min-width:0}
-  .att-title{font-size:11px}
-  .att-meta{font-size:11px}
-  .att-chip{padding:3px 6px;font-size:9px}
-  .att-select{width:74px;min-width:74px;max-width:74px;padding:4px 5px;font-size:10px;border-radius:8px}
-  .att-reason{margin-top:5px;font-size:11px;padding:6px 7px}
-  .att-note{font-size:9px}
+  .att-line{padding:.82rem .82rem;border-radius:14px}
+  .att-line-top{gap:8px}
+  .att-main{gap:9px;min-width:0}
+  .att-title{font-size:17px}
+  .att-meta{font-size:16px}
+  .att-select{width:104px;min-width:104px;max-width:104px;padding:7px 7px;font-size:12px;border-radius:10px}
+  .att-reason-wrap{margin-top:8px}
+  .att-reason-label{font-size:11px;padding:4px 8px;margin-bottom:6px}
+  .att-reason{font-size:13px;padding:9px 10px;border-radius:10px}
+  .att-note{font-size:11px}
   #I_det .evb{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,.1)}
   #I_det .evb:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
   #I_det .evb .btn.xs{background:#fff;border-color:rgba(0,0,0,.1);color:rgba(26,26,26,.54)}
@@ -246,7 +242,7 @@ textarea.fi{resize:vertical}
     <div class="sni on" data-s="cal">📅 일정 캘린더</div>
     <div class="sni" data-s="wed">💍 결혼 현황</div>
     <div class="sni" data-s="cells">👥 셀 명단</div>
-    <div class="sni" data-s="gchk">☑️ 금철 출석체크</div>
+    <div class="sni" data-s="gchk">🙋 금철 출석체크</div>
     <div class="sni" data-s="worship">🙏 이번 주 예배</div>
     <div class="sni" data-s="chk">✅ 체크리스트</div>
   </nav>
@@ -343,7 +339,7 @@ textarea.fi{resize:vertical}
   <div class="mni on" data-s="cal"><div class="mni-ic">📅</div>일정</div>
   <div class="mni" data-s="wed"><div class="mni-ic">💍</div>결혼</div>
   <div class="mni" data-s="cells"><div class="mni-ic">👥</div>셀</div>
-  <div class="mni" data-s="gchk"><div class="mni-ic">☑️</div>출석</div>
+  <div class="mni" data-s="gchk"><div class="mni-ic">🙋</div>출석</div>
   <div class="mni" data-s="worship"><div class="mni-ic">🙏</div>예배</div>
   <div class="mni" data-s="chk"><div class="mni-ic">✅</div>체크</div>
 </div></div>
@@ -957,7 +953,7 @@ $('M_mS').onclick=function(){
   hideMo('M_mem');rMemList(eCid);rCells();banner('저장됐어요 ✓');
 };
 /* GF ATTENDANCE */
-var GSTAT=['출석','2층','3층','비전센터','불참','2층(늦참)','2층(야근)','3층(늦참)','3층(야근)','2층or3층(늦참)','2층or3층(야근)','기타'];
+var GSTAT=['출석','2층','3층','비전센터','불참','불참(야근)','2층(늦참)','2층(야근)','3층(늦참)','3층(야근)','2층or3층(늦참)','2층or3층(야근)','기타'];
 function attDs(){
   var v=$('I_gd').value;
   return v||dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
@@ -974,7 +970,7 @@ function attStatusCls(st){
   if(st==='2층') return 'f2';
   if(st==='3층') return 'f3';
   if(st==='비전센터') return 'vision';
-  if(st==='불참') return 'abs';
+  if(st==='불참'||st==='불참(야근)') return 'abs';
   if(st.indexOf('늦참')>=0) return 'late';
   if(st.indexOf('야근')>=0) return 'work';
   return 'etc';
@@ -1012,9 +1008,12 @@ function attBuildLine(cellNum,c,m,mid,status,reason){
   var cls=attStatusCls(status);
   var opts='<option value="">미체크</option>';
   for(var j=0;j<GSTAT.length;j++) opts+='<option value="'+GSTAT[j]+'"'+(status===GSTAT[j]?' selected':'')+'>'+GSTAT[j]+'</option>';
-  var h='<div class="att-line"><div class="att-line-top"><div class="att-main"><div class="att-title">'+esc((cellNum||'?')+'셀')+'</div><div class="att-meta">'+esc(m.name||'')+'</div></div><span class="att-chip '+cls+'">'+esc(status||'미체크')+'</span><select class="fi att-select '+cls+'" data-astatus="'+mid+'">'+opts+'</select></div>';
+  var h='<div class="att-line"><div class="att-line-top"><div class="att-main"><div class="att-title">'+esc((cellNum||'?')+'셀')+'</div><div class="att-meta">'+esc(m.name||'')+'</div></div><select class="fi att-select '+cls+'" data-astatus="'+mid+'">'+opts+'</select></div>';
   if(attNeedReason(status)||reason){
-    h+='<textarea class="fi att-reason" data-areason="'+mid+'" rows="2" placeholder="'+(status==='불참'?'불참 사유 작성':status==='기타'?'기타 사유 작성':'사유 작성')+'">'+esc(reason)+'</textarea><div class="att-note">불참/기타 선택 시 사유를 적을 수 있어요.</div>';
+    var rcls=(status==='불참')?'abs':'etc';
+    var rlabel=(status==='불참')?'불참 사유':'기타 사유';
+    var rph=(status==='불참')?'불참 사유 작성':'기타 사유 작성';
+    h+='<div class="att-reason-wrap"><div class="att-reason-label '+rcls+'">'+rlabel+'</div><textarea class="fi att-reason '+rcls+'" data-areason="'+mid+'" rows="2" placeholder="'+rph+'">'+esc(reason)+'</textarea><div class="att-note '+rcls+'">사유를 꼭 적어 두면 빠르게 확인할 수 있어요.</div></div>';
   }
   h+='</div>';
   return h;
@@ -1023,7 +1022,7 @@ function rGchk(){
   if(!$('I_gd').value)$('I_gd').value=dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
   var ds=attDs(),q=($('I_gq').value||'').toLowerCase();
   var cells=ents(gCells).sort(function(a,b){return attCellNum(a[1])-attCellNum(b[1]);});
-  var total=0,done=0,left=[],right=[];
+  var total=0,done=0,lines=[];
   for(var i=0;i<cells.length;i++){
     var cid=cells[i][0],c=cells[i][1],ld=attLeaderOfCell(cid,c),cellNum=attCellNum(c);
     if(!ld)continue;
@@ -1031,17 +1030,14 @@ function rGchk(){
     if(q&&kw.indexOf(q)<0)continue;
     var rec=attRec(ds,mid),status=rec&&rec.status?rec.status:'',reason=rec&&rec.reason?rec.reason:'';
     total++; if(status)done++;
-    var line=attBuildLine(cellNum,c,m,mid,status,reason);
-    if(cellNum>=26) right.push(line); else left.push(line);
+    lines.push(attBuildLine(cellNum,c,m,mid,status,reason));
   }
   $('I_gsum').textContent=(q?'검색 결과 기준 · ':'')+done+' / '+total+'명 입력';
-  if(!left.length&&!right.length){
-    $('I_ggrid').innerHTML='<div class="card" style="grid-column:1/-1;text-align:center;color:#888">표시할 셀리더가 없어요</div>';
+  if(!lines.length){
+    $('I_ggrid').innerHTML='<div class="card" style="text-align:center;color:#888">표시할 셀리더가 없어요</div>';
     return;
   }
-  var h='<div class="att-col"><div class="att-col-head">1~25셀</div>'+(left.length?left.join(''):'<div class="att-empty">표시할 셀이 없어요</div>')+'</div>'
-    +'<div class="att-col"><div class="att-col-head">26~46셀</div>'+(right.length?right.join(''):'<div class="att-empty">표시할 셀이 없어요</div>')+'</div>';
-  $('I_ggrid').innerHTML=h;
+  $('I_ggrid').innerHTML=lines.join('');
 }
 $('I_gd').onchange=rGchk;
 $('I_gq').oninput=rGchk;
