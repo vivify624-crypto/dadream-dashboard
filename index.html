@@ -41,8 +41,6 @@ td{padding:8px 10px;border-top:0.5px solid rgba(0,0,0,.06);vertical-align:middle
 input.fi,textarea.fi,select.fi{width:100%;padding:8px 10px;border:0.5px solid rgba(0,0,0,.15);border-radius:6px;font-size:13px;background:#fff;color:#1a1a1a;font-family:inherit;-webkit-appearance:none}
 input.fi:focus,textarea.fi:focus,select.fi:focus{outline:none;border-color:#3C3489}
 textarea.fi{resize:vertical}
-.frow{display:flex;gap:8px}
-.frow .fr{flex:1}
 .ov{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:100;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px 12px}
 .ov.show{display:block}
 .mbox{background:#fff;border-radius:14px;max-width:500px;margin:0 auto;padding:1.5rem;width:100%}
@@ -127,7 +125,6 @@ textarea.fi{resize:vertical}
 .mtag.faith{background:#E6F1FB;color:#185FA5}
 .mtag.lead{background:#EEEDFE;color:#3C3489}
 .mtag.etc{background:#f5f5f3;color:#555}
-/* 예배순서 */
 .wr-role{font-size:13px;font-weight:600;color:#3C3489;padding:9px 12px;border-right:0.5px solid rgba(0,0,0,.06);white-space:nowrap;background:#f9f9ff;width:90px}
 .wr-val{font-size:13px;padding:9px 12px;word-break:break-word;white-space:normal}
 .chi{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:6px;margin-bottom:4px}
@@ -209,32 +206,21 @@ textarea.fi{resize:vertical}
   #I_det .evb .btn.xs.dl{background:#FFF7F7;border-color:rgba(240,149,149,.48);color:rgba(163,45,45,.62)}
 }
 @media (min-width:1100px){
-  #I_s_cal,
-  #I_s_wed,
-  #I_s_worship{
-    width:calc(100% - 56px);
-    max-width:960px;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  #I_s_cal .cdet{padding:.85rem .95rem;}
-  #I_s_cal .evb{margin-bottom:10px;padding-bottom:10px;}
-  #I_s_cal .memobox{padding:7px 10px;line-height:1.55;margin-bottom:4px;}
-  #I_s_cal .ni{margin-bottom:4px;}
-  #I_s_wed .row.sb2.mb2,
-  #I_s_wed > div:nth-child(2),
-  #I_s_worship > .row{margin-bottom:.7rem !important;}
-  /* 결혼 카드 */
-  #I_wtb > div{padding:.85rem .95rem !important;margin-bottom:.55rem !important;border-radius:10px !important;}
-  #I_wtb > div > div:first-child{margin-bottom:.45rem !important;}
-  /* 예배 */
-  #I_s_worship .card{padding:1rem !important;}
-  #I_s_worship .card.mb2{margin-bottom:.7rem !important;}
-  #I_s_worship .ct-t{margin-bottom:.6rem !important;}
-  #I_s_worship th{padding:6px 8px !important;font-size:11px !important;}
-  #I_s_worship td{padding:6px 8px !important;font-size:12px !important;line-height:1.35 !important;}
-  #I_s_worship .wr-role{width:82px !important;padding:7px 9px !important;font-size:12px !important;}
-  #I_s_worship .wr-val{padding:7px 9px !important;font-size:12px !important;line-height:1.35 !important;}
+  #I_s_cal,#I_s_wed,#I_s_worship{width:calc(100% - 56px);max-width:960px;margin-left:auto;margin-right:auto}
+  #I_s_cal .cdet{padding:.85rem .95rem}
+  #I_s_cal .evb{margin-bottom:10px;padding-bottom:10px}
+  #I_s_cal .memobox{padding:7px 10px;line-height:1.55;margin-bottom:4px}
+  #I_s_cal .ni{margin-bottom:4px}
+  #I_s_wed .row.sb2.mb2,#I_s_wed > div:nth-child(2),#I_s_worship > .row{margin-bottom:.7rem !important}
+  #I_wtb > div{padding:.85rem .95rem !important;margin-bottom:.55rem !important;border-radius:10px !important}
+  #I_wtb > div > div:first-child{margin-bottom:.45rem !important}
+  #I_s_worship .card{padding:1rem !important}
+  #I_s_worship .card.mb2{margin-bottom:.7rem !important}
+  #I_s_worship .ct-t{margin-bottom:.6rem !important}
+  #I_s_worship th{padding:6px 8px !important;font-size:11px !important}
+  #I_s_worship td{padding:6px 8px !important;font-size:12px !important;line-height:1.35 !important}
+  #I_s_worship .wr-role{width:82px !important;padding:7px 9px !important;font-size:12px !important}
+  #I_s_worship .wr-val{padding:7px 9px !important;font-size:12px !important;line-height:1.35 !important}
 }
 </style>
 </head>
@@ -254,7 +240,6 @@ textarea.fi{resize:vertical}
 <div class="main">
   <div class="topbar"><span class="tb-t" id="I_tbt">일정 캘린더</span></div>
   <div class="ct">
-    <!-- 캘린더 -->
     <div class="sec on" id="I_s_cal">
       <div class="cleg" id="I_leg"></div>
       <div class="cal-nav">
@@ -272,13 +257,11 @@ textarea.fi{resize:vertical}
       <div class="cgrid" id="I_grid"></div>
       <div id="I_det"><div class="cdet"><p class="hint">날짜를 탭하면 일정을 확인할 수 있어요</p></div></div>
     </div>
-    <!-- 결혼 -->
     <div class="sec" id="I_s_wed">
       <div class="row sb2 mb2"><span class="mu" id="I_wsum"></span><button class="btn pr sm" id="I_wadd">+ 결혼 추가</button></div>
       <div style="font-size:14px;font-weight:600;text-align:center;margin-bottom:1rem">26년 다드림 결혼식 현황</div>
       <div id="I_wtb"></div>
     </div>
-    <!-- 셀 명단 -->
     <div class="sec" id="I_s_cells">
       <div class="row sb2 mb2" style="flex-wrap:wrap;gap:8px">
         <span class="mu" id="I_csum"></span>
@@ -289,7 +272,6 @@ textarea.fi{resize:vertical}
       </div>
       <div class="g3" id="I_cgrid"></div>
     </div>
-    <!-- 출석체크 -->
     <div class="sec" id="I_s_gchk">
       <div class="att-toolbar">
         <div class="att-tools">
@@ -303,7 +285,6 @@ textarea.fi{resize:vertical}
       </div>
       <div class="att-grid" id="I_ggrid"></div>
     </div>
-    <!-- 예배 -->
     <div class="sec" id="I_s_worship">
       <div id="I_ww">
         <div class="row sb2 mb2" style="flex-wrap:wrap;gap:8px">
@@ -323,7 +304,6 @@ textarea.fi{resize:vertical}
         </div>
       </div>
     </div>
-    <!-- 체크리스트 -->
     <div class="sec" id="I_s_chk">
       <div id="I_ckw">
         <div class="card mb2">
@@ -417,7 +397,7 @@ textarea.fi{resize:vertical}
       <label for="M_mpf" style="display:inline-block;padding:6px 12px;border-radius:8px;font-size:12px;cursor:pointer;border:0.5px solid rgba(0,0,0,.15);background:#fff">📷 사진 선택</label>
       <input type="file" id="M_mpf" accept="image/*" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">
       <div id="M_mpd" style="display:none;margin-top:6px"><button class="btn xs dl" id="M_mpdel" type="button">사진 삭제</button></div>
-      <div style="font-size:11px;color:#888;margin-top:5px">아바타 또는 버튼 탭</div>
+      <div style="font-size:11px;color:#888;margin-top:5px">아바타 또는 버튼 탭 · 자동 압축 저장</div>
     </div>
   </div>
   <div class="fr"><label class="fl">이름 *</label><input class="fi" type="text" id="M_mn"></div>
@@ -514,6 +494,7 @@ function cfm(msg,cb){ $('M_cfmT').textContent=msg; cfmCb=cb; showMo('M_cfm'); }
 $('M_cfmY').onclick=function(){hideMo('M_cfm');if(cfmCb)cfmCb();};
 $('M_cfmN').onclick=function(){hideMo('M_cfm');cfmCb=null;};
 function findUp(el,attr){while(el){if(el.getAttribute&&el.getAttribute(attr))return el;el=el.parentNode;}return null;}
+
 /* INIT DATA */
 var IEVTS={"2026-03-22":[{t:"제자훈련",c:"p",m:"",n:[],memo:""}],"2026-03-27":[{t:"차량 조사 (4/1 관련)",c:"a",m:"3월 마지막 주",n:["4/1 교회해산법 행사 차량 조사 진행"],memo:""}],"2026-03-28":[{t:"거방",c:"t",m:"",n:[],memo:""}],"2026-04-01":[{t:"교회해산법 국회 계단",c:"c",m:"",n:["다음 주일 예배 후 광고 진행","차량 관련 확인 필요"],memo:""}],"2026-04-05":[{t:"칸타타",c:"p",m:"오후예배 본성전",n:["셀 모임 진행 여부 추후 논의"],memo:""},{t:"부활절 전도 대축제",c:"c",m:"",n:["1,2청 연합 카톡방 46개 셀 구역 확인","예배 봉사자 고려 구역 배치"],memo:""}],"2026-04-06":[{t:"부장님 셀 시작",c:"t",m:"4월 첫째 주",n:[],memo:""}],"2026-04-11":[{t:"새가족 환영회",c:"k",m:"",n:[],memo:""}],"2026-04-12":[{t:"다드림 예배-태국 선교 보고",c:"p",m:"",n:[],memo:""}],"2026-04-18":[{t:"석인후 리더 결혼",c:"k",m:"",n:[],memo:""}],"2026-04-25":[{t:"월례회",c:"a",m:"장소: 지연 세미나실",n:["팀장 수요 오프라인 필참 여부 → 현재처럼 유지"],memo:""}],"2026-05-09":[{t:"이은빈 리더 결혼",c:"k",m:"",n:[],memo:""}],"2026-05-16":[{t:"이정욱 결혼",c:"k",m:"",n:[],memo:""}],"2026-05-25":[{t:"셀리더 체육대회",c:"t",m:"백학 초등학교",n:["셀리더 필참","식비 100만원 지원 확인"],memo:""}],"2026-06-20":[{t:"이세원 결혼",c:"k",m:"",n:[],memo:""}],"2026-06-27":[{t:"효도 잔치",c:"c",m:"",n:["2청 메인 진행"],memo:""}],"2026-07-09":[{t:"여름 수련회 1일차",c:"b",m:"7/9~7/11",n:[],memo:""}],"2026-07-10":[{t:"여름 수련회 2일차",c:"b",m:"",n:[],memo:""}],"2026-07-11":[{t:"여름 수련회 마지막날",c:"b",m:"",n:[],memo:""}]};
 var IWED={w1:{groom:"석인후(25셀)",bride:"윤혜진(3청)",date:"2026-04-18",venue:"발산 더 베뉴지",time:"18:30",mc:"이창헌 목사님",prayer:"이진섭 목사님",officiant:"박한수 목사님",extra:"",note:""},w2:{groom:"이은빈(21셀)",bride:"염정원(27셀)",date:"2026-05-09",venue:"백석 천년웨딩홀 미엘홀",time:"17:30",mc:"여호수아 전도사님",prayer:"은빈형제 아버님",officiant:"박한수 목사님",extra:"",note:""},w3:{groom:"이정욱(35셀)",bride:"김원지(41셀)",date:"2026-05-16",venue:"삼성 더 베일리 하우스(2층)",time:"14:00",mc:"-",prayer:"이창헌 목사님",officiant:"박한수 목사님",extra:"",note:""},w4:{groom:"이세원(26셀)",bride:"이아영(36셀)",date:"2026-06-20",venue:"마포 월드컵컨벤션",time:"18:20",mc:"-",prayer:"이창헌 목사님",officiant:"박한수 목사님",extra:"",note:""},w5:{groom:"고기헌(16셀)",bride:"외부인원",date:"2026-08-22",venue:"발산 더베뉴지 서울아트홀",time:"17:20",mc:"-",prayer:"-",officiant:"신부 측 목사님",extra:"",note:""},w6:{groom:"서정암(35셀)",bride:"김민정(38셀)",date:"2026-09-19",venue:"상암 DMC웨딩타워 펠리체홀",time:"15:00",mc:"-",prayer:"이창헌 목사님",officiant:"박한수 목사님",extra:"이창헌 목사님께 기도 부탁 드릴 예정",note:""},w7:{groom:"김준원(19셀)",bride:"김원비(29셀)",date:"2026-10-09",venue:"마곡나루 보타닉파크",time:"17:50",mc:"-",prayer:"미정",officiant:"미정",extra:"",note:""}};
@@ -536,7 +517,6 @@ function buildCells(){
   return{nc:nc,nm:nm};
 }
 var built=buildCells();
-var _skipListener = {};
 var gEvts=JSON.parse(JSON.stringify(IEVTS));
 var gWed=JSON.parse(JSON.stringify(IWED));
 var gOrd=JSON.parse(JSON.stringify(IORD));
@@ -551,12 +531,58 @@ var eWed=null, eOrd=null, eKom=null, eCid=null, eMid=null;
 var mPhotoURL=null;
 var gGsyncTs=0;
 var curSec='cal';
-/* FIREBASE */
+
+/* ── 사진 압축 (최대 200px, JPEG 72%) ── */
+function compressPhoto(file, cb){
+  var MAX=200, Q=0.72;
+  var img=new Image(), url=URL.createObjectURL(file);
+  img.onload=function(){
+    var w=img.width,h=img.height,s=Math.min(MAX/w,MAX/h,1);
+    var cw=Math.round(w*s),ch=Math.round(h*s);
+    var cv=document.createElement('canvas');
+    cv.width=cw; cv.height=ch;
+    cv.getContext('2d').drawImage(img,0,0,cw,ch);
+    URL.revokeObjectURL(url);
+    cb(cv.toDataURL('image/jpeg',Q));
+  };
+  img.onerror=function(){URL.revokeObjectURL(url);cb(null);};
+  img.src=url;
+}
+
+/* ── FIREBASE ── */
 var FB=null;
 function fbSet(path,val){if(FB)try{FB.ref(path).set(val);}catch(e){}}
 function fbDel(path){if(FB)try{FB.ref(path).remove();}catch(e){}}
-function fbOn(path,cb){if(!FB)return;try{FB.ref(path).on('value',function(s){cb(s.val());},function(err){console.log('FB listener error:',path,err);});}catch(e){console.log('FB listener exception:',e);}}
-function fbOnce(path,cb){if(FB)try{FB.ref(path).once('value',function(s){cb(s.val());});}catch(e){}}
+function fbOn(path,cb){
+  if(!FB)return;
+  try{FB.ref(path).on('value',function(s){cb(s.val());},function(err){console.log('FB err:',path,err);});}
+  catch(e){console.log('FB ex:',e);}
+}
+function fbOnce(path,cb){
+  if(FB)try{FB.ref(path).once('value',function(s){cb(s.val());});}catch(e){}
+}
+
+/* ── 출석 날짜별 리스너 (오늘 날짜만 실시간, 나머지는 1회 fetch) ── */
+var _attListener=null; // {ref, date}
+function attSetDate(ds){
+  if(!ds) ds=dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
+  // 같은 날짜면 그냥 렌더만
+  if(_attListener && _attListener.date===ds){ rGchk(); return; }
+  // 기존 리스너 해제
+  if(_attListener){
+    try{_attListener.ref.off('value');}catch(e){}
+    _attListener=null;
+  }
+  if(!FB){ rGchk(); return; }
+  var ref=FB.ref('gf_attendance/'+ds);
+  ref.on('value',function(s){
+    gGchk[ds]=s.val()||{};
+    gGsyncTs=Date.now(); setGsync(gGsyncTs);
+    if(curSec==='gchk') rGchk();
+  },function(e){console.log('att err',e);});
+  _attListener={ref:ref,date:ds};
+}
+
 function initFB(){
   try{
     firebase.initializeApp({apiKey:"AIzaSyCYzIoHqTze7xstmkDZvcG-skgDk1hi4pA",authDomain:"youth-calendar-12793.firebaseapp.com",databaseURL:"https://youth-calendar-12793-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"youth-calendar-12793",storageBucket:"youth-calendar-12793.appspot.com",messagingSenderId:"286339113904",appId:"1:286339113904:web:b9f8876da982aa47faec75"});
@@ -565,27 +591,60 @@ function initFB(){
     startFbSync();
   }catch(e){console.log('FB error',e);}
 }
+
+/*
+ * ★ 핵심 최적화: 모든 노드를 fbOnce(1회 읽기)로 전환
+ *   - 캘린더/셀/멤버/예배/결혼 → 페이지 로드 시 1회만 다운로드
+ *   - 출석만 → 선택 날짜 경로만 실시간 (전체 아닌 당일만)
+ *   - 저장 시 로컬 상태도 즉시 반영되므로 실시간 불필요
+ */
 function startFbSync(){
+  // 캘린더 일정
   fbOnce('ycal-evts',function(v){
-    gEvts={};if(v){var e=ents(v);for(var i=0;i<e.length;i++)gEvts[e[i][0]]=toArr(e[i][1]);}
+    gEvts={};
+    if(v){var e=ents(v);for(var i=0;i<e.length;i++)gEvts[e[i][0]]=toArr(e[i][1]);}
     if(curSec==='cal'){rCal();if(gSel)rDet(gSel);}
-    fbOn('ycal-evts',function(v2){gEvts={};if(v2){var e2=ents(v2);for(var j=0;j<e2.length;j++)gEvts[e2[j][0]]=toArr(e2[j][1]);}if(curSec==='cal'){rCal();if(gSel)rDet(gSel);}});
   });
-  fbOn('ycal-chk',function(v){gChk=v||{};if(gSel)rDet(gSel);});
-  fbOn('ycal-labels',function(v){gLabels={p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'};var src=v||{};var ks=keys(src);for(var i=0;i<ks.length;i++)gLabels[ks[i]]=src[ks[i]];rLeg();});
-  fbOnce('weddings',function(v){gWed=v||{};if(curSec==='wed')rWed();fbOn('weddings',function(v2){gWed=v2||{};if(curSec==='wed')rWed();});});
-  fbOnce('cells',function(v){gCells=v||{};fbOnce('members',function(v2){gMems=v2||{};if(curSec==='cells')rCells();if(curSec==='gchk')rGchk();fbOn('cells',function(v3){gCells=v3||{};if(curSec==='cells'){rCells();if(eCid&&$('M_cell').classList.contains('show'))rMemList(eCid);}if(curSec==='gchk')rGchk();});fbOn('members',function(v4){gMems=v4||{};if(curSec==='cells'){rCells();if(eCid&&$('M_cell').classList.contains('show'))rMemList(eCid);}if(curSec==='gchk')rGchk();});});});
-  fbOnce('worship_orders',function(v){gOrd=v||{};if(curSec==='worship')rWorship();fbOn('worship_orders',function(v2){gOrd=v2||{};if(curSec==='worship')rWorship();});});
-  fbOnce('worship_committee',function(v){gKom=v||{};if(curSec==='worship')rWorship();fbOn('worship_committee',function(v2){gKom=v2||{};if(curSec==='worship')rWorship();});});
-  fbOn('checks',function(v){gChecks=v||{};if(curSec==='chk')rChk();});
-  fbOn('gf_attendance',function(v){gGchk=v||{};gGsyncTs=Date.now();setGsync(gGsyncTs);if(curSec==='gchk')rGchk();});
+  // 체크리스트 완료 상태
+  fbOnce('ycal-chk',function(v){gChk=v||{};if(gSel)rDet(gSel);});
+  // 색상 라벨
+  fbOnce('ycal-labels',function(v){
+    gLabels={p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'};
+    var src=v||{};var ks=keys(src);for(var i=0;i<ks.length;i++)gLabels[ks[i]]=src[ks[i]];
+    rLeg();
+  });
+  // 결혼 현황
+  fbOnce('weddings',function(v){gWed=v||{};if(curSec==='wed')rWed();});
+  // 셀 + 멤버 (순차 로드)
+  fbOnce('cells',function(v){
+    gCells=v||{};
+    fbOnce('members',function(v2){
+      gMems=v2||{};
+      if(curSec==='cells')rCells();
+      if(curSec==='gchk')rGchk();
+    });
+  });
+  // 예배순서 / 예배위원
+  fbOnce('worship_orders',function(v){gOrd=v||{};if(curSec==='worship')rWorship();});
+  fbOnce('worship_committee',function(v){gKom=v||{};if(curSec==='worship')rWorship();});
+  // 이번 주 체크리스트
+  fbOnce('checks',function(v){gChecks=v||{};if(curSec==='chk')rChk();});
+  // 출석: 오늘 날짜 경로만 실시간 리스닝
+  attSetDate(dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()));
 }
+
 (function(){
   var s1=document.createElement('script');
   s1.src='https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.0/firebase-app-compat.min.js';
-  s1.onload=function(){var s2=document.createElement('script');s2.src='https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.0/firebase-database-compat.min.js';s2.onload=initFB;document.head.appendChild(s2);};
+  s1.onload=function(){
+    var s2=document.createElement('script');
+    s2.src='https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.0/firebase-database-compat.min.js';
+    s2.onload=initFB;
+    document.head.appendChild(s2);
+  };
   document.head.appendChild(s1);
 })();
+
 /* NAVIGATION */
 var STITLE={cal:'일정 캘린더',wed:'결혼 현황',cells:'셀 명단',gchk:'출석체크',worship:'이번 주 예배 담당자',chk:'이번주 체크리스트'};
 function navTo(id){
@@ -596,14 +655,21 @@ function navTo(id){
   $('I_s_'+id).classList.add('on');
   $('I_tbt').textContent=STITLE[id]||'';
   curSec=id;
-  if(id==='cal')rCal();if(id==='wed')rWed();if(id==='cells')rCells();if(id==='gchk')rGchk();if(id==='worship')rWorship();if(id==='chk')rChk();
+  if(id==='cal')rCal();
+  if(id==='wed')rWed();
+  if(id==='cells')rCells();
+  if(id==='gchk')rGchk();
+  if(id==='worship')rWorship();
+  if(id==='chk')rChk();
 }
 (function(){var ns=document.querySelectorAll('.sni,.mni');for(var i=0;i<ns.length;i++){(function(el){el.onclick=function(){navTo(el.getAttribute('data-s'));};})(ns[i]);}})();
+
 /* COLOR PICKER */
 (function(){var opt=$('M_copt');for(var i=0;i<CK.length;i++){(function(k){var item=document.createElement('button');item.type='button';item.className='csw-item';item.setAttribute('data-c',k);var d=document.createElement('div');d.className='csw';d.style.background=CBG[k];d.setAttribute('data-c',k);var t=document.createElement('span');t.className='csw-txt';t.textContent=calLabel(k);item.appendChild(d);item.appendChild(t);item.onclick=function(){var sw=document.querySelectorAll('#M_copt .csw');for(var j=0;j<sw.length;j++)sw[j].classList.remove('sel');d.classList.add('sel');};opt.appendChild(item);})(CK[i]);}})();
 function refreshCswLabels(){var items=document.querySelectorAll('#M_copt .csw-item');for(var i=0;i<items.length;i++){var c=items[i].getAttribute('data-c'),t=items[i].querySelector('.csw-txt');if(t)t.textContent=calLabel(c);}}
 function getCsel(){var s=document.querySelector('#M_copt .csw.sel');return s?s.getAttribute('data-c'):'p';}
 function setCsel(c){var sw=document.querySelectorAll('#M_copt .csw');for(var i=0;i<sw.length;i++)sw[i].classList.toggle('sel',sw[i].getAttribute('data-c')===c);}
+
 /* LEGEND */
 function rLeg(){
   var h='<span style="font-size:11px;color:#888;margin-right:4px">색상</span>';
@@ -614,6 +680,7 @@ function rLeg(){
 }
 $('M_lX').onclick=function(){hideMo('M_lbl');};
 $('M_lS').onclick=function(){var v=$('M_li').value.trim();if(!v)return;gLabels[gLmoKey]=v;fbSet('ycal-labels',gLabels);refreshCswLabels();if(gSel)rDet(gSel);rCal();hideMo('M_lbl');banner('라벨 저장됐어요 ✓');};
+
 /* CALENDAR */
 function rCal(){
   $('I_ml').textContent=gY+'년 '+(gM+1)+'월';
@@ -795,6 +862,7 @@ function calKako(key){
   try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(function(){banner('복사됐어요! 📋');}).catch(function(){fb2(text);});}catch(ex){fb2(text);}
   function fb2(t){var ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;top:-9999px;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');banner('복사됐어요!');}catch(ex){}if(ta.parentNode)ta.parentNode.removeChild(ta);}
 }
+
 /* WEDDING */
 function rWed(){
   var items=ents(gWed).sort(function(a,b){return(a[1].date||'9').localeCompare(b[1].date||'9')});
@@ -817,15 +885,11 @@ function rWed(){
     h+='<span style="font-size:15px;font-weight:700">'+esc(w.groom||'')+' 💍 '+esc(w.bride||'')+'</span>';
     h+='</div><button class="btn xs" data-wed="'+id+'">수정</button></div>';
     h+='<div style="display:grid;grid-template-columns:1fr 1fr;font-size:13px">';
-    // 날짜 + 시간
     h+='<div style="padding:3px 0 4px;'+R+'"><div style="'+LB+'">날짜</div><div style="'+VB+'">'+(w.date||'')+(dow2?' ('+dow2+')':'')+'</div></div>';
     h+='<div style="padding:3px 0 4px;'+R+';padding-left:12px"><div style="'+LB+'">시간</div><div style="'+VB+'">'+(w.time||'-')+'</div></div>';
-    // 장소
     h+='<div style="grid-column:1/-1;padding:3px 0 4px;'+R+'"><div style="'+LB+'">장소</div><div style="'+VB+'">'+esc(w.venue||'-')+'</div></div>';
-    // 사회 + 기도
     h+='<div style="padding:3px 0 4px;'+R+'"><div style="'+LB+'">사회</div><div style="'+VS+'">'+esc(w.mc||'-')+'</div></div>';
     h+='<div style="padding:3px 0 4px;'+R+';padding-left:12px"><div style="'+LB+'">기도</div><div style="'+VS+'">'+esc(w.prayer||'-')+'</div></div>';
-    // 주례
     h+='<div style="grid-column:1/-1;padding:3px 0 4px;'+(w.extra||w.note?R:'')+'">'+'<div style="'+LB+'">주례</div><div style="'+VS+'">'+esc(w.officiant||'-')+'</div></div>';
     if(w.extra&&w.extra!=='-')h+='<div style="grid-column:1/-1;padding:3px 0 4px;'+(w.note?R:'')+'">'+'<div style="'+LB+'">기타</div><div style="'+VS+'">'+esc(w.extra)+'</div></div>';
     if(w.note)h+='<div style="grid-column:1/-1;padding:3px 0 4px"><div style="'+LB+'">비고</div><div style="font-size:12px;color:#555">'+esc(w.note)+'</div></div>';
@@ -857,6 +921,7 @@ $('M_wS').onclick=function(){
   gWed[id]={groom:g,bride:b,date:$('M_wd').value,time:$('M_wt').value.trim(),venue:$('M_wv').value.trim(),mc:$('M_wmc').value.trim()||'-',prayer:$('M_wpr').value.trim()||'-',officiant:$('M_wof').value.trim(),extra:$('M_wex').value.trim(),note:$('M_wno').value.trim()};
   fbSet('weddings/'+id,gWed[id]);hideMo('M_wed');rWed();banner('저장됐어요 ✓');
 };
+
 /* CELLS */
 function rCells(){
   var sq=($('I_csq').value||'').toLowerCase();
@@ -895,6 +960,7 @@ $('M_cellS').onclick=function(){var n=$('M_cni').value.trim();if(!n){banner('셀
 $('I_cnadd').onclick=function(){$('M_nnm').value='';showMo('M_nadd');};
 $('M_nX').onclick=function(){hideMo('M_nadd');};
 $('M_nS').onclick=function(){var n=$('M_nnm').value.trim();if(!n){banner('셀 이름을 입력해 주세요',true);return;}var cid='c_'+uid();gCells[cid]={name:n,number:keys(gCells).length+1,color:'g'};fbSet('cells/'+cid,gCells[cid]);hideMo('M_nadd');rCells();banner(n+' 추가됐어요 ✓');};
+
 /* MEMBER */
 function getTagHTML(arr){if(!arr||!arr.length)return'';var h='';for(var i=0;i<arr.length;i++){var t=TAGS[arr[i]];if(t)h+='<span class="mtag '+t.c+'">'+t.l+'</span>';}return h;}
 function rMemList(cid){
@@ -917,16 +983,21 @@ function rMemList(cid){
   for(i=0;i<avs.length;i++){(function(av){av.onclick=function(){var m2=gMems[av.getAttribute('data-photo')];if(m2&&m2.photo){$('M_photoImg').src=m2.photo;$('M_photoName').textContent=m2.name||'';$('M_photoSub').textContent=(m2.role||'')+(m2.birthYear?' · '+m2.birthYear:'');$('M_photo').style.display='flex';}};})(avs[i]);}
 }
 $('M_photoX').onclick=function(){$('M_photo').style.display='none';};
+
+/* ── 사진 업로드: 압축 후 저장 ── */
 $('M_mpf').onchange=function(){
-  var file=this.files[0];if(!file)return;
-  var fr=new FileReader();
-  fr.onload=function(ev){
-    var dataUrl=ev.target.result;mPhotoURL=dataUrl;
-    var av=$('M_mav');av.innerHTML='<img src="'+dataUrl+'" style="width:100%;height:100%;object-fit:cover">';$('M_mpd').style.display='';
-  };
-  fr.onerror=function(){banner('이미지를 읽을 수 없어요',true);};
-  fr.readAsDataURL(file);
+  var file=this.files[0]; if(!file) return;
+  compressPhoto(file, function(dataUrl){
+    if(!dataUrl){ banner('이미지를 읽을 수 없어요', true); return; }
+    mPhotoURL=dataUrl;
+    var av=$('M_mav');
+    av.innerHTML='<img src="'+dataUrl+'" style="width:100%;height:100%;object-fit:cover">';
+    $('M_mpd').style.display='';
+    var kb=Math.round(dataUrl.length*0.75/1024);
+    banner('사진 압축 완료 (약 '+kb+'KB) ✓');
+  });
 };
+
 $('M_mpdel').onclick=function(){mPhotoURL='';$('M_mav').innerHTML='👤';$('M_mpd').style.display='none';$('M_mpf').value='';};
 function openMem(cid,mid){
   eMid=mid;eCid=cid;mPhotoURL=null;var m=mid?gMems[mid]:{};
@@ -944,9 +1015,9 @@ $('M_mX').onclick=function(){hideMo('M_mem');};
 $('M_mdel').onclick=function(){
   if(!eMid)return;var nm=gMems[eMid]?gMems[eMid].name:'멤버';
   cfm('"'+nm+'"를 삭제할까요?',function(){
-    var mid2=eMid,cid2=eCid;_skipListener.members=true;
+    var mid2=eMid,cid2=eCid;
     if(gCells[cid2]&&gCells[cid2].leaderId===mid2){gCells[cid2].leaderId=null;if(FB)FB.ref('cells/'+cid2+'/leaderId').remove();}
-    delete gMems[mid2];if(FB)FB.ref('members/'+mid2).remove().then(function(){setTimeout(function(){_skipListener.members=false;},2000);});
+    delete gMems[mid2];if(FB)FB.ref('members/'+mid2).remove();
     hideMo('M_mem');rMemList(cid2);rCells();banner('삭제됐어요');
   });
 };
@@ -967,6 +1038,7 @@ $('M_mS').onclick=function(){
   fbSet('members/'+id,md);mPhotoURL=null;
   hideMo('M_mem');rMemList(eCid);rCells();banner('저장됐어요 ✓');
 };
+
 /* GF ATTENDANCE */
 var GSTAT=['출석','2층','3층','비전센터','불참','불참(야근)','2층(늦참)','2층(야근)','3층(늦참)','3층(야근)','2층or3층(늦참)','2층or3층(야근)','기타'];
 function attDs(){
@@ -1055,27 +1127,30 @@ function rGchk(){
   }
   $('I_ggrid').innerHTML=lines.join('');
 }
-$('I_gd').onchange=rGchk;
+
+/* 날짜 변경 시 해당 날짜 출석 데이터 fetch */
+$('I_gd').onchange=function(){
+  var ds=this.value||dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
+  attSetDate(ds);
+};
+
 $('I_gq').oninput=rGchk;
+
+/* 새로고침: 현재 날짜 경로만 1회 fetch */
 $('I_grefresh').onclick=function(){
   var btn=this;
-  btn.disabled=true;
-  btn.classList.add('att-syncing');
+  btn.disabled=true; btn.classList.add('att-syncing');
   setGsync(Date.now(),'불러오는 중...');
-  fbOnce('gf_attendance',function(v){
-    gGchk=v||{};
-    gGsyncTs=Date.now();
-    rGchk();
+  var ds=attDs();
+  fbOnce('gf_attendance/'+ds,function(v){
+    gGchk[ds]=v||{};
+    gGsyncTs=Date.now(); rGchk();
     banner('최신 출석 상태를 불러왔어요 ✓');
-    btn.disabled=false;
-    btn.classList.remove('att-syncing');
+    btn.disabled=false; btn.classList.remove('att-syncing');
   });
-  setTimeout(function(){
-    btn.disabled=false;
-    btn.classList.remove('att-syncing');
-    if(curSec==='gchk') rGchk();
-  },2500);
+  setTimeout(function(){btn.disabled=false;btn.classList.remove('att-syncing');},3000);
 };
+
 $('I_gall').onclick=function(){
   var ds=attDs(),cells=ents(gCells),pack={};
   for(var i=0;i<cells.length;i++){
@@ -1109,6 +1184,7 @@ $('I_ggrid').onchange=function(e){
     attSave(ds,mid2,st2,t.value.trim());
   }
 };
+
 /* WORSHIP */
 function rWorship(){
   var oList=ents(gOrd).sort(function(a,b){return(a[1].date||'').localeCompare(b[1].date||'')});
@@ -1127,19 +1203,15 @@ function rWorship(){
   if(!kList.length){
     kh='<tr><td class="wr-role">날짜</td><td class="wr-val" style="color:#888">데이터 없음</td></tr>';
   } else {
-    // 날짜 행 (헤더 역할) + 수정 버튼
     kh+='<tr><td class="wr-role">날짜</td>';
     for(var i=0;i<kList.length;i++){
       var id2=kList[i][0],k=kList[i][1];
       kh+='<td class="wr-val"><div style="display:flex;align-items:center;gap:6px"><span style="font-weight:600">'+fmtD(k.date)+'</span><button class="btn xs" data-kom="'+id2+'">수정</button></div></td>';
     }
     kh+='</tr>';
-    // 역할별 행
     for(var ri=0;ri<KOMROLES.length;ri++){
       kh+='<tr><td class="wr-role">'+KOMROLES[ri]+'</td>';
-      for(var i=0;i<kList.length;i++){
-        kh+='<td class="wr-val">'+esc(kList[i][1][KOMROLES[ri]]||'')+'</td>';
-      }
+      for(var i=0;i<kList.length;i++){kh+='<td class="wr-val">'+esc(kList[i][1][KOMROLES[ri]]||'')+'</td>';}
       kh+='</tr>';
     }
   }
@@ -1156,8 +1228,7 @@ $('M_oX').onclick=function(){hideMo('M_ord');};
 $('M_odel').onclick=function(){
   if(!eOrd)return;
   cfm('예배순서를 삭제할까요?',function(){
-    var id=eOrd;_skipListener.orders=true;
-    delete gOrd[id];if(FB)FB.ref('worship_orders/'+id).remove().then(function(){setTimeout(function(){_skipListener.orders=false;},2000);});
+    var id=eOrd;delete gOrd[id];if(FB)FB.ref('worship_orders/'+id).remove();
     hideMo('M_ord');rWorship();banner('삭제됐어요');
   });
 };
@@ -1166,12 +1237,12 @@ $('M_kX').onclick=function(){hideMo('M_kom');};
 $('M_kdel').onclick=function(){
   if(!eKom)return;
   cfm('예배위원을 삭제할까요?',function(){
-    var id=eKom;_skipListener.committee=true;
-    delete gKom[id];if(FB)FB.ref('worship_committee/'+id).remove().then(function(){setTimeout(function(){_skipListener.committee=false;},2000);});
+    var id=eKom;delete gKom[id];if(FB)FB.ref('worship_committee/'+id).remove();
     hideMo('M_kom');rWorship();banner('삭제됐어요');
   });
 };
 $('M_kS').onclick=function(){var date=$('M_kd').value;if(!date){banner('날짜를 입력해 주세요',true);return;}var id=eKom||uid();gKom[id]={date:date,'기도인도':$('M_kp').value.trim(),'대표기도':$('M_kr').value.trim(),'헌금위원':$('M_kh').value.trim(),'주차위원':$('M_kj').value.trim(),'청소담당':$('M_kc').value.trim(),'폰타나':$('M_kf').value.trim()};fbSet('worship_committee/'+id,gKom[id]);hideMo('M_kom');rWorship();banner('저장됐어요 ✓');};
+
 /* CHECKLIST */
 function rChk(){
   var items=ents(gChecks).sort(function(a,b){return(a[1].ts||0)-(b[1].ts||0)});
@@ -1186,6 +1257,7 @@ $('I_cnew').onkeydown=function(e){if((e.keyCode||e.which)===13)$('I_ckadd').oncl
 $('I_ckclear').onclick=function(){var ks=keys(gChecks),toDel=[],i;for(i=0;i<ks.length;i++){if(gChecks[ks[i]].done)toDel.push(ks[i]);}if(!toDel.length){banner('완료된 항목이 없어요');return;}for(i=0;i<toDel.length;i++){delete gChecks[toDel[i]];fbDel('checks/'+toDel[i]);}rChk();banner(toDel.length+'개 삭제됐어요');};
 $('I_cklist').onclick=function(e){var d=findUp(e.target,'data-cdel');if(d){delete gChecks[d.getAttribute('data-cdel')];fbDel('checks/'+d.getAttribute('data-cdel'));rChk();}};
 $('I_cklist').onchange=function(e){var t=e.target;if(t&&t.getAttribute('data-cid')){var id=t.getAttribute('data-cid');if(gChecks[id]){gChecks[id].done=t.checked;fbSet('checks/'+id+'/done',t.checked);}rChk();}};
+
 /* INIT */
 rLeg();rCal();rWed();rCells();rGchk();rWorship();rChk();
 })();
