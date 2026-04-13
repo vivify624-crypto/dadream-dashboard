@@ -551,8 +551,70 @@ function compressPhoto(file, cb){
 
 /* ── FIREBASE ── */
 var FB=null;
-function fbSet(path,val){if(FB)try{FB.ref(path).set(val);}catch(e){}}
-function fbDel(path){if(FB)try{FB.ref(path).remove();}catch(e){}}
+/* ── localStorage 캐시 헬퍼 ── */
+var CACHE_KEY='yd_cache_v1', CACHE_TS_KEY='yd_ts_v1';
+function cacheLoad(){
+  try{var v=localStorage.getItem(CACHE_KEY);return v?JSON.parse(v):null;}catch(e){return null;}
+}
+function cacheSave(data){
+  try{localStorage.setItem(CACHE_KEY,JSON.stringify(data));}catch(e){}
+}
+function cacheTsGet(){
+  try{return localStorage.getItem(CACHE_TS_KEY)||'';}catch(e){return '';}
+}
+function cacheTsSet(ts){
+  try{localStorage.setItem(CACHE_TS_KEY,String(ts));}catch(e){}
+}
+function applyCache(c){
+  if(!c)return;
+  if(c.evts){gEvts={};var e=ents(c.evts);for(var i=0;i<e.length;i++)gEvts[e[i][0]]=toArr(e[i][1]);}
+  if(c.chk)gChk=c.chk;
+  if(c.labels){gLabels={p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'};var ks=keys(c.labels);for(var i=0;i<ks.length;i++)gLabels[ks[i]]=c.labels[ks[i]];}
+  if(c.wed)gWed=c.wed;
+  if(c.cells)gCells=c.cells;
+  if(c.mems)gMems=c.mems;
+  if(c.ord)gOrd=c.ord;
+  if(c.kom)gKom=c.kom;
+  if(c.checks)gChecks=c.checks;
+}
+function buildCacheObj(){
+  return{evts:gEvts,chk:gChk,labels:gLabels,wed:gWed,cells:gCells,mems:gMems,ord:gOrd,kom:gKom,checks:gChecks};
+}
+
+/* ── fbSet: 저장 시 lastModified 타임스탬프도 같이 갱신 ── */
+var _pendingTs=null;
+function fbSet(path,val){
+  if(!FB)return;
+  try{
+    FB.ref(path).set(val);
+    // 출석(gf_attendance)은 타임스탬프 갱신 제외 (자주 바뀌는 데이터)
+    if(path.indexOf('gf_attendance')===0)return;
+    // 디바운스: 연속 저장 시 마지막 것만
+    if(_pendingTs)clearTimeout(_pendingTs);
+    _pendingTs=setTimeout(function(){
+      var ts=Date.now();
+      FB.ref('_meta/lastModified').set(ts);
+      cacheTsSet(ts);
+      cacheSave(buildCacheObj());
+      _pendingTs=null;
+    },800);
+  }catch(e){}
+}
+function fbDel(path){
+  if(!FB)return;
+  try{
+    FB.ref(path).remove();
+    if(path.indexOf('gf_attendance')===0)return;
+    if(_pendingTs)clearTimeout(_pendingTs);
+    _pendingTs=setTimeout(function(){
+      var ts=Date.now();
+      FB.ref('_meta/lastModified').set(ts);
+      cacheTsSet(ts);
+      cacheSave(buildCacheObj());
+      _pendingTs=null;
+    },800);
+  }catch(e){}
+}
 function fbOn(path,cb){
   if(!FB)return;
   try{FB.ref(path).on('value',function(s){cb(s.val());},function(err){console.log('FB err:',path,err);});}
@@ -593,44 +655,81 @@ function initFB(){
 }
 
 /*
- * ★ 핵심 최적화: 모든 노드를 fbOnce(1회 읽기)로 전환
- *   - 캘린더/셀/멤버/예배/결혼 → 페이지 로드 시 1회만 다운로드
- *   - 출석만 → 선택 날짜 경로만 실시간 (전체 아닌 당일만)
- *   - 저장 시 로컬 상태도 즉시 반영되므로 실시간 불필요
+ * ★★ 스마트 캐시 동기화
+ *   1. Firebase에서 lastModified(타임스탬프)만 먼저 읽어옴 (1KB)
+ *   2. 내 브라우저 캐시 타임스탬프와 비교
+ *   3. 같으면 → 캐시에서 바로 로드 (Firebase 다운로드 0MB)
+ *   4. 다르면 → Firebase 전체 fetch 후 캐시 갱신
+ *   출석만 → 선택 날짜 경로만 실시간
  */
-function startFbSync(){
-  // 캘린더 일정
+function fetchAllFromFB(cb){
   fbOnce('ycal-evts',function(v){
-    gEvts={};
-    if(v){var e=ents(v);for(var i=0;i<e.length;i++)gEvts[e[i][0]]=toArr(e[i][1]);}
-    if(curSec==='cal'){rCal();if(gSel)rDet(gSel);}
-  });
-  // 체크리스트 완료 상태
-  fbOnce('ycal-chk',function(v){gChk=v||{};if(gSel)rDet(gSel);});
-  // 색상 라벨
-  fbOnce('ycal-labels',function(v){
-    gLabels={p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'};
-    var src=v||{};var ks=keys(src);for(var i=0;i<ks.length;i++)gLabels[ks[i]]=src[ks[i]];
-    rLeg();
-  });
-  // 결혼 현황
-  fbOnce('weddings',function(v){gWed=v||{};if(curSec==='wed')rWed();});
-  // 셀 + 멤버 (순차 로드)
-  fbOnce('cells',function(v){
-    gCells=v||{};
-    fbOnce('members',function(v2){
-      gMems=v2||{};
-      if(curSec==='cells')rCells();
-      if(curSec==='gchk')rGchk();
+    gEvts={};if(v){var e=ents(v);for(var i=0;i<e.length;i++)gEvts[e[i][0]]=toArr(e[i][1]);}
+    fbOnce('ycal-chk',function(v2){
+      gChk=v2||{};
+      fbOnce('ycal-labels',function(v3){
+        gLabels={p:'예배/훈련',t:'셀/단합',c:'행사/집회',a:'회의/행정',b:'수련회/외부',k:'환영/경조사',g:'기타'};
+        var src=v3||{};var ks=keys(src);for(var i=0;i<ks.length;i++)gLabels[ks[i]]=src[ks[i]];
+        fbOnce('weddings',function(v4){
+          gWed=v4||{};
+          fbOnce('cells',function(v5){
+            gCells=v5||{};
+            fbOnce('members',function(v6){
+              gMems=v6||{};
+              fbOnce('worship_orders',function(v7){
+                gOrd=v7||{};
+                fbOnce('worship_committee',function(v8){
+                  gKom=v8||{};
+                  fbOnce('checks',function(v9){
+                    gChecks=v9||{};
+                    if(cb)cb();
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
     });
   });
-  // 예배순서 / 예배위원
-  fbOnce('worship_orders',function(v){gOrd=v||{};if(curSec==='worship')rWorship();});
-  fbOnce('worship_committee',function(v){gKom=v||{};if(curSec==='worship')rWorship();});
-  // 이번 주 체크리스트
-  fbOnce('checks',function(v){gChecks=v||{};if(curSec==='chk')rChk();});
-  // 출석: 오늘 날짜 경로만 실시간 리스닝
-  attSetDate(dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()));
+}
+function startFbSync(){
+  var cachedTs=cacheTsGet();
+  // lastModified만 먼저 읽어옴 (약 1KB)
+  fbOnce('_meta/lastModified',function(fbTs){
+    var fbTsStr=fbTs?String(fbTs):'';
+    if(cachedTs && fbTsStr && cachedTs===fbTsStr){
+      // ✅ 캐시 히트: Firebase 다운로드 없이 로컬 캐시 사용
+      var cached=cacheLoad();
+      if(cached){
+        applyCache(cached);
+        $('FB_ST').textContent='● 캐시 로드됨';
+        rLeg();rCal();rWed();rCells();rWorship();rChk();
+        if(gSel)rDet(gSel);
+        if(curSec==='gchk')rGchk();
+        attSetDate(dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()));
+        return;
+      }
+    }
+    // ❌ 캐시 미스 or 변경 있음: Firebase 전체 fetch
+    $('FB_ST').textContent='● 동기화 중...';
+    fetchAllFromFB(function(){
+      // lastModified가 없으면 새로 만들어줌
+      if(!fbTsStr){
+        var ts=Date.now();
+        FB.ref('_meta/lastModified').set(ts);
+        cacheTsSet(ts);
+      } else {
+        cacheTsSet(fbTsStr);
+      }
+      cacheSave(buildCacheObj());
+      $('FB_ST').textContent='● Firebase 연결됨';
+      rLeg();rCal();rWed();rCells();rWorship();rChk();
+      if(gSel)rDet(gSel);
+      if(curSec==='gchk')rGchk();
+      attSetDate(dkey(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()));
+    });
+  });
 }
 
 (function(){
