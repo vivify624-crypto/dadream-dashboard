@@ -341,11 +341,11 @@ body{font-family:-apple-system,'Noto Sans KR',sans-serif;background:var(--bg3);c
 
 <div class="modal-bg hide" id="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal" id="modal-box"></div></div>
 
-<script type="module">
-import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import{getDatabase,ref,set,get,onValue,remove}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
-
-const app=initializeApp({
+<!-- Firebase compat (전역 변수 지원) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script>
+firebase.initializeApp({
   apiKey:"AIzaSyAXWaFGfpKLmiTvu_Uu7H3uaYKJ2ijrurs",
   authDomain:"dadream-retreat-2026.firebaseapp.com",
   databaseURL:"https://dadream-retreat-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -354,7 +354,7 @@ const app=initializeApp({
   messagingSenderId:"494338036402",
   appId:"1:494338036402:web:2fbfdf2f9a8fcf3050afab"
 });
-const db=getDatabase(app);
+const db=firebase.database();
 
 /* ── 싱크 표시 ── */
 function showSync(){
@@ -364,29 +364,26 @@ function showSync(){
   b._t=setTimeout(()=>{b.classList.add('fade');setTimeout(()=>b.classList.remove('show','fade'),500)},800);
 }
 
-/* ── Firebase 저장 (배열을 객체로 변환해서 저장 - Firebase 배열 문제 방지) ── */
+/* ── Firebase 저장 ── */
 function fbSave(path,data){
   showSync();
-  // 배열이면 인덱스 키 객체로 변환
   if(Array.isArray(data)){
-    const obj={};
-    data.forEach((v,i)=>obj[i]=v);
-    return set(ref(db,path),obj);
+    const obj={};data.forEach((v,i)=>obj[i]=v);
+    return db.ref(path).set(obj);
   }
-  return set(ref(db,path),data);
+  return db.ref(path).set(data);
 }
+window.fbSave=fbSave;
 
-/* ── Firebase에서 배열 읽기 (객체→배열 변환) ── */
+/* ── Firebase 배열 읽기 ── */
 function toArr(val){
   if(!val)return[];
   if(Array.isArray(val))return val;
-  // 숫자 키 객체 → 배열
-  const keys=Object.keys(val).sort((a,b)=>Number(a)-Number(b));
-  return keys.map(k=>val[k]);
+  return Object.keys(val).sort((a,b)=>Number(a)-Number(b)).map(k=>val[k]);
 }
 
 /* ── 연결 상태 ── */
-onValue(ref(db,'.info/connected'),snap=>{
+db.ref('.info/connected').on('value',snap=>{
   const el=document.getElementById('conn-badge');
   el.className='conn-badge '+(snap.val()?'conn-ok':'conn-off');
   el.textContent=snap.val()?'🟢 연결됨':'🔴 오프라인';
@@ -422,7 +419,7 @@ document.querySelectorAll('[data-fk]').forEach(el=>{
   // blur시 저장
   el.addEventListener('blur',()=>fbSave(path,el.innerText.trim()));
   // Firebase 변경사항 수신 (내가 편집중이 아닐때만)
-  onValue(ref(db,path),snap=>{
+  db.ref(path).on('value',snap=>{
     if(snap.val()!==null && document.activeElement!==el){
       if(el.innerText!==snap.val()) el.innerText=snap.val();
     }
@@ -518,7 +515,6 @@ function renderSched(){
     renderSchedDay(dk);
   });
 }
-window.fbSave=fbSave;
 
 // 드래그 앤 드롭
 let _dragDk=null,_dragRi=null;
@@ -535,7 +531,7 @@ window.sdDrop=(e,dk,toRi)=>{
 
 // 각 day 개별 onValue로 받기 (전체 재렌더 방지)
 ['day1','day2','day3'].forEach(dk=>{
-  onValue(ref(db,'schedule/'+dk),snap=>{
+  db.ref('schedule/'+dk).on('value',snap=>{
     const def=DEFAULT_SCHED[dk];
     if(snap.val()){
       const v=snap.val();
@@ -582,7 +578,7 @@ function renderBudget(){
   });
 }
 window.addBudgetRow=()=>{budgetRows.push({cat:'',name:'',unit:'',qty:'',price:'',note:''});fbSave('budgetRows',budgetRows);};
-onValue(ref(db,'budgetRows'),snap=>{
+db.ref('budgetRows').on('value',snap=>{
   budgetRows=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_BUDGET));
   if(!snap.val())fbSave('budgetRows',budgetRows);
   renderBudget();
@@ -699,7 +695,7 @@ window.saveNewProg=()=>{
   progData.push({icon:document.getElementById('ep-icon').value,bg:'var(--gr-l)',name,meta:document.getElementById('ep-meta').value,warn:document.getElementById('ep-warn').value,rows,note:document.getElementById('ep-note').value});
   fbSave('programs',progData);renderProgs();closeModal();
 };
-onValue(ref(db,'programs'),snap=>{
+db.ref('programs').on('value',snap=>{
   progData=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_PROGS));
   if(!snap.val())fbSave('programs',progData);
   renderProgs();
@@ -776,7 +772,7 @@ window.addUrgent=()=>{
   clData[0].items.push({t,d:document.getElementById('urg-dl').value||'',u:true,done:false});
   fbSave('checklist',clData);
 };
-onValue(ref(db,'checklist'),snap=>{
+db.ref('checklist').on('value',snap=>{
   clData=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_CL));
   clData.forEach(g=>g.items=toArr(g.items).map(it=>({done:false,...it})));
   if(!snap.val())fbSave('checklist',clData);
@@ -857,7 +853,7 @@ window.saveNewGroup=()=>{
   staffGroups.push({name,color:'#444441',bg:'#F1EFE8',leader:{name:document.getElementById('ng-leader').value||'(팀장 미정)',role:document.getElementById('ng-lrole').value||'팀장',st:'no'},members:[]});
   fbSave('staff',staffGroups);closeModal();
 };
-onValue(ref(db,'staff'),snap=>{
+db.ref('staff').on('value',snap=>{
   staffGroups=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_STAFF));
   staffGroups.forEach(g=>{g.members=toArr(g.members||[]);});
   if(!snap.val())fbSave('staff',staffGroups);
@@ -913,12 +909,12 @@ window.addTlModal=(fbKey,renderFn)=>{
     <button class="btn-ok" onclick="getTlData('${fbKey}').push({date:document.getElementById('tl-date').value,title:document.getElementById('tl-title').value,desc:document.getElementById('tl-desc').value,dot:'r'});fbSave('${fbKey}',getTlData('${fbKey}'));closeModal()">추가</button></div>`);
 };
 
-onValue(ref(db,'staffMtg'),snap=>{
+db.ref('staffMtg').on('value',snap=>{
   staffMtgData=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_STAFF_MTG));
   if(!snap.val())fbSave('staffMtg',staffMtgData);
   renderStaffTl();
 });
-onValue(ref(db,'prepTl'),snap=>{
+db.ref('prepTl').on('value',snap=>{
   prepTlData=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_PREP_TL));
   if(!snap.val())fbSave('prepTl',prepTlData);
   renderPrepTl();
@@ -950,7 +946,7 @@ window.addDayOp=(inpId,key)=>{
   fbSave('dayOps',dayOpsData);
   document.getElementById(inpId).value='';
 };
-onValue(ref(db,'dayOps'),snap=>{
+db.ref('dayOps').on('value',snap=>{
   if(snap.val()){
     dayOpsData={
       day1:toArr(snap.val().day1||[]).map(it=>typeof it==='string'?{t:it,done:false}:it),
