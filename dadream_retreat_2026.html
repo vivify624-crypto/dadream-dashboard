@@ -72,13 +72,119 @@ body{font-family:-apple-system,'Noto Sans KR',sans-serif;background:var(--bg3);c
 .rv{color:var(--tx);flex:1}
 /* schedule */
 .sday{background:var(--bg);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden;margin-bottom:14px}
-.sdh{padding:10px 16px;font-weight:600;font-size:14px;color:#fff}
-.d1h{background:var(--gn)}.d2h{background:var(--tl)}.d3h{background:var(--bl)}
+.sdh{padding:10px 16px;font-weight:600;font-size:14px;color:#fff!important}
+.d1h{background:#3B6D11!important;color:#fff!important}
+.d2h{background:#0F6E56!important;color:#fff!important}
+.d3h{background:#185FA5!important;color:#fff!important}
+.sdh{color:#fff!important}
 .stbl{width:100%;border-collapse:collapse}
 .stbl th{font-size:11px;font-weight:500;color:var(--tx3);padding:6px 12px;background:var(--bg2);text-align:left;border-bottom:1px solid var(--bd)}
 .stbl td{padding:8px 12px;font-size:13px;border-bottom:1px solid var(--bdl);vertical-align:middle}
 .stbl tr:last-child td{border-bottom:none}
 .stbl tr:hover td{background:var(--bg2)}
+
+/* ══ 모바일 최적화 (600px 이하) ══ */
+@media(max-width:600px){
+  /* 전체 레이아웃 */
+  .wrap{padding:0 12px}
+  .page{padding:16px 0 70px}
+  .sec{margin-bottom:20px}
+  .sec-t{font-size:14px;margin-bottom:10px}
+  .card{padding:12px 13px;margin-bottom:8px}
+  .two{grid-template-columns:1fr}
+  .g2{grid-template-columns:1fr 1fr;gap:8px}
+
+  /* 히어로 */
+  .hero{padding:24px 16px 20px}
+  .hero h1{font-size:24px}
+  .hsub{font-size:13px}
+  .hverse{font-size:12px;padding:10px 13px}
+
+  /* D-Day 바 */
+  .dday{font-size:12px;padding:7px 12px;line-height:1.5}
+
+  /* 내비게이션 */
+  .nb{padding:10px 11px;font-size:12px}
+
+  /* 연결 뱃지 */
+  .conn-badge{bottom:10px;right:10px;font-size:11px;padding:4px 8px}
+
+  /* 개요 카드 */
+  .kv .v{font-size:15px}
+  .kv .s{font-size:11px}
+  .row{flex-direction:column;gap:3px}
+  .rk{min-width:unset;font-size:12px}
+
+  /* 일정표 — 핵심: 분류/비고/드래그 숨기고 시간+프로그램만 */
+  .drag-handle{display:none}
+  .stbl th:nth-child(1){display:none} /* 드래그 */
+  .stbl td:nth-child(1){display:none}
+  .stbl th:nth-child(3){display:none} /* 분류 */
+  .stbl td:nth-child(3){display:none}
+  .stbl th:nth-child(5){display:none} /* 비고 */
+  .stbl td:nth-child(5){display:none}
+  .stbl th:nth-child(6){width:28px}
+  .stbl td:nth-child(6){width:28px;padding:6px 4px}
+  .stbl td{padding:8px 10px;font-size:13px}
+  .tc{width:75px;font-size:11px;color:var(--tx3)}
+  .sdh{font-size:13px;padding:9px 13px}
+  /* 프로그램명 아래 태그 뱃지로 분류 표시 */
+  .stbl td:nth-child(4){font-size:13px}
+
+  /* 체크리스트 */
+  .cli{padding:8px 10px;gap:7px}
+  .cli-tx{font-size:13px}
+  .cli-dl{font-size:10px;min-width:45px}
+  .add-cli{flex-wrap:wrap;gap:5px}
+  .add-cli input{font-size:12px;padding:6px 8px}
+  .add-cli .dli{width:65px}
+  .add-cli button{padding:6px 10px;font-size:12px}
+  .pb-lbl{font-size:11px}
+
+  /* 스텝 */
+  .sg-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .sg-btns{width:100%;display:flex;gap:6px}
+  .sg-btns button{flex:1;text-align:center}
+  .sg-leader{flex-wrap:wrap;gap:6px}
+  .sg-member{flex-wrap:wrap;gap:5px}
+  .s-name{font-size:13px;min-width:80px}
+  .s-role{font-size:11px;color:var(--tx3)}
+  .sav{width:28px;height:28px;font-size:11px}
+
+  /* 프로그램 */
+  .phd{padding:10px 12px}
+  .pico{width:28px;height:28px;font-size:13px}
+  .pnm{font-size:13px}
+  .pmt{font-size:11px}
+  .pbody{padding:12px 13px}
+  .prog-add-row-form{flex-direction:column}
+  .prog-add-row-form input{width:100%!important}
+
+  /* 예산 — 단위/수량 숨기고 핵심만 */
+  .btbl th:nth-child(3),.btbl td:nth-child(3){display:none} /* 단위 */
+  .btbl th:nth-child(4),.btbl td:nth-child(4){display:none} /* 수량 */
+  .btbl th,.btbl td{font-size:12px;padding:6px 8px}
+  .btbl th:last-child,.btbl td:last-child{width:28px;padding:4px}
+
+  /* 타임라인 */
+  .tli{gap:6px}
+  .tldate{font-size:11px}
+  .tltit{font-size:13px}
+  .tldsc{font-size:12px}
+
+  /* 모달 */
+  .modal{padding:18px 16px;width:95vw}
+  .modal h3{font-size:14px}
+  .modal input,.modal select,.modal textarea{font-size:13px;padding:7px 9px}
+  .modal-btns{gap:6px}
+  .btn-cancel,.btn-ok{padding:8px 14px;font-size:13px}
+
+  /* ehint */
+  .ehint{font-size:11px;padding:5px 9px}
+
+  /* info 박스 */
+  .info{font-size:12px;padding:9px 12px}
+}
 .tc{color:var(--tx3);width:115px;font-size:12px}
 .tag-sel{font-size:11px;padding:2px 5px;border-radius:4px;font-weight:500;border:none;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none}
 .tw{background:var(--pu-l);color:var(--pu)}.tp{background:var(--tl-l);color:var(--tl)}.tm{background:var(--am-l);color:var(--am)}.tpr{background:var(--gn-l);color:var(--gn-d)}.tf{background:var(--gr-l);color:var(--gr)}.ts{background:var(--co-l);color:var(--co)}
