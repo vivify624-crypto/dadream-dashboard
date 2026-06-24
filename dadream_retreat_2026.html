@@ -191,6 +191,9 @@ body{font-family:-apple-system,'Noto Sans KR',sans-serif;background:var(--bg3);c
 .drag-handle{cursor:grab;color:var(--tx3);font-size:14px;padding:0 4px;user-select:none}
 .drag-handle:active{cursor:grabbing}
 .drag-over td{background:var(--gn-l)!important;border-top:2px solid var(--gn-m)!important}
+.prog-card.drag-over{border:2px solid var(--gn-m)!important;background:var(--gn-l)!important}
+.staff-group.drag-over{border:2px solid var(--gn-m)!important;background:var(--gn-l)!important}
+.sg-member.drag-over{border:2px solid var(--gn-m)!important;background:var(--gn-l)!important}
 .ra{display:flex;gap:3px;opacity:0;transition:opacity .12s}
 .stbl tr:hover .ra,.btbl tr:hover .ra{opacity:1}
 .bdel{background:none;border:none;cursor:pointer;font-size:13px;color:var(--tx3);padding:2px 4px;border-radius:4px;line-height:1}
@@ -607,11 +610,13 @@ function renderSchedDay(dk){
 
 function renderSched(){
   const w=document.getElementById('sched-wrap');w.innerHTML='';
+  const clsMap={day1:'d1h',day2:'d2h',day3:'d3h'};
   ['day1','day2','day3'].forEach(dk=>{
     const d=schedData[dk]||DEFAULT_SCHED[dk];
+    const cls=clsMap[dk]; /* 항상 고정 클래스 사용 - Firebase 데이터에 의존 안 함 */
     const div=document.createElement('div');div.className='sday';
     div.innerHTML=`
-      <div class="sdh ${d.cls}" id="sdh-${dk}" contenteditable="true" onblur="schedData['${dk}'].title=this.innerText;fbSave('schedule/${dk}',schedData['${dk}'])">${esc(d.title)}</div>
+      <div class="sdh ${cls}" id="sdh-${dk}" contenteditable="true" onblur="schedData['${dk}'].title=this.innerText;fbSave('schedule/${dk}',schedData['${dk}'])">${esc(d.title)}</div>
       <table class="stbl">
         <thead><tr><th style="width:22px"></th><th style="width:110px">시간</th><th style="width:80px">분류</th><th>프로그램</th><th>비고</th><th style="width:32px"></th></tr></thead>
         <tbody id="sb-${dk}"></tbody>
@@ -704,13 +709,31 @@ const DEFAULT_PROGS=[
   {icon:'🌅',bg:'var(--gn-l)',name:'아침 QT 및 조별 나눔',meta:'Day 2 · Day 3 / 08:00–09:30',warn:'',rows:[{k:'📌 목적',v:'Holy Routine의 체험 — 아침 경건의 시간이 일상의 루틴이 됨을 경험'},{k:'📋 구성',v:'개인 QT 40분 → 조별 나눔 50분'}],note:'✅ 준비: QT 본문 2일치 사전 작성 및 배포 / 나눔 질문 3–4개 준비'},
 ];
 let progData=[];
+let _progDragIdx=null;
 function renderProgs(){
   const list=document.getElementById('prog-list');list.innerHTML='';
   progData.forEach((p,i)=>{
     const card=document.createElement('div');card.className='prog-card';
+    card.setAttribute('draggable','true');
+    card.setAttribute('data-pi',i);
+    card.ondragstart=e=>{_progDragIdx=i;card.style.opacity='.4';e.dataTransfer.effectAllowed='move'};
+    card.ondragend=()=>{card.style.opacity='';document.querySelectorAll('.prog-card.drag-over').forEach(c=>c.classList.remove('drag-over'))};
+    card.ondragover=e=>{e.preventDefault();card.classList.add('drag-over')};
+    card.ondragleave=()=>card.classList.remove('drag-over');
+    card.ondrop=e=>{
+      e.preventDefault();card.classList.remove('drag-over');
+      const toIdx=parseInt(card.getAttribute('data-pi'));
+      if(_progDragIdx===null||_progDragIdx===toIdx)return;
+      const[moved]=progData.splice(_progDragIdx,1);
+      progData.splice(toIdx,0,moved);
+      fbSave('programs',progData);
+      _progDragIdx=null;
+    };
     card.innerHTML=`
       <div class="phd" onclick="toggleProg(${i})">
-        <div class="ptw"><div class="pico" style="background:${p.bg}">${p.icon}</div>
+        <div class="ptw">
+          <span class="drag-handle" title="드래그로 순서 변경" onclick="event.stopPropagation()">⠿</span>
+          <div class="pico" style="background:${p.bg}">${p.icon}</div>
           <div><div class="pnm">${esc(p.name)}</div><div class="pmt">${esc(p.meta)}</div></div>
         </div>
         <div style="display:flex;align-items:center;gap:6px" onclick="event.stopPropagation()">
@@ -897,6 +920,7 @@ const DEFAULT_STAFF=[
   {name:'🌿 조 인도자',color:'#534AB7',bg:'#EEEDFE',leader:{name:'(조장 미정)',role:'총 조장',st:'no'},members:[{name:'(조장 모집)',role:'1조 조장',st:'no'},{name:'(조장 모집)',role:'2조 조장',st:'no'},{name:'(조장 모집)',role:'3조 조장',st:'no'},{name:'(조장 모집)',role:'4조 조장',st:'no'}]},
 ];
 let staffGroups=[];
+window._staffDrag=null; // 전역 - 인라인 ondragstart에서 접근 가능
 const ST_OPT=['ok','wr','no'],ST_LBL={ok:'✅ 확정',wr:'🔄 조율중',no:'🔴 모집필요'};
 function stSel(val,cb){
   return`<select class="st-${val}" style="background:inherit;color:inherit;font-size:11px;border:none;font-weight:600;cursor:pointer;outline:none;padding:2px 5px;border-radius:10px;font-family:inherit" onchange="${cb};this.className='st-'+this.value">${ST_OPT.map(o=>`<option value="${o}"${o===val?' selected':''}>${ST_LBL[o]}</option>`).join('')}</select>`;
@@ -905,9 +929,41 @@ function renderStaff(){
   const w=document.getElementById('staff-wrap');w.innerHTML='';
   staffGroups.forEach((grp,gi)=>{
     const el=document.createElement('div');el.className='staff-group';
+    el.setAttribute('draggable','true');
+    el.setAttribute('data-gi',gi);
+    /* 그룹 드래그 */
+    el.ondragstart=e=>{
+      if(e.target.closest('.sg-body'))return; /* 팀원 드래그 중엔 그룹 드래그 무시 */
+      window._staffDrag={gi};el.style.opacity='.4';e.dataTransfer.effectAllowed='move';
+    };
+    el.ondragend=()=>{el.style.opacity='';document.querySelectorAll('.staff-group.drag-over,.sg-member.drag-over').forEach(c=>c.classList.remove('drag-over'))};
+    el.ondragover=e=>{
+      if(window._staffDrag&&window._staffDrag.gi!==undefined&&window._staffDrag.mi===undefined){e.preventDefault();el.classList.add('drag-over');}
+    };
+    el.ondragleave=()=>el.classList.remove('drag-over');
+    el.ondrop=e=>{
+      e.preventDefault();el.classList.remove('drag-over');
+      if(!window._staffDrag||window._staffDrag.mi!==undefined)return;
+      const toGi=parseInt(el.getAttribute('data-gi'));
+      if(window._staffDrag.gi===toGi)return;
+      const[moved]=staffGroups.splice(window._staffDrag.gi,1);
+      staffGroups.splice(toGi,0,moved);
+      fbSave('staff',staffGroups);window._staffDrag=null;
+    };
     const ldr=grp.leader||{name:'',role:'',st:'no'};
     const mem=toArr(grp.members||[]).map((m,mi)=>`
-      <div class="sg-member">
+      <div class="sg-member" draggable="true" data-gi="${gi}" data-mi="${mi}"
+        ondragstart="event.stopPropagation();window._staffDrag={gi:${gi},mi:${mi}};this.style.opacity='.4';event.dataTransfer.effectAllowed='move'"
+        ondragend="this.style.opacity='';document.querySelectorAll('.sg-member.drag-over').forEach(c=>c.classList.remove('drag-over'))"
+        ondragover="event.preventDefault();this.classList.add('drag-over')"
+        ondragleave="this.classList.remove('drag-over')"
+        ondrop="event.preventDefault();event.stopPropagation();this.classList.remove('drag-over');
+          if(!window._staffDrag||window._staffDrag.gi!=${gi})return;
+          const toMi=${mi};if(window._staffDrag.mi===toMi)return;
+          const[moved]=staffGroups[${gi}].members.splice(window._staffDrag.mi,1);
+          staffGroups[${gi}].members.splice(toMi,0,moved);
+          fbSave('staff',staffGroups);window._staffDrag=null;">
+        <span class="drag-handle" style="font-size:13px;color:var(--tx3);cursor:grab;padding:0 4px;user-select:none">⠿</span>
         <div class="sav" style="background:${grp.bg};color:${grp.color}">${(m.name.replace(/[()]/g,'')[0]||'?')}</div>
         <span class="s-name" contenteditable="true" onblur="staffGroups[${gi}].members[${mi}].name=this.innerText;fbSave('staff',staffGroups)">${esc(m.name)}</span>
         <span class="s-role" contenteditable="true" onblur="staffGroups[${gi}].members[${mi}].role=this.innerText;fbSave('staff',staffGroups)">${esc(m.role)}</span>
@@ -916,7 +972,10 @@ function renderStaff(){
       </div>`).join('');
     el.innerHTML=`
       <div class="sg-head">
-        <span class="sg-title" contenteditable="true" onblur="staffGroups[${gi}].name=this.innerText;fbSave('staff',staffGroups)">${esc(grp.name)}</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="drag-handle" style="font-size:16px;color:var(--tx3);cursor:grab;user-select:none" title="드래그로 그룹 순서 변경">⠿</span>
+          <span class="sg-title" contenteditable="true" onblur="staffGroups[${gi}].name=this.innerText;fbSave('staff',staffGroups)">${esc(grp.name)}</span>
+        </div>
         <div class="sg-btns">
           <button class="btn-sm" onclick="addMemberModal(${gi})">+ 팀원 추가</button>
           <button class="btn-sm-red" data-gi="${gi}" onclick="delGroup(this)">그룹 삭제</button>
