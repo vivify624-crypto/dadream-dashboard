@@ -645,13 +645,17 @@ window.sdDrop=(e,dk,toRi)=>{
   db.ref('schedule/'+dk).on('value',snap=>{
     const def=DEFAULT_SCHED[dk];
     if(snap.val()){
+      /* Firebase에 데이터 있으면 그걸 씀 - 절대 덮어쓰지 않음 */
       const v=snap.val();
       schedData[dk]={title:v.title||def.title,cls:def.cls,rows:toArr(v.rows||[])};
     } else {
-      schedData[dk]=JSON.parse(JSON.stringify(def));
-      fbSave('schedule/'+dk,schedData[dk]);
+      /* Firebase에 데이터가 아예 없을 때만 (최초 1회) 기본값 저장 */
+      const alreadyHasData=Object.keys(schedData).some(k=>schedData[k]&&schedData[k].rows&&schedData[k].rows.length>0);
+      if(!alreadyHasData){
+        schedData[dk]=JSON.parse(JSON.stringify(def));
+        fbSave('schedule/'+dk,schedData[dk]);
+      }
     }
-    // 첫 로드 or 이미 렌더됨 → tbody만 업데이트
     if(!document.getElementById('sb-'+dk)){renderSched();}
     else{renderSchedDay(dk);}
   });
@@ -691,7 +695,7 @@ function renderBudget(){
 window.addBudgetRow=()=>{budgetRows.push({cat:'',name:'',unit:'',qty:'',price:'',note:''});fbSave('budgetRows',budgetRows);};
 db.ref('budgetRows').on('value',snap=>{
   budgetRows=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_BUDGET));
-  if(!snap.val())fbSave('budgetRows',budgetRows);
+  // 데이터 없을 때 기본값 저장 - 제거 (기존 데이터 보호)
   renderBudget();
 });
 
@@ -826,7 +830,7 @@ window.saveNewProg=()=>{
 };
 db.ref('programs').on('value',snap=>{
   progData=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_PROGS));
-  if(!snap.val())fbSave('programs',progData);
+  // 데이터 없을 때 기본값 저장 - 제거 (기존 데이터 보호)
   renderProgs();
 });
 
@@ -904,7 +908,7 @@ window.addUrgent=()=>{
 db.ref('checklist').on('value',snap=>{
   clData=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_CL));
   clData.forEach(g=>g.items=toArr(g.items).map(it=>({done:false,...it})));
-  if(!snap.val())fbSave('checklist',clData);
+  // 데이터 없을 때 기본값 저장 - 제거 (기존 데이터 보호)
   renderCL();
 });
 
@@ -1021,7 +1025,7 @@ window.saveNewGroup=()=>{
 db.ref('staff').on('value',snap=>{
   staffGroups=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_STAFF));
   staffGroups.forEach(g=>{g.members=toArr(g.members||[]);});
-  if(!snap.val())fbSave('staff',staffGroups);
+  // 데이터 없을 때 기본값 저장 - 제거 (기존 데이터 보호)
   renderStaff();
 });
 
@@ -1076,12 +1080,12 @@ window.addTlModal=(fbKey,renderFn)=>{
 
 db.ref('staffMtg').on('value',snap=>{
   staffMtgData=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_STAFF_MTG));
-  if(!snap.val())fbSave('staffMtg',staffMtgData);
+  // 데이터 없을 때 기본값 저장 - 제거 (기존 데이터 보호)
   renderStaffTl();
 });
 db.ref('prepTl').on('value',snap=>{
   prepTlData=snap.val()?toArr(snap.val()):JSON.parse(JSON.stringify(DEFAULT_PREP_TL));
-  if(!snap.val())fbSave('prepTl',prepTlData);
+  // 데이터 없을 때 기본값 저장 - 제거 (기존 데이터 보호)
   renderPrepTl();
 });
 
